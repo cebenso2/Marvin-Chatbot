@@ -8,6 +8,9 @@ app.listen((process.env.PORT || 5000));
 app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'ejs');
 
+const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
+const VERIFY_TOKEN = process.env.VERIFY_TOKEN
+
 // Server index page
 app.get("/", function (req, res) {
    res.render('pages/index');
@@ -16,7 +19,7 @@ app.get("/", function (req, res) {
 // Facebook Webhook
 // Used for verification
 app.get("/webhook", function (req, res) {
-  if (req.query["hub.verify_token"] === "this_is_my_token") {
+  if (req.query["hub.verify_token"] === VERIFY_TOKEN) {
     console.log("Verified webhook");
     res.status(200).send(req.query["hub.challenge"]);
   } else {
