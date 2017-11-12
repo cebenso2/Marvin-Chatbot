@@ -5,10 +5,11 @@ var app = express();
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.listen((process.env.PORT || 5000));
+app.use(express.static(__dirname + '/public'));
 
 // Server index page
 app.get("/", function (req, res) {
-  res.send("Deployed!");
+   res.render('pages/index');
 });
 
 // Facebook Webhook
