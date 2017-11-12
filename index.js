@@ -36,13 +36,21 @@ app.post('/webhook', (req, res) => {
   // Checks this is an event from a page subscription
   if (body.object === 'page') {
 
-    // Iterates over each entry - there may be multiple if batched
     body.entry.forEach(function(entry) {
+      // Gets the body of the webhook event
+      let webhook_event = entry.messaging[0];
+      console.log(webhook_event);
 
-      // Gets the message. entry.messaging is an array, but
-      // will only ever contain one message, so we get index 0
-      let webhookEvent = entry.messaging[0];
-      console.log(webhookEvent);
+      // Get the sender PSID
+      let sender_psid = webhook_event.sender.id;
+      console.log('Sender PSID: ' + sender_psid);
+      // Check if the event is a message or postback and
+      // pass the event to the appropriate handler function
+      if (webhook_event.message) {
+        handleMessage(sender_psid, webhook_event.message);
+      } else if (webhook_event.postback) {
+        handlePostback(sender_psid, webhook_event.postback);
+      }
     });
 
     // Returns a '200 OK' response to all requests
@@ -53,3 +61,43 @@ app.post('/webhook', (req, res) => {
   }
 
 });
+function handleMessage(sender_psid, received_message) {
+
+  let response;
+
+  // Check if the message contains text
+  if (received_message.text) {
+
+    // Create the payload for a basic text message
+    response = {
+      "text": `You sent the message: "${received_message.text}". Now send me an image!`
+    }
+  }
+
+  // Sends the response message
+  callSendAPI(sender_psid, response);
+}
+
+function callSendAPI(sender_psid, response) {
+  // Construct the message body
+  let request_body = {
+    "recipient": {
+      "id": sender_psid
+    },
+    "message": response
+  }
+
+  // Send the HTTP request to the Messenger Platform
+  request({
+    "uri": "https://graph.facebook.com/v2.6/me/messages",
+    "qs": { "access_token": PAGE_ACCESS_TOKEN },
+    "method": "POST",
+    "json": request_body
+  }, (err, res, body) => {
+    if (!err) {
+      console.log('message sent!')
+    } else {
+      console.error("Unable to send message:" + err);
+    }
+  });
+}
