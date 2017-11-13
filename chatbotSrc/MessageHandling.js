@@ -39,10 +39,17 @@ function handleMessage(sender_psid, received_message) {
 
     // Gets the corrdintes of the message attachment
     let coordinates = received_message.attachments[0].payload.coordinates;
-    console.log(coordinates);
-    WeatherDataUtils.getWeatherData(coordinates.lat, coordinates.long);
-
-
+    response = {
+      "text":"Fetching Weather Data"
+    }
+    WeatherDataUtils.getWeatherData(coordinates.lat, coordinates.long).then(
+      tempString => {
+        response = {
+          "text": "The current temperature is " + tempString,
+        }
+        sendMessage(sender_psid, response);
+      }
+    );
   }
 
   // Sends the response message

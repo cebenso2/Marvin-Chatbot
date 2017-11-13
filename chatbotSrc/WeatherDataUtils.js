@@ -9,7 +9,7 @@ function getWeatherData(latitude, longitude) {
     response => {
       let data = JSON.parse(response);
       //console.log(response.body.current_observation.feelslike_string);
-      console.log(data.current_observation.feelslike_string);
+      return data.current_observation.feelslike_string;
     }
   ).catch(error => console.log(error))
 }
