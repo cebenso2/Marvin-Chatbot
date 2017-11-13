@@ -7,7 +7,7 @@ const FACEBOOK_ENDPOINT = "https://graph.facebook.com/v2.6/me/messages"
 function handleMessage(sender_psid, received_message) {
 
   let response;
-
+  console.log(received_message)
   // Check if the message contains text
   if (received_message.text) {
 
