@@ -7,10 +7,9 @@ const FACEBOOK_ENDPOINT = "https://graph.facebook.com/v2.6/me/messages"
 function handleMessage(sender_psid, received_message) {
 
   let response;
-  console.log(received_message);
   // Check if the message contains text
   if (received_message.text) {
-
+    let greeting = firstEntity(received_message.nlp, 'greeting');
     // Create the payload for a basic text message
     if (received_message.text === "@help") {
       response = {
@@ -32,25 +31,7 @@ function handleMessage(sender_psid, received_message) {
         ]
       }
     }
-  } else if (received_message.attachments) {
-
-    // Gets the corrdintes of the message attachment
-    let coordinates = received_message.attachments[0].payload.coordinates;
-    response = {
-      "text":"Fetching Weather Data"
-    }
-    WeatherDataUtils.getWeatherData(coordinates.lat, coordinates.long).then(
-      tempString => {
-        response = {
-          "text": "The current temperature is " + tempString,
-        }
-        sendMessage(sender_psid, response);
-      }
-    );
-  } else {
-    // check greeting is here and is confident
-    let greeting = firstEntity(received_message.nlp, 'greeting');
-    if (greeting && greeting.confidence > 0.8) {
+    else if (greeting && greeting.confidence > 0.8) {
       response = {
         "text": "Hello!",
       }
@@ -60,9 +41,22 @@ function handleMessage(sender_psid, received_message) {
         "text": `You sent the message: "${received_message.text}". I do not know how to respond. Try send "@help".`
       }
     }
-    // Sends the response message
-    sendMessage(sender_psid, response);
+  } else if (received_message.attachments) {
+
+    // Gets the corrdintes of the message attachment
+    let coordinates = received_message.attachments[0].payload.coordinates;
+    WeatherDataUtils.getWeatherData(coordinates.lat, coordinates.long).then(
+      tempString => {
+        response = {
+          "text": "The current temperature is " + tempString,
+        }
+        sendMessage(sender_psid, response);
+      }
+    );
+    return
   }
+  // Sends the response message
+  sendMessage(sender_psid, response);
 }
 
 function handlePostback(sender_psid, received_message) {
