@@ -11,8 +11,7 @@ function getWeatherData(latitude, longitude) {
         console.log(json.body.current_observation.feelslike_string)
         console.log(json.current_observation.feelslike_string)
       }
-    )
-  ).catch(error => console.log(error));
+    ).catch(error => console.log(error));
 }
 
 module.exports = {getWeatherData: getWeatherData}
