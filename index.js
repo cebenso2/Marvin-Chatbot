@@ -72,6 +72,13 @@ function handleMessage(sender_psid, received_message) {
     response = {
       "text": `You sent the message: "${received_message.text}".`
     }
+    if (received_message.text === "@help") {
+      response = "Learn about me at: http://marvin-assistant.herokuapp.com/"
+    }
+
+    if (received_message.text === "@hi") {
+      response = "Hi. I hope you are having a good day!"
+    }
   }
 
   // Sends the response message
