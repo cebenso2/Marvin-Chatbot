@@ -45,8 +45,14 @@ function handleMessage(sender_psid, received_message) {
     let coordinates = received_message.attachments[0].payload.coordinates;
     WeatherDataUtils.getWeatherData(coordinates.lat, coordinates.long).then(
       tempString => {
-        response = {
-          "text": "The current temperature is " + tempString,
+        if (!tempString || tempString == "FAIL"){
+          response = {
+            "text": "Sorry I could find any weather data for that location.",
+          }
+        } else {
+          response = {
+            "text": "The current temperature is " + tempString,
+          }
         }
         sendMessage(sender_psid, response);
       }

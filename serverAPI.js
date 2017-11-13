@@ -12,7 +12,6 @@ app.use(bodyParser.json());
 app.listen((process.env.PORT || 5000));
 app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'ejs');
-
 //token for verification of webhook - set in heroku for security
 const VERIFY_TOKEN = process.env.VERIFY_TOKEN
 
@@ -61,3 +60,5 @@ app.post('/webhook', (req, res) => {
   }
 
 });
+
+console.log("API Server Started: Running");
