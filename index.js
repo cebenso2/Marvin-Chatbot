@@ -74,7 +74,7 @@ function handleMessage(sender_psid, received_message) {
     }
     if (received_message.text === "@help") {
       response = {
-        "test": "Learn about me at: http://marvin-assistant.herokuapp.com/"
+        "text": "I am a personal assistant chatbot. Learn how I can help you at: http://marvin-assistant.herokuapp.com/"
       }
     }
 
