@@ -1,4 +1,5 @@
 var request = require("request");
+var fetch = require("fetch");
 const WEATHER_ENDPOINT = "http://api.wunderground.com/api/" + process.env.WEATHER_API_KEY + "/conditions/q/"
 function getWeatherData(latitude, longitude) {
 
