@@ -3,7 +3,10 @@ var WeatherDataUtils = require("./WeatherDataUtils")
 
 //access token for page - set in heroku for security
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
+//endpoint to send response messages to
 const FACEBOOK_ENDPOINT = "https://graph.facebook.com/v2.6/me/messages"
+
+//receives a message and a sender id. Deteremines the correct response
 function handleMessage(sender_psid, received_message) {
 
   let response;
@@ -54,9 +57,12 @@ function handleMessage(sender_psid, received_message) {
   sendMessage(sender_psid, response);
 }
 
+//Handle postback - TODO
 function handlePostback(sender_psid, received_message) {
 }
 
+
+//sends a message back to the sender id over facebook messenger
 function sendMessage(sender_psid, response) {
   // Construct the message body
   let request_body = {
@@ -82,7 +88,7 @@ function sendMessage(sender_psid, response) {
   });
 }
 
-//nlp helper function
+//NLP helper function
 function firstEntity(nlp, name) {
   return nlp && nlp.entities && nlp.entities && nlp.entities[name] && nlp.entities[name][0];
 }

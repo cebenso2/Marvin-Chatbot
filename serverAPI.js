@@ -42,13 +42,10 @@ app.post('/webhook', (req, res) => {
   if (body.object === 'page') {
 
     body.entry.forEach(function(entry) {
-      // Gets the body of the webhook event
       let webhook_event = entry.messaging[0];
 
-      // Get the sender PSID
       let sender_psid = webhook_event.sender.id;
-      // Check if the event is a message or postback and
-      // pass the event to the appropriate handler function
+      // Check if the event is a message or postback
       if (webhook_event.message) {
         MessageHandling.handleMessage(sender_psid, webhook_event.message);
       } else if (webhook_event.postback) {

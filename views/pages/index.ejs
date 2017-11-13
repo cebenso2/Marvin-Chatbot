@@ -1,60 +1,58 @@
 <!DOCTYPE html>
+<!-- This is the homepage for the Marvin help pages -->
 <html>
-<head>
-  <% include ../partials/header.ejs %>
-</head>
-
-<body>
-
-
-<div class="jumbotron text-center">
-  <div class="container">
-    <div class="logo">
-      <img src="/messenger-icon.png">
-    </div>
-    <h1>Marvin: Facebook Chatbot</h1>
-    <p>Chris Benson's Final Project for CS242. Marvin is a personal assistant Facebook chatbot.   </p>
+  <head>
+    <% include ../partials/header.ejs %>
+  </head>
+  <body>
+    <div class="jumbotron text-center">
+      <div class="container">
+        <div class="logo">
+          <img src="/messenger-icon.png">
+        </div>
+        <h1>Marvin: Facebook Chatbot</h1>
+        <p>Chris Benson's Final Project for CS242. Marvin is a personal assistant Facebook chatbot.   </p>
       </div>
-</div>
-<div class="container">
-  <h3><span class="glyphicon glyphicon-info-sign"></span> About Marvin</h3>
-  <hr>
-  <p>
-    Marvin is a personal assistant Facebook chatbot. Marvin can help you by answering questions and helping with tasks.
-  </p>
-  <h3><span class="glyphicon glyphicon-info-sign"></span> How to interact with Marvin</h3>
-  <hr>
-  <div class="alert alert-danger text-center">Marvin is still in development and therefore public users will not yet be able to interact with Marvin.</div>
-  <ul>
-    <li> Marvin is a Facebook chatbot and therefore is a page on Facebook. </li>
-    <li> Navigate to Marvin's Facebook page located <a href="https://www.facebook.com/Marvin-255789928282913/"> here </a> </li>
-    <li> Press the send message button and start chatting with Marvin. </li>
-  </ul>
-  <h3><span class="glyphicon glyphicon-info-sign"></span> What Marvin can do</h3>
-  <hr>
-  <p> Here are a list of messages that Marvin can respond to: </p>
-  <table class="table table-borderless table-marginless">
- <tr>
-   <th>Command</th>
-   <th>Action</th>
- </tr>
- <tr>
-   <td><div class="alert alert-info text-center"><strong>@help</strong><div></td>
-   <td><div class="alert alert-info">Marvin respond with information about itself and sends a link to this page.</div></td>
- </tr>
- <tr>
-   <td><div class="alert alert-info text-center strong"><strong>@hi</strong><div></td>
-   <td><div class="alert alert-info">Marvin responds a friendly greeting.</div></td>
- </tr>
- <tr>
-   <td><div class="alert alert-info text-center strong"><strong>@weather</strong><div></td>
-   <td><div class="alert alert-info">Marvin will send you information about the weather.</div></td>
- </tr>
- <tr>
-   <td><div class="alert alert-info text-center strong"><strong> < Greeting > </strong><div></td>
-   <td><div class="alert alert-info">Marvin can detect most greetings and can respond with a default greeting.</div></td>
- </tr>
-</table>
-</div>
-</body>
+    </div>
+    <div class="container">
+      <h3><span class="glyphicon glyphicon-info-sign"></span> About Marvin</h3>
+      <hr>
+      <p>
+        Marvin is a personal assistant Facebook chatbot. Marvin can help you by answering questions and helping with tasks.
+      </p>
+      <h3><span class="glyphicon glyphicon-info-sign"></span> How to interact with Marvin</h3>
+      <hr>
+      <div class="alert alert-danger text-center">Marvin is still in development and therefore public users will not yet be able to interact with Marvin.</div>
+      <ul>
+        <li> Marvin is a Facebook chatbot and therefore is a page on Facebook. </li>
+        <li> Navigate to Marvin's Facebook page located <a href="https://www.facebook.com/Marvin-255789928282913/"> here </a> </li>
+        <li> Press the send message button and start chatting with Marvin. </li>
+      </ul>
+      <h3><span class="glyphicon glyphicon-info-sign"></span> What Marvin can do</h3>
+      <hr>
+      <p> Here are a list of messages that Marvin can respond to: </p>
+      <table class="table table-borderless table-marginless">
+        <tr>
+         <th>Command</th>
+         <th>Action</th>
+       </tr>
+       <tr>
+         <td><div class="alert alert-info text-center"><strong>@help</strong><div></td>
+         <td><div class="alert alert-info">Marvin respond with information about itself and sends a link to this page.</div></td>
+       </tr>
+       <tr>
+         <td><div class="alert alert-info text-center strong"><strong>@hi</strong><div></td>
+         <td><div class="alert alert-info">Marvin responds a friendly greeting.</div></td>
+       </tr>
+       <tr>
+         <td><div class="alert alert-info text-center strong"><strong>@weather</strong><div></td>
+         <td><div class="alert alert-info">Marvin will send you information about the weather.</div></td>
+       </tr>
+       <tr>
+         <td><div class="alert alert-info text-center strong"><strong> < Greeting > </strong><div></td>
+         <td><div class="alert alert-info">Marvin can detect most greetings and can respond with a default greeting.</div></td>
+       </tr>
+      </table>
+    </div>
+  </body>
 </html>
