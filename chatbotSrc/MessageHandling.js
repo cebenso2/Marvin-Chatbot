@@ -10,28 +10,24 @@ function handleMessage(sender_psid, received_message) {
   // Check if the message contains text
   if (received_message.text) {
     let greeting = firstEntity(received_message.nlp, 'greeting');
+    console.log(greeting);
     // Create the payload for a basic text message
     if (received_message.text === "@help") {
       response = {
         "text": "I am a personal assistant chatbot. Learn how I can help you at: http://marvin-assistant.herokuapp.com/"
       }
-    }
-
-    if (received_message.text === "@hi") {
+    } else if (received_message.text === "@hi") {
       response = {
         "text": "Hi. I hope you are having a good day!"
       }
-    }
-
-    if (received_message.text === "@weather") {
+    } else if (received_message.text === "@weather") {
       response = {
         "text": "Where are you so I can get weather data?",
         "quick_replies":[
           {"content_type":"location"}
         ]
       }
-    }
-    else if (greeting && greeting.confidence > 0.8) {
+    } else if (greeting && greeting.confidence > 0.8) {
       response = {
         "text": "Hello!",
       }
