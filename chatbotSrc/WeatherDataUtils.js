@@ -5,7 +5,7 @@ function getWeatherData(latitude, longitude) {
   let response;
 
   // Send the HTTP request to the Messenger Platform
-  fetch(WEATHER_ENDPOINT + latitude +","+longitude+".json",{method: 'GET',}).then(
+  window.fetch(WEATHER_ENDPOINT + latitude +","+longitude+".json",{method: 'GET',}).then(
     (response) => response.json()).then(
       (json) => {
         console.log(json.body.current_observation.feelslike_string)
