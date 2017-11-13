@@ -34,6 +34,12 @@ function handleMessage(sender_psid, received_message) {
         ]
       }
     }
+  } else if (received_message.attachments) {
+
+    // Gets the corrdintes of the message attachment
+    let coordinates = received_message.attachments[0].payload.coordinates;
+    console.log(coordinates);
+
   }
 
   // Sends the response message
