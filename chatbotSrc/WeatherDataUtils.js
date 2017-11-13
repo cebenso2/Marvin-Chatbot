@@ -8,7 +8,8 @@ function getWeatherData(latitude, longitude) {
   request(WEATHER_ENDPOINT + latitude +","+longitude+".json", (err, res, body) => {
     if (!err) {
       console.log("A");
-      console.log(body);
+      let result = JSON.parse(body);
+      console.log(result.current_observation.feelslike_string)
       console.log("B")
       //console.log(res);
     } else {
