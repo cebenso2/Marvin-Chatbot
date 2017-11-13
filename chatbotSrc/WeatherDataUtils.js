@@ -6,12 +6,11 @@ function getWeatherData(latitude, longitude) {
 
   // Send the HTTP request to the Messenger Platform
   request(WEATHER_ENDPOINT + latitude +","+longitude+".json").then(
-    response => response).then(
-      json => {
-        console.log(json.body.current_observation.feelslike_string);
-        console.log(json.current_observation.feelslike_string);
-      }
-    ).catch(error => console.log(error))
+    response => {
+      console.log(repsonse.body.current_observation.feelslike_string);
+      console.log(response.current_observation.feelslike_string);
+    }
+  ).catch(error => console.log(error))
 }
 
 module.exports = {getWeatherData: getWeatherData}
