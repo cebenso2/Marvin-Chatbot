@@ -5,14 +5,14 @@ function getWeatherData(latitude, longitude) {
   let response;
 
   // Send the HTTP request to the Messenger Platform
-  request(WEATHER_ENDPOINT + latitude +","+longitude+".json", (err, res, body) => {
-    if (!err) {
-      let result = JSON.parse(body);
-      console.log(result.current_observation.feelslike_string)
-    } else {
-      console.error("Error getting data");
-    }
-  });
+  fetch(WEATHER_ENDPOINT + latitude +","+longitude+".json").then(
+    (response) => response.json()).then(
+      (json) => {
+        console.log(json.body.current_observation.feelslike_string)
+        console.log(json.current_observation.feelslike_string)
+      }
+    )
+  ).catch(error => console.log(error));
 }
 
 module.exports = {getWeatherData: getWeatherData}
