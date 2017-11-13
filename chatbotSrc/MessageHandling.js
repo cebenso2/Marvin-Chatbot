@@ -28,7 +28,7 @@ function handleMessage(sender_psid, received_message) {
       }
     } else if (greeting && greeting.confidence > 0.8) {
       response = {
-        "text": "Hello!",
+        "text": "Hello! My name is Marvin and I am good.",
       }
     } else {
       // default
