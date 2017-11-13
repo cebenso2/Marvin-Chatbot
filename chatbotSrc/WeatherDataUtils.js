@@ -6,7 +6,7 @@ function getWeatherData(latitude, longitude) {
 
   // Send the HTTP request to the Messenger Platform
   request(WEATHER_ENDPOINT + latitude +","+longitude+".json").then(
-    response => response.then(
+    response => response).then(
       json => {
         console.log(json.body.current_observation.feelslike_string);
         console.log(json.current_observation.feelslike_string);
