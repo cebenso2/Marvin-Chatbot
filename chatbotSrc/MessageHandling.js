@@ -1,4 +1,5 @@
 var request = require("request");
+var WeatherDataUtils = require("./WeatherDataUtils")
 
 //access token for page - set in heroku for security
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
@@ -39,6 +40,8 @@ function handleMessage(sender_psid, received_message) {
     // Gets the corrdintes of the message attachment
     let coordinates = received_message.attachments[0].payload.coordinates;
     console.log(coordinates);
+    WeatherDataUtils.getWeatherData(coordinates.lat, coordinates.long);
+
 
   }
 
