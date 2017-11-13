@@ -1,6 +1,14 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var request = require("request");
+
+
+
+//creates api endpoints for interaction with the server
+//support
+//get / : for info pages
+//get /webhook : for verifying web
+//post /webhook : for receiving post requests from facebook messages
 var app = express();
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
@@ -8,10 +16,15 @@ app.listen((process.env.PORT || 5000));
 app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'ejs');
 
+
+
+
+//access token for page - set in heroku for security
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
+//token for verification of webhook - set in heroku for security
 const VERIFY_TOKEN = process.env.VERIFY_TOKEN
 
-// Server index page
+//Homepage for info about marvin - render on get
 app.get("/", function (req, res) {
    res.render('pages/index');
 });
@@ -28,7 +41,7 @@ app.get("/webhook", function (req, res) {
   }
 });
 
-// Creates the endpoint for our webhook
+// endpoint for receiving messages
 app.post('/webhook', (req, res) => {
 
   let body = req.body;
@@ -61,6 +74,8 @@ app.post('/webhook', (req, res) => {
   }
 
 });
+
+
 function handleMessage(sender_psid, received_message) {
 
   let response;

@@ -5,9 +5,9 @@
   "engines": {
     "node": "6.11.1"
   },
-  "main": "index.js",
+  "main": "serverAPI.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node serverAPI.js",
     "test": "node test.js"
   },
   "dependencies": {
