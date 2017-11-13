@@ -28,19 +28,24 @@ function handleMessage(sender_psid, received_message) {
   }
 
   // Sends the response message
-  callSendAPI(sender_psid, response);
+  sendMessage(sender_psid, response);
 }
 
 function handlePostback(sender_psid, received_message) {
 }
 
-function callSendAPI(sender_psid, response) {
+function sendMessage(sender_psid, response) {
   // Construct the message body
   let request_body = {
     "recipient": {
       "id": sender_psid
     },
-    "message": response
+    "message": response,
+    "quick_replies":[
+      {
+        "content_type":"location"
+      }
+    ]
   }
 
   // Send the HTTP request to the Messenger Platform
