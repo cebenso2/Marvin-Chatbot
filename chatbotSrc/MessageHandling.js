@@ -9,7 +9,8 @@ function handleMessage(sender_psid, received_message) {
   let response;
   // Check if the message contains text
   if (received_message.text) {
-    let greeting = firstEntity(received_message, 'greeting');
+    console.log(received_message)
+    let greeting = firstEntity(received_message.nlp, 'greeting');
     console.log(greeting);
     // Create the payload for a basic text message
     if (received_message.text === "@help") {
@@ -34,7 +35,7 @@ function handleMessage(sender_psid, received_message) {
     } else {
       // default
       response = {
-        "text": `You sent the message: "${received_message.text}". I do not know how to respond. Try send "@help".`
+        "text": `You sent the message: "${received_message.text}". I do not know how to respond. Try sending "@help".`
       }
     }
   } else if (received_message.attachments) {
