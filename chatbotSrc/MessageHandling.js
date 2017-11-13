@@ -9,7 +9,7 @@ function handleMessage(sender_psid, received_message) {
   let response;
   // Check if the message contains text
   if (received_message.text) {
-    let greeting = firstEntity(received_message.nlp, 'greeting');
+    let greeting = firstEntity(received_message, 'greeting');
     console.log(greeting);
     // Create the payload for a basic text message
     if (received_message.text === "@help") {
