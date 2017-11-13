@@ -7,14 +7,11 @@ const FACEBOOK_ENDPOINT = "https://graph.facebook.com/v2.6/me/messages"
 function handleMessage(sender_psid, received_message) {
 
   let response;
-  console.log(received_message)
+  console.log(received_message);
   // Check if the message contains text
   if (received_message.text) {
 
     // Create the payload for a basic text message
-    response = {
-      "text": `You sent the message: "${received_message.text}".`
-    }
     if (received_message.text === "@help") {
       response = {
         "text": "I am a personal assistant chatbot. Learn how I can help you at: http://marvin-assistant.herokuapp.com/"
@@ -50,6 +47,16 @@ function handleMessage(sender_psid, received_message) {
         sendMessage(sender_psid, response);
       }
     );
+  } else {
+    // check greeting is here and is confident
+    let greeting = firstEntity(received_message.nlp, 'greeting');
+    if (greeting && greeting.confidence > 0.8) {
+      sendResponse('Hi there!');
+    } else {
+    // default
+    response = {
+      "text": `You sent the message: "${received_message.text}". I do not know how to respond. Try send "@help".`
+    }
   }
 
   // Sends the response message
@@ -82,6 +89,10 @@ function sendMessage(sender_psid, response) {
       console.error("Unable to send message:" + err);
     }
   });
+}
+
+function firstEntity(nlp, name) {
+  return nlp && nlp.entities && nlp.entities && nlp.entities[name] && nlp.entities[name][0];
 }
 
 module.exports = {handleMessage: handleMessage, handlePostback: handlePostback}
