@@ -25,6 +25,15 @@ function handleMessage(sender_psid, received_message) {
         "text": "Hi. I hope you are having a good day!"
       }
     }
+
+    if (received_message.text === "@weather") {
+      response = {
+        "text": "Where are you so I can get weather data?",
+        "quick_replies":[
+          {"content_type":"location"}
+        ]
+      }
+    }
   }
 
   // Sends the response message
@@ -41,11 +50,7 @@ function sendMessage(sender_psid, response) {
       "id": sender_psid
     },
     "message": response,
-    "quick_replies":[
-      {
-        "content_type":"location"
-      }
-    ]
+
   }
 
   // Send the HTTP request to the Messenger Platform
