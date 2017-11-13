@@ -51,16 +51,18 @@ function handleMessage(sender_psid, received_message) {
     // check greeting is here and is confident
     let greeting = firstEntity(received_message.nlp, 'greeting');
     if (greeting && greeting.confidence > 0.8) {
-      sendResponse('Hi there!');
+      response = {
+        "text": "Hello!",
+      }
     } else {
-    // default
-    response = {
-      "text": `You sent the message: "${received_message.text}". I do not know how to respond. Try send "@help".`
+      // default
+      response = {
+        "text": `You sent the message: "${received_message.text}". I do not know how to respond. Try send "@help".`
+      }
     }
+    // Sends the response message
+    sendMessage(sender_psid, response);
   }
-
-  // Sends the response message
-  sendMessage(sender_psid, response);
 }
 
 function handlePostback(sender_psid, received_message) {
