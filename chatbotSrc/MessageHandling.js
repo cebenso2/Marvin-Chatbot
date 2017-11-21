@@ -72,24 +72,26 @@ function handlePostback(sender_psid, received_message) {
 }
 
 function getNewsHeadlinesResponse(){
-    let headlines = NewsDataUtils.getNewsHeadlines();
-    let response = {
-      "attachment":{
-        "type":"template",
-        "payload":{
-          "template_type":"generic",
-          "elements":[{
-            "title":"Fun",
-            "image_url":"http://i2.cdn.turner.com/money/dam/assets/171120141601-charlie-rose-780x439.jpg",
-            "buttons":[
-              {
-                "type":"web_url",
-                "url":"https://www.google.com",
-                "title":"View Website"
-              }
-            ]
-          }
-        ]
+  let headlines = NewsDataUtils.getNewsHeadlines();
+  let tiles = headlines.map((headline) => {
+    return {
+      "title":"Fun",
+      "image_url":"http://i2.cdn.turner.com/money/dam/assets/171120141601-charlie-rose-780x439.jpg",
+      "buttons":[
+        {
+          "type":"web_url",
+          "url":"https://www.google.com",
+          "title":"View Website"
+        }
+      ]
+    }
+  });
+  let response = {
+    "attachment":{
+      "type":"template",
+      "payload":{
+        "template_type":"generic",
+        "elements": tiles,
       }
     }
   };
