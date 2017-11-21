@@ -73,6 +73,7 @@ function handlePostback(sender_psid, received_message) {
 
 function getNewsHeadlinesResponse(){
   let headlines = NewsDataUtils.getNewsHeadlines();
+  console.log(headlines);
   let tiles = headlines.map((headline) => {
     return {
       "title":"Fun",
