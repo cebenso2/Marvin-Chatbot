@@ -11,9 +11,11 @@ function getNewsHeadlines(latitude, longitude) {
     response => {
       let data = JSON.parse(response);
       let newsData = data.articles.map((headline) => {
-          title: headline.title,
-          url: headline.url,
-          imageURL: headline.urlToImage,
+          return {
+            title: headline.title,
+            url: headline.url,
+            imageURL: headline.urlToImage,
+          }
         }
       );
       console.log(newsData);
