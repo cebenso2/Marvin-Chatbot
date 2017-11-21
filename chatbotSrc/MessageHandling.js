@@ -73,22 +73,14 @@ function handlePostback(sender_psid, received_message) {
 
 function getNewsHeadlinesResponse(){
     //let headlines = NewsDataUtils.getNewsHeadlines();
-    /*let response = {
+    let response = {
       "attachment":{
         "type":"template",
         "payload":{
           "template_type":"generic",
           "elements":[{
-            "title":"Welcome to Peter\'s Hats",
+            "title":"Fun",
             "image_url":"http://i2.cdn.turner.com/money/dam/assets/171120141601-charlie-rose-780x439.jpg",
-            "subtitle":"We\'ve got the right hat for everyone.",
-            "default_action": {
-              "type": "web_url",
-              "url": "https://www.google.com",
-              "messenger_extensions": true,
-              "webview_height_ratio": "tall",
-              "fallback_url": "https://www.google.com"
-            },
             "buttons":[
               {
                 "type":"web_url",
@@ -100,8 +92,8 @@ function getNewsHeadlinesResponse(){
         ]
       }
     }
-  };*/
-  let response = {
+  };
+  /*let response = {
     "attachment":{
       "type":"image",
       "payload":{
@@ -109,7 +101,7 @@ function getNewsHeadlinesResponse(){
         "is_reusable":true
       }
     }
-  };
+  };*/
   console.log(response);
   return response;
 }
