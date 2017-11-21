@@ -73,7 +73,7 @@ function handlePostback(sender_psid, received_message) {
 
 function getNewsHeadlinesResponse(){
     //let headlines = NewsDataUtils.getNewsHeadlines();
-    let response = {
+    /*let response = {
       "attachment":{
         "type":"template",
         "payload":{
@@ -98,6 +98,15 @@ function getNewsHeadlinesResponse(){
             ]
           }
         ]
+      }
+    }
+  };*/
+  let response = {
+    "attachment":{
+      "type":"image",
+      "payload":{
+        "url":"http://i2.cdn.turner.com/money/dam/assets/171120141601-charlie-rose-780x439.jpg",
+        "is_reusable":true
       }
     }
   };
