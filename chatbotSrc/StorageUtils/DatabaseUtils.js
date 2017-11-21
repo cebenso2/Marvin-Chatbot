@@ -7,7 +7,7 @@ function createLocationTable(){
   });
 
   client.connect();
-  client.query('CREATE TABLE locations ( user VARCHAR, name VARCHAR, longitude DECIMAL, latitude DECIMAL );', (err, res) => {
+  client.query('CREATE TABLE locations (userpsid VARCHAR, name VARCHAR, longitude DECIMAL, latitude DECIMAL);', (err, res) => {
     if (err) {
       console.log("Error while creating locations table");
       console.log(err);
@@ -46,7 +46,7 @@ function getLocations(user_psid){
   });
 
   client.connect();
-  client.query("SELECT * FROM locations WHERE user='"+user_psid+"';", (err, res) => {
+  client.query("SELECT * FROM locations WHERE userpsid='"+user_psid+"';", (err, res) => {
     if (err) {
       console.log(err);
     } else {
