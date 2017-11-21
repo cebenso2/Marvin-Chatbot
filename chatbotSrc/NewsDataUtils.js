@@ -18,7 +18,6 @@ function getNewsHeadlines(latitude, longitude) {
           }
         }
       );
-      console.log(newsData);
       return newsData;
     }
   ).catch(error => console.log(error))
