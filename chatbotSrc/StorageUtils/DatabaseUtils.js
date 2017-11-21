@@ -8,17 +8,17 @@ function createDatabase(){
   });
 
   client.connect();
-
-  /*client.query('SELECT table_schema,table_name FROM information_schema.tables;', (err, res) => {
+  client.query("CREATE TABLE Locations (LocationName varchar(255),Latitude FLOAT,Longitude FLOAT);", (err, res) => {
+    console.log(err);
+    console.log(res);
+  });
+  client.query('SELECT LocationName,Locations FROM information_schema.tables;', (err, res) => {
     if (err) throw err;
     for (let row of res.rows) {
       console.log(JSON.stringify(row));
     }
-  });*/
-  client.query("CREATE TABLE Persons (LocationName varchar(255),Latitude FLOAT,Longitude FLOAT);", (err, res) => {
-    console.log(err);
-    console.log(res);
   });
+
   client.end();
 }
 module.exports = {createDatabase: createDatabase}
