@@ -8,7 +8,7 @@ function createDatabase(){
   });
 
   client.connect();
-  client.query('ALTER TABLE locations ADD COLUMN longitude DECIMAL;', (err, res) => {
+  client.query('CREATE TABLE locations (name VARCHAR, longitude DECIMAL, latitude DECIAML);', (err, res) => {
     console.log("create db");
     console.log(err);
     console.log(res);
@@ -49,13 +49,5 @@ function getLocations(){
     }
     client.end();
   });
-  /*client.query('SELECT LocationName,Locations FROM information_schema.tables;', (err, res) => {
-    console.log("locations:");
-    if (err) throw err;
-    for (let row of res.rows) {
-      console.log(JSON.stringify(row));
-    }
-    client.end();
-  });*/
 }
 module.exports = {createDatabase: createDatabase, getLocations: getLocations,  insertLocation: insertLocation}
