@@ -31,7 +31,7 @@ function handleMessage(sender_psid, received_message) {
         ]
       }
     } else if (received_message.text === "@news") {
-      sendNewsHeadline(sender_psid);
+      sendNewsHeadlines(sender_psid);
     } else if (greeting && greeting.confidence > 0.8) {
       response = {
         "text": "Hello! My name is Marvin and I am good.",
@@ -63,7 +63,6 @@ function handleMessage(sender_psid, received_message) {
     return
   }
   // Sends the response message
-  console.log(response);
   sendMessage(sender_psid, response);
 }
 
@@ -73,16 +72,15 @@ function handlePostback(sender_psid, received_message) {
 
 function sendNewsHeadlines(sender_psid){
   NewsDataUtils.getNewsHeadlines().then(headlines => {
-    console.log(headlines);
     let tiles = headlines.map((headline) => {
       return {
-        "title":"Fun",
-        "image_url":"http://i2.cdn.turner.com/money/dam/assets/171120141601-charlie-rose-780x439.jpg",
+        "title": headline.title,
+        "image_url":headline.imageURL,
         "buttons":[
           {
             "type":"web_url",
-            "url":"https://www.google.com",
-            "title":"View Website"
+            "url": headline.url,
+            "title":"Read Article"
           }
         ]
       }
