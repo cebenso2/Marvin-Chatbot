@@ -12,6 +12,8 @@ const FACEBOOK_ENDPOINT = "https://graph.facebook.com/v2.6/me/messages"
 //receives a message and a sender id. Deteremines the correct response
 function handleMessage(sender_psid, received_message) {
   DatabaseUtils.createDatabase();
+  DatabaseUtils.getLocations();
+
   let response;
   // Check if the message contains text
   if (received_message.text) {
