@@ -2,6 +2,7 @@ const { Client } = require('pg');
 
 
 function createDatabase(){
+  console.log("create db");
   const client = new Client({
     connectionString: process.env.DATABASE_URL,
     ssl: true,
