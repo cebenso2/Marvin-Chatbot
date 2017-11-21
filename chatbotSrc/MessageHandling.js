@@ -1,6 +1,6 @@
 var request = require("request");
-var WeatherDataUtils = require("./WeatherDataUtils")
-var NewsDataUtils = require("./NewsDataUtils")
+var WeatherDataUtils = require("./DataUtils/WeatherDataUtils")
+var NewsDataUtils = require("./DataUtils/NewsDataUtils")
 
 
 //access token for page - set in heroku for security
