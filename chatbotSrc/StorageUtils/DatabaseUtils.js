@@ -8,7 +8,7 @@ function createDatabase(){
   });
 
   client.connect();
-  client.query('ALTER TABLE locations ADD COLUMN name STRING;', (err, res) => {
+  client.query('ALTER TABLE locations ADD COLUMN name VARCHAR;', (err, res) => {
     console.log("create db");
     console.log(err);
     console.log(res);
