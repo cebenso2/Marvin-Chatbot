@@ -11,7 +11,7 @@ const FACEBOOK_ENDPOINT = "https://graph.facebook.com/v2.6/me/messages"
 
 //receives a message and a sender id. Deteremines the correct response
 function handleMessage(sender_psid, received_message) {
-  DatabaseUtils.createDatabase();
+  //DatabaseUtils.createDatabase();
   DatabaseUtils.insertLocation("test", 10, 20);
   DatabaseUtils.getLocations();
 
