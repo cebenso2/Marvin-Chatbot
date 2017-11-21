@@ -10,7 +10,6 @@ const FACEBOOK_ENDPOINT = "https://graph.facebook.com/v2.6/me/messages"
 
 //receives a message and a sender id. Deteremines the correct response
 function handleMessage(sender_psid, received_message) {
-  NewsDataUtils.getNewsHeadlines();
   let response;
   // Check if the message contains text
   if (received_message.text) {
@@ -31,6 +30,8 @@ function handleMessage(sender_psid, received_message) {
           {"content_type":"location"}
         ]
       }
+    } else if (received_message.text === "@news") {
+      response = getNewsHeadlinesResponse();
     } else if (greeting && greeting.confidence > 0.8) {
       response = {
         "text": "Hello! My name is Marvin and I am good.",
@@ -69,6 +70,42 @@ function handleMessage(sender_psid, received_message) {
 function handlePostback(sender_psid, received_message) {
 }
 
+function getNewsHeadlinesResponse(){
+    let headlines = NewsDataUtils.getNewsHeadlines();
+    let response = {
+      "attachment":{
+        "type":"template",
+        "payload":{
+          "template_type":"generic",
+          "elements":[{
+            "title":"Welcome to Peter\'s Hats",
+            "image_url":"https://petersfancybrownhats.com/company_image.png",
+            "subtitle":"We\'ve got the right hat for everyone.",
+            "default_action": {
+              "type": "web_url",
+              "url": "https://peterssendreceiveapp.ngrok.io/view?item=103",
+              "messenger_extensions": true,
+              "webview_height_ratio": "tall",
+              "fallback_url": "https://peterssendreceiveapp.ngrok.io/"
+            },
+            "buttons":[
+              {
+                "type":"web_url",
+                "url":"https://petersfancybrownhats.com",
+                "title":"View Website"
+              },{
+                "type":"postback",
+                "title":"Start Chatting",
+                "payload":"DEVELOPER_DEFINED_PAYLOAD"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  };
+  return response;
+}
 
 //sends a message back to the sender id over facebook messenger
 function sendMessage(sender_psid, response) {
@@ -80,7 +117,6 @@ function sendMessage(sender_psid, response) {
     "message": response,
 
   }
-
   // Send the HTTP request to the Messenger Platform
   request({
     "uri": FACEBOOK_ENDPOINT,
