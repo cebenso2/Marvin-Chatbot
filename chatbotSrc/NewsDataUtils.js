@@ -10,7 +10,14 @@ function getNewsHeadlines(latitude, longitude) {
   return request(NEWS_ENDPOINT).then(
     response => {
       let data = JSON.parse(response);
-      console.log(data);
+      let newsData = data.articles.map((headline) => {
+          title: headline.title,
+          url: headline.url,
+          imageURL: headline.urlToImage,
+        }
+      );
+      console.log(newsData);
+      return newsData;
     }
   ).catch(error => console.log(error))
 }
