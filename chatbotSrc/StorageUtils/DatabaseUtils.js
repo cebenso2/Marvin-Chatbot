@@ -1,5 +1,6 @@
 const { Client } = require('pg');
 
+//create the location database
 function createLocationTable(){
   const client = new Client({
     connectionString: process.env.DATABASE_URL,
@@ -20,6 +21,7 @@ function createLocationTable(){
 
 }
 
+//insert a location for a user
 function insertLocation(user_psid, name, long, lat){
   const client = new Client({
     connectionString: process.env.DATABASE_URL,
@@ -38,6 +40,7 @@ function insertLocation(user_psid, name, long, lat){
 
 }
 
+//get locations for a user
 function getLocations(user_psid){
   console.log("getLocations");
   const client = new Client({
@@ -46,14 +49,10 @@ function getLocations(user_psid){
   });
 
   client.connect();
-  client.query("SELECT * FROM locations WHERE userpsid='"+user_psid+"';", (err, res) => {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log("Locations:");
-      for (let row of res.rows) {
-        console.log(JSON.stringify(row));
-      }
+  return client.query("SELECT * FROM locations WHERE userpsid='"+user_psid+"';").then((result) => {
+    let locations = [];
+    for (let row of result.rows) {
+      locations.push(row.name);
     }
     client.end();
   });

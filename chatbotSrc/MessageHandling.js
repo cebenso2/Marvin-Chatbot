@@ -34,7 +34,7 @@ function handleMessage(sender_psid, received_message) {
     } else if (received_message.text === "@news") {
       sendNewsHeadlines(sender_psid);
     } else if (received_message.text === "@locations") {
-      return DatabaseUtils.getLocations(sender_psid);
+      sendLocations(sender_psid);
     } else if (received_message.text.substring(0,9) === "@location") {
       locationName = received_message.text.substring(10);
       response = {
@@ -113,6 +113,19 @@ function sendNewsHeadlines(sender_psid){
       }
     };
     sendMessage(sender_psid, response);
+  });
+}
+
+function sendLocations(sender_psid){
+  DatabaseUtils.getLocations(sender_psid).then((locations) => {
+    let locationString ="";
+    for( let l of locations){
+      locationString+= l +"\n";
+    }
+    let response = {
+      "text": locationString,
+    }
+    sendMessage(sender_psid, response)
   });
 }
 
