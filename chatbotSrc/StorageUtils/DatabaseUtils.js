@@ -8,7 +8,7 @@ function createDatabase(){
   });
 
   client.connect();
-  client.query('ALTER TABLE locations ADD COLUMN name VARCHAR;', (err, res) => {
+  client.query('ALTER TABLE locations ADD COLUMN latititude DECIMAL;', (err, res) => {
     console.log("create db");
     console.log(err);
     console.log(res);
@@ -25,7 +25,7 @@ function getLocations(){
   });
 
   client.connect();
-  client.query('SELECT * FROM information_schema.tables;', (err, res) => {
+  client.query('SELECT *,locations FROM information_schema.tables;', (err, res) => {
     console.log("locations:");
     if (err) throw err;
     for (let row of res.rows) {
