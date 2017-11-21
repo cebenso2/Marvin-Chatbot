@@ -2,7 +2,7 @@ var request = require("request");
 var WeatherDataUtils = require("./DataUtils/WeatherDataUtils")
 var NewsDataUtils = require("./DataUtils/NewsDataUtils")
 var DatabaseUtils = require("./StorageUtils/DatabaseUtils")
-let flag = false;
+let locationName = null;
 
 //access token for page - set in heroku for security
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
@@ -11,7 +11,6 @@ const FACEBOOK_ENDPOINT = "https://graph.facebook.com/v2.6/me/messages"
 
 //receives a message and a sender id. Deteremines the correct response
 function handleMessage(sender_psid, received_message) {
-  console.log(flag);
   let response = null;
   // Check if the message contains text
   if (received_message.text) {
@@ -33,14 +32,20 @@ function handleMessage(sender_psid, received_message) {
         ]
       }
     } else if (received_message.text === "@news") {
-      return sendNewsHeadlines(sender_psid);
+      sendNewsHeadlines(sender_psid);
     } else if (received_message.text === "@locations") {
       return DatabaseUtils.getLocations(sender_psid);
-    } else if (received_message.text === "@location") {
-      flag=true;
-      return DatabaseUtils.insertLocation(sender_psid, "home", 144, -10.3);
+    } else if (received_message.text.substring(0,8) === "@location") {
+      locationName = received_message.text.substring(9);
+      response = {
+        "text": `What location would you like to store for "${locationName}" ?`,
+        "quick_replies":[
+          {"content_type":"location"}
+        ]
+      };
+      return sendMessage(sender_psid, response);
     } else if (received_message.text === "@create") {
-      return DatabaseUtils.createLocationTable();
+      DatabaseUtils.createLocationTable();
     } else if (greeting && greeting.confidence > 0.8) {
       response = {
         "text": "Hello! My name is Marvin and I am good.",
@@ -55,25 +60,27 @@ function handleMessage(sender_psid, received_message) {
 
     // Gets the corrdintes of the message attachment
     let coordinates = received_message.attachments[0].payload.coordinates;
-    console.log(flag);
-    WeatherDataUtils.getWeatherData(coordinates.lat, coordinates.long).then(
-      tempString => {
-        if (!tempString || tempString == "FAIL"){
-          response = {
-            "text": "Sorry I could find any weather data for that location.",
+    if (locationName){
+      DatabaseUtils.insertLocation(user_psid, locationName, coordinates.long, coordinates.lat);
+    } else {
+      WeatherDataUtils.getWeatherData(coordinates.lat, coordinates.long).then(
+        tempString => {
+          if (!tempString || tempString == "FAIL"){
+            response = {
+              "text": "Sorry I could find any weather data for that location.",
+            }
+          } else {
+            response = {
+              "text": "The current temperature is " + tempString,
+            }
           }
-        } else {
-          response = {
-            "text": "The current temperature is " + tempString,
-          }
+          sendMessage(sender_psid, response);
         }
-        sendMessage(sender_psid, response);
-      }
-    );
-    return
+      );
+    }
   }
   // Sends the response message
-  flag=false;
+  locationName=null;
   sendMessage(sender_psid, response);
 }
 
