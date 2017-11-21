@@ -55,7 +55,7 @@ function getLocations(user_psid){
       locations.push(row.name);
     }
     client.end();
-    return loactions;
+    return locations;
   });
 }
 module.exports = {createLocationTable: createLocationTable, getLocations: getLocations,  insertLocation: insertLocation}
