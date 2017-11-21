@@ -1,7 +1,6 @@
 const { Client } = require('pg');
 
-function createDatabase(){
-  console.log("create db");
+function createLocationTable(){
   const client = new Client({
     connectionString: process.env.DATABASE_URL,
     ssl: true,
@@ -9,9 +8,13 @@ function createDatabase(){
 
   client.connect();
   client.query('CREATE TABLE locations (name VARCHAR, longitude DECIMAL, latitude DECIMAL);', (err, res) => {
-    console.log("create db");
-    console.log(err);
-    console.log(res);
+    if (err) {
+      console.log("Error while creating locations table");
+      console.log(err);
+    } else {
+      console.log("Created locations table");
+      console.log(res);
+    }
     client.end();
   });
 
@@ -24,10 +27,12 @@ function insertLocation(name, long, lat){
   });
 
   client.connect();
-  client.query("INSERT INTO locations VALUES ('home', 10,20);", (err, res) => {
-    console.log("insert");
-    console.log(err);
-    console.log(res);
+  client.query("INSERT INTO locations VALUES ( '" + name + "," + long + "," + lat +");", (err, res) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("Location inserted");
+    }
     client.end();
   });
 
@@ -42,10 +47,13 @@ function getLocations(){
 
   client.connect();
   client.query('SELECT * FROM locations;', (err, res) => {
-    console.log("locations:");
-    console.log(err);
-    for (let row of res.rows) {
-      console.log(JSON.stringify(row));
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("Locations:");
+      for (let row of res.rows) {
+        console.log(JSON.stringify(row));
+      }
     }
     client.end();
   });

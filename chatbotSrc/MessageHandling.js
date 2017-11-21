@@ -11,9 +11,6 @@ const FACEBOOK_ENDPOINT = "https://graph.facebook.com/v2.6/me/messages"
 
 //receives a message and a sender id. Deteremines the correct response
 function handleMessage(sender_psid, received_message) {
-  //DatabaseUtils.createDatabase();
-  DatabaseUtils.insertLocation("test", 10, 20);
-  DatabaseUtils.getLocations();
 
   let response;
   // Check if the message contains text
@@ -36,7 +33,11 @@ function handleMessage(sender_psid, received_message) {
         ]
       }
     } else if (received_message.text === "@news") {
-      sendNewsHeadlines(sender_psid);
+      return sendNewsHeadlines(sender_psid);
+    } else if (received_message.text === "@locations") {
+      return DataUtils.getLocations();
+    } else if (received_message.text === "@location") {
+      return DataUtils.insertLocation("home", 144, -10.3);
     } else if (greeting && greeting.confidence > 0.8) {
       response = {
         "text": "Hello! My name is Marvin and I am good.",
