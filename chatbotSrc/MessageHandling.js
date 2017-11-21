@@ -35,8 +35,8 @@ function handleMessage(sender_psid, received_message) {
       sendNewsHeadlines(sender_psid);
     } else if (received_message.text === "@locations") {
       return DatabaseUtils.getLocations(sender_psid);
-    } else if (received_message.text.substring(0,8) === "@location") {
-      locationName = received_message.text.substring(9);
+    } else if (received_message.text.substring(0,9) === "@location") {
+      locationName = received_message.text.substring(11);
       response = {
         "text": `What location would you like to store for "${locationName}" ?`,
         "quick_replies":[
