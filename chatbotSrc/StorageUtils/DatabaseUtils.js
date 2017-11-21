@@ -25,7 +25,7 @@ function getLocations(){
   });
 
   client.connect();
-  client.query('SELECT LocationName,Locations FROM information_schema.tables;', (err, res) => {
+  client.query('SELECT * FROM information_schema.tables;', (err, res) => {
     console.log("locations:");
     if (err) throw err;
     for (let row of res.rows) {
@@ -33,5 +33,13 @@ function getLocations(){
     }
     client.end();
   });
+  /*client.query('SELECT LocationName,Locations FROM information_schema.tables;', (err, res) => {
+    console.log("locations:");
+    if (err) throw err;
+    for (let row of res.rows) {
+      console.log(JSON.stringify(row));
+    }
+    client.end();
+  });*/
 }
 module.exports = {createDatabase: createDatabase, getLocations: getLocations}
