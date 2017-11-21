@@ -18,7 +18,7 @@ function createDatabase(){
 }
 
 function getLocations(){
-  console.log("getLocations ");
+  console.log("getLocations");
   const client = new Client({
     connectionString: process.env.DATABASE_URL,
     ssl: true,
