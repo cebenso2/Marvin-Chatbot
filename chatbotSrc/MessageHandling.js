@@ -63,6 +63,7 @@ function handleMessage(sender_psid, received_message) {
     return
   }
   // Sends the response message
+  console.log(response);
   sendMessage(sender_psid, response);
 }
 
@@ -104,6 +105,7 @@ function getNewsHeadlinesResponse(){
       }
     }
   };
+  console.log(response);
   return response;
 }
 
