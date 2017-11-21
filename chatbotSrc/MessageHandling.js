@@ -13,6 +13,7 @@ const FACEBOOK_ENDPOINT = "https://graph.facebook.com/v2.6/me/messages"
 function handleMessage(sender_psid, received_message) {
   //DatabaseUtils.createDatabase();
   DatabaseUtils.getLocations();
+  DatabaseUtils.insertLocation("test", 10, 20);
 
   let response;
   // Check if the message contains text
