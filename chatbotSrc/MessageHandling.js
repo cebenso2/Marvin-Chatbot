@@ -1,5 +1,7 @@
 var request = require("request");
 var WeatherDataUtils = require("./WeatherDataUtils")
+var NewsDataUtils = require("./NewsDataUtils")
+
 
 //access token for page - set in heroku for security
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
@@ -8,7 +10,7 @@ const FACEBOOK_ENDPOINT = "https://graph.facebook.com/v2.6/me/messages"
 
 //receives a message and a sender id. Deteremines the correct response
 function handleMessage(sender_psid, received_message) {
-
+  NewsDataUtils.getNewsHeadlines();
   let response;
   // Check if the message contains text
   if (received_message.text) {
