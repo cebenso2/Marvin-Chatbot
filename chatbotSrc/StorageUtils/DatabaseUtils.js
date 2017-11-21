@@ -27,7 +27,7 @@ function insertLocation(name, long, lat){
   });
 
   client.connect();
-  client.query("INSERT INTO locations VALUES ( '" + name + "," + long + "," + lat +");", (err, res) => {
+  client.query("INSERT INTO locations VALUES ( '" + name + "'," + long + "," + lat +");", (err, res) => {
     if (err) {
       console.log(err);
     } else {
