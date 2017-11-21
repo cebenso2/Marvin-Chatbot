@@ -21,3 +21,4 @@ function createDatabase(){
   });
   client.end();
 }
+module.exports = {createDatabase: createDatabase}
