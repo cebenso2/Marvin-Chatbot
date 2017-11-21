@@ -8,7 +8,7 @@ function createDatabase(){
   });
 
   client.connect();
-  client.query('CREATE TABLE locations (name VARCHAR, longitude DECIMAL, latitude DECIAML);', (err, res) => {
+  client.query('CREATE TABLE locations (name VARCHAR, longitude DECIMAL, latitude DECIMAL);', (err, res) => {
     console.log("create db");
     console.log(err);
     console.log(res);
