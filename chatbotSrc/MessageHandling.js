@@ -35,9 +35,11 @@ function handleMessage(sender_psid, received_message) {
     } else if (received_message.text === "@news") {
       return sendNewsHeadlines(sender_psid);
     } else if (received_message.text === "@locations") {
-      return DatabaseUtils.getLocations();
+      return DatabaseUtils.getLocations(sender_psid);
     } else if (received_message.text === "@location") {
-      return DatabaseUtils.insertLocation("home", 144, -10.3);
+      return DatabaseUtils.insertLocation(sender_psid, "home", 144, -10.3);
+    } else if (received_message.text === "@create") {
+      return DatabaseUtils.createLocationTable();
     } else if (greeting && greeting.confidence > 0.8) {
       response = {
         "text": "Hello! My name is Marvin and I am good.",

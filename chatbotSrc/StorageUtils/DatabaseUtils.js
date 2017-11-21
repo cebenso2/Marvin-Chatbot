@@ -7,7 +7,7 @@ function createLocationTable(){
   });
 
   client.connect();
-  client.query('CREATE TABLE locations (name VARCHAR, longitude DECIMAL, latitude DECIMAL);', (err, res) => {
+  client.query('CREATE TABLE locations (user VARCHAR, name VARCHAR, longitude DECIMAL, latitude DECIMAL);', (err, res) => {
     if (err) {
       console.log("Error while creating locations table");
       console.log(err);
@@ -20,14 +20,14 @@ function createLocationTable(){
 
 }
 
-function insertLocation(name, long, lat){
+function insertLocation(user_psid, name, long, lat){
   const client = new Client({
     connectionString: process.env.DATABASE_URL,
     ssl: true,
   });
 
   client.connect();
-  client.query("INSERT INTO locations VALUES ( '" + name + "'," + long + "," + lat +");", (err, res) => {
+  client.query("INSERT INTO locations VALUES ( '" +user_psid +"','" + name + "'," + long + "," + lat +");", (err, res) => {
     if (err) {
       console.log(err);
     } else {
@@ -38,7 +38,7 @@ function insertLocation(name, long, lat){
 
 }
 
-function getLocations(){
+function getLocations(user_psid){
   console.log("getLocations");
   const client = new Client({
     connectionString: process.env.DATABASE_URL,
@@ -46,7 +46,7 @@ function getLocations(){
   });
 
   client.connect();
-  client.query('SELECT * FROM locations;', (err, res) => {
+  client.query("SELECT * FROM locations WHERE user='"+user_psid+"';", (err, res) => {
     if (err) {
       console.log(err);
     } else {
