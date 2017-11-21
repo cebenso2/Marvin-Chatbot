@@ -24,7 +24,7 @@ function insertLocation(name, long, lat){
   });
 
   client.connect();
-  client.query("INSERT INTO location VALUES ('home', 10,20);", (err, res) => {
+  client.query("INSERT INTO locations VALUES ('home', 10,20);", (err, res) => {
     console.log("create db");
     console.log(err);
     console.log(res);
