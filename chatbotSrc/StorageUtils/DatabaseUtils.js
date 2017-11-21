@@ -7,7 +7,7 @@ function createLocationTable(){
   });
 
   client.connect();
-  client.query('CREATE TABLE locations (user VARCHAR, name VARCHAR, longitude DECIMAL, latitude DECIMAL);', (err, res) => {
+  client.query('CREATE TABLE locations ( user VARCHAR, name VARCHAR, longitude DECIMAL, latitude DECIMAL );', (err, res) => {
     if (err) {
       console.log("Error while creating locations table");
       console.log(err);
