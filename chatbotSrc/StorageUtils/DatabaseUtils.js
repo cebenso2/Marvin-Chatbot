@@ -58,4 +58,4 @@ function getLocations(){
     client.end();
   });
 }
-module.exports = {createDatabase: createDatabase, getLocations: getLocations,  insertLocation: insertLocation}
+module.exports = {createLocationTable: createLocationTable, getLocations: getLocations,  insertLocation: insertLocation}
