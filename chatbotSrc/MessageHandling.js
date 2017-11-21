@@ -2,7 +2,7 @@ var request = require("request");
 var WeatherDataUtils = require("./DataUtils/WeatherDataUtils")
 var NewsDataUtils = require("./DataUtils/NewsDataUtils")
 var DatabaseUtils = require("./StorageUtils/DatabaseUtils")
-
+let flag = false;
 
 //access token for page - set in heroku for security
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
@@ -11,8 +11,8 @@ const FACEBOOK_ENDPOINT = "https://graph.facebook.com/v2.6/me/messages"
 
 //receives a message and a sender id. Deteremines the correct response
 function handleMessage(sender_psid, received_message) {
-
-  let response;
+  console.log(flag);
+  let response = NULL;
   // Check if the message contains text
   if (received_message.text) {
     let greeting = firstEntity(received_message.nlp, 'greetings');
@@ -37,6 +37,7 @@ function handleMessage(sender_psid, received_message) {
     } else if (received_message.text === "@locations") {
       return DatabaseUtils.getLocations(sender_psid);
     } else if (received_message.text === "@location") {
+      flag=true;
       return DatabaseUtils.insertLocation(sender_psid, "home", 144, -10.3);
     } else if (received_message.text === "@create") {
       return DatabaseUtils.createLocationTable();
@@ -54,6 +55,7 @@ function handleMessage(sender_psid, received_message) {
 
     // Gets the corrdintes of the message attachment
     let coordinates = received_message.attachments[0].payload.coordinates;
+    console.log(flag);
     WeatherDataUtils.getWeatherData(coordinates.lat, coordinates.long).then(
       tempString => {
         if (!tempString || tempString == "FAIL"){
@@ -71,6 +73,7 @@ function handleMessage(sender_psid, received_message) {
     return
   }
   // Sends the response message
+  flag=false;
   sendMessage(sender_psid, response);
 }
 
