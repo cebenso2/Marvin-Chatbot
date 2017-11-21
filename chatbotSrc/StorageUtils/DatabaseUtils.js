@@ -25,7 +25,7 @@ function getLocations(){
   });
 
   client.connect();
-  client.query('SELECT *,locations FROM information_schema.tables;', (err, res) => {
+  client.query('SELECT * FROM locations;', (err, res) => {
     console.log("locations:");
     console.log(err);
     for (let row of res.rows) {
