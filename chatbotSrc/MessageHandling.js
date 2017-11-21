@@ -36,7 +36,7 @@ function handleMessage(sender_psid, received_message) {
     } else if (received_message.text === "@locations") {
       return DatabaseUtils.getLocations(sender_psid);
     } else if (received_message.text.substring(0,9) === "@location") {
-      locationName = received_message.text.substring(11);
+      locationName = received_message.text.substring(10);
       response = {
         "text": `What location would you like to store for "${locationName}" ?`,
         "quick_replies":[
@@ -61,7 +61,7 @@ function handleMessage(sender_psid, received_message) {
     // Gets the corrdintes of the message attachment
     let coordinates = received_message.attachments[0].payload.coordinates;
     if (locationName){
-      DatabaseUtils.insertLocation(user_psid, locationName, coordinates.long, coordinates.lat);
+      DatabaseUtils.insertLocation(sender_psid, locationName, coordinates.long, coordinates.lat);
     } else {
       WeatherDataUtils.getWeatherData(coordinates.lat, coordinates.long).then(
         tempString => {
