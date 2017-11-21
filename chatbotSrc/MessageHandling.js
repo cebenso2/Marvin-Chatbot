@@ -118,6 +118,7 @@ function sendNewsHeadlines(sender_psid){
 
 function sendLocations(sender_psid){
   DatabaseUtils.getLocations(sender_psid).then((locations) => {
+    console.log(locations);
     let locationString ="";
     for( let l of locations){
       locationString+= l +"\n";
