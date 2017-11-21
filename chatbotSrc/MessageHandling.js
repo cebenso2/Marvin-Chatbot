@@ -72,7 +72,7 @@ function handlePostback(sender_psid, received_message) {
 }
 
 function getNewsHeadlinesResponse(){
-    let headlines = NewsDataUtils.getNewsHeadlines();
+    //let headlines = NewsDataUtils.getNewsHeadlines();
     let response = {
       "attachment":{
         "type":"template",
@@ -80,24 +80,20 @@ function getNewsHeadlinesResponse(){
           "template_type":"generic",
           "elements":[{
             "title":"Welcome to Peter\'s Hats",
-            "image_url":"https://petersfancybrownhats.com/company_image.png",
+            "image_url":"http://i2.cdn.turner.com/money/dam/assets/171120141601-charlie-rose-780x439.jpg",
             "subtitle":"We\'ve got the right hat for everyone.",
             "default_action": {
               "type": "web_url",
-              "url": "https://peterssendreceiveapp.ngrok.io/view?item=103",
+              "url": "https://www.google.com",
               "messenger_extensions": true,
               "webview_height_ratio": "tall",
-              "fallback_url": "https://peterssendreceiveapp.ngrok.io/"
+              "fallback_url": "https://www.google.com"
             },
             "buttons":[
               {
                 "type":"web_url",
-                "url":"https://petersfancybrownhats.com",
+                "url":"https://www.google.com",
                 "title":"View Website"
-              },{
-                "type":"postback",
-                "title":"Start Chatting",
-                "payload":"DEVELOPER_DEFINED_PAYLOAD"
               }
             ]
           }
