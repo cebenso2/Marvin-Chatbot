@@ -72,7 +72,7 @@ function handlePostback(sender_psid, received_message) {
 }
 
 function getNewsHeadlinesResponse(){
-    //let headlines = NewsDataUtils.getNewsHeadlines();
+    let headlines = NewsDataUtils.getNewsHeadlines();
     let response = {
       "attachment":{
         "type":"template",
@@ -93,6 +93,7 @@ function getNewsHeadlinesResponse(){
       }
     }
   };
+  console.log(response.attachment.payload.elements);
   /*let response = {
     "attachment":{
       "type":"image",
