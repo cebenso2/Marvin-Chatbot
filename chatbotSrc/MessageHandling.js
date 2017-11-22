@@ -116,6 +116,7 @@ function sendNewsHeadlines(sender_psid){
   });
 }
 
+//repond with the names of stored locations
 function sendLocations(sender_psid){
   DatabaseUtils.getLocations(sender_psid).then((locations) => {
     console.log(locations);
