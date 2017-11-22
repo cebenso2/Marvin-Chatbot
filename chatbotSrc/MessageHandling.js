@@ -60,6 +60,9 @@ function handleMessage(sender_psid, received_message) {
 
     // Gets the corrdintes of the message attachment
     let coordinates = received_message.attachments[0].payload.coordinates;
+    if (!coordinates) {
+      returnl
+    }
     if (locationName){
       DatabaseUtils.insertLocation(sender_psid, locationName, coordinates.long, coordinates.lat);
     } else {
@@ -119,7 +122,6 @@ function sendNewsHeadlines(sender_psid){
 //repond with the names of stored locations
 function sendLocations(sender_psid){
   DatabaseUtils.getLocations(sender_psid).then((locations) => {
-    console.log(locations);
     let locationString ="";
     for( let l of locations){
       locationString+= l +"\n";
