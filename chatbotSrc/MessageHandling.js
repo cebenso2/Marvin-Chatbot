@@ -61,7 +61,7 @@ function handleMessage(sender_psid, received_message) {
     // Gets the corrdintes of the message attachment
     let coordinates = received_message.attachments[0].payload.coordinates;
     if (!coordinates) {
-      returnl
+      return;
     }
     if (locationName){
       DatabaseUtils.insertLocation(sender_psid, locationName, coordinates.long, coordinates.lat);
