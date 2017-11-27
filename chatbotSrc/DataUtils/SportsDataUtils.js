@@ -1,4 +1,5 @@
 var Authentication = require("../Utils/Authentication")
+var request = require("request-promise");
 
 //news source - currently only CNN
 const SPORTS_TEAM = "bos";
@@ -8,12 +9,14 @@ const SPORTS_SCHEDULE_ENDPOINT = "https://api.mysportsfeeds.com/v1.1/pull/nba/cu
 
 //returns the current temperature at the give lat and long
 function getTeamSchedule(team) {
-  return fetch(SPORTS_SCHEDULE_ENDPOINT, {
-    method: 'GET',
+  let options = {
+    uri: SPORTS_SCHEDULE_ENDPOINT,
     headers: {
       'Authentication': Authentication.getAuthenticationHeader(),
     },
-  }).then(
+    json: true // Automatically parses the JSON string in the response
+  };
+  return request(options).then(
     response => {
       let data = JSON.parse(response);
       console.log(data);
