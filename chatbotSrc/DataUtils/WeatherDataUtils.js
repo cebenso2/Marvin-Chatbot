@@ -29,7 +29,7 @@ function getForecastRecommendations(latitude, longitude) {
         let wind = forecast.avewind.mph > 17;
         let humid = forecast.avehumid > 100;
         let conditions = forecast.conditions;
-        let response = createRecommendationText(hot,cold,precipitation, snow,wind,humid,conditions);
+        let response = createRecommendationText(hot,cold,precipitation,snow,wind,humid,conditions);
         console.log(response);
 
       }
@@ -38,7 +38,7 @@ function getForecastRecommendations(latitude, longitude) {
   ).catch(error => console.log(error))
 }
 
-function createRecommendationText(hot, cold, precipitation, snow, wind, humid, conditions){
+function createRecommendationText(hot, cold, rain, snow, wind, humid, conditions){
   let tempText = "mild" ;
   if (hot) {
     tempText="hot";
