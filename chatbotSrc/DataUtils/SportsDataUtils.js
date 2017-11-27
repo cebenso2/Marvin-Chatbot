@@ -16,6 +16,7 @@ function getTeamSchedule(team) {
     },
     json: true // Automatically parses the JSON string in the response
   };
+  console.log(options);
   return request(options).then(
     response => {
       let data = JSON.parse(response);
