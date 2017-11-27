@@ -41,6 +41,7 @@ test('basic api endpoints', (t) => {
   });
 });
 
+//test for weather data
 test('get weather data', (t) => {
   let lat = "40.7484"
   let long = "73.9857"
@@ -51,6 +52,7 @@ test('get weather data', (t) => {
   });
 });
 
+//test for weather recommendations
 test('get weather data recommendations', (t) => {
   let rec = WeatherDataUtils.createRecommendationText(false, false, false, false, false, false, "Clear");
   t.equal(rec, "Today is going to be mild in terms of temperature and have clear conditions. Most likely it is going to  be nice outside. I would recommend wearing anything you want. ")
@@ -60,6 +62,7 @@ test('get weather data recommendations', (t) => {
   t.end();
 });
 
+//test for headlines
 test('get news headlines', (t) => {
   NewsDataUtils.getNewsHeadlines().then( response => {
     t.false(response);
