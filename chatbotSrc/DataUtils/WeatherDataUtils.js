@@ -31,7 +31,13 @@ function getForecastRecommendations(latitude, longitude) {
         let windy = forecast.avewind.mph > 17;
         let humid = forecast.avehumid > 100;
 
-        let tempText = "hot" if hot else "cold" if cold else "mild";
+        let tempText = "mild" ;
+        if hot {
+          tempText="hot";
+        }
+        if cold {
+          tempText="cold";
+        }
         let conditions = forecast.conditions;
 
         let overView = "Today is going to be " + tempText +" in terms of temperature and have " + conditions + ' conditions. '
