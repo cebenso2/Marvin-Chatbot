@@ -28,7 +28,7 @@ function getTeamSchedule(team) {
     }
   ).catch(error => console.log(error))*/
 
-  let msf = new MySportsFeeds("1.1", true);
+  let msf = new MySportsFeeds("1.0", true);
   msf.authenticate(process.env.SPORTS_USERNAME, process.env.SPORTS_PASSWORD);
   let data = msf.getData('nba', '2016-2017-regular', 'player_gamelogs', 'json', {player: 'stephen-curry'});
   console.log(data);
