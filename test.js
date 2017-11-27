@@ -1,7 +1,8 @@
 const { spawn } = require('child_process');
 const request = require('request');
 const test = require('tape');
-const WeatherDataUtils = require("./chatbotSrc/WeatherDataUtils")
+const WeatherDataUtils = require("./chatbotSrc/DataUtils/WeatherDataUtils")
+const NewsDataUtils = require("./chatbotSrc/DataUtils/NewsDataUtils")
 
 
 // Start the app
@@ -47,5 +48,21 @@ test('get weather data', (t) => {
   WeatherDataUtils.getWeatherData(lat,long).then(response =>{
     t.false(false);
     t.equal(response, "FAIL")
+  });
+});
+
+test('get weather data recommendations', (t) => {
+  let rec = WeatherDataUtils.createRecommendationText(false, false, false, false, false, false, "Clear");
+  t.equal(rec, "Today is going to be mild in terms of temperature and have clear conditions. Most likely it is going to  be nice outside. I would recommend wearing anything you want. ")
+  rec = WeatherDataUtils.createRecommendationText(false, false, true, false, false, false, "Clear");
+  t.equal(rec, "Today is going to be mild in terms of temperature and have clear conditions. Most likely it is going to rain. I would recommend wearing rain jacket. ")
+
+  t.end();
+});
+
+test('get news headlines', (t) => {
+  NewsDataUtils.getNewsHeadlines().then( response => {
+    t.false(response);
+    t.end();
   });
 });

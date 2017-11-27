@@ -99,4 +99,4 @@ function createRecommendationText(hot, cold, rain, snow, wind, humid, conditions
   return recommendations;
 }
 
-module.exports = {getWeatherData: getWeatherData, getForecastRecommendations: getForecastRecommendations}
+module.exports = {getWeatherData: getWeatherData, getForecastRecommendations: getForecastRecommendations, createRecommendationText: createRecommendationText}

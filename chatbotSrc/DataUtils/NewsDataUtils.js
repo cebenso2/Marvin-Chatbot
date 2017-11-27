@@ -6,7 +6,7 @@ const NEWS_SOURCES = "cnn";
 const NEWS_ENDPOINT = "https://newsapi.org/v2/top-headlines?apiKey=" + process.env.NEWS_API_KEY+ "&sources=" + NEWS_SOURCES;
 
 //returns the top headlines, image urls, and new urls for 10 stories from cnn
-function getNewsHeadlines(latitude, longitude) {
+function getNewsHeadlines() {
   return request(NEWS_ENDPOINT).then(
     response => {
       let data = JSON.parse(response);
@@ -20,7 +20,7 @@ function getNewsHeadlines(latitude, longitude) {
       );
       return newsData;
     }
-  ).catch(error => console.log(error))
+  ).catch(error => console.log("News Error"))
 }
 
 module.exports = {getNewsHeadlines: getNewsHeadlines}
