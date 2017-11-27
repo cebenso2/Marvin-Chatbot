@@ -23,4 +23,4 @@ function getTeamSchedule(team) {
   ).catch(error => console.log(error))
 }
 
-module.exports = {getNewsHeadlines: getNewsHeadlines}
+module.exports = {getTeamSchedule: getTeamSchedule}
