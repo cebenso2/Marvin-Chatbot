@@ -31,20 +31,61 @@ function getForecastRecommendations(latitude, longitude) {
         let windy = forecast.avewind.mph > 17;
         let humid = forecast.avehumid > 100;
 
-        console.log(lowTemp);
-        console.log(highTemp);
-        console.log(cold);
-        console.log(hot);
-        console.log(precipitation);
-        console.log(snow);
-        console.log(windy);
-        console.log(humid);
+        let tempText = "hot" if hot else "cold" if cold else "mild";
+        let conditions = forecast.conditions;
 
+        let overView = "Today is going to be " + tempText +" in terms of temperature and have " + conditions + ' conditions. '
 
+        let events = [];
+        if (snow) {
+          events.push("snow");
+        }
+        if (rain) {
+          events.push("rain");
+        }
+        if (wind) {
+          events.push("be windy");
+        }
+        if (humid) {
+          events.push("be humid");
+        }
+        let eventsText = ""
+        if(len(events)==0){
+          eventsText = "nice outside"
+        }
+        else if (len(events)<2){
+          eventsText = events[0];
+        } else if (len(events)==2){
+          eventsText = events[0] + " and " +events[1];
+        } else {
+          for (let i = 0; i < events.length - 1; i++) {
+            eventsText += events[i]+", ";
+          }
+          eventsText += "and " events[events.length-1];
+        }
 
-        //return data.current_observation.feelslike_string;
+        let weatherEvents = "During today, it is probably going to " + eventsText;
+
+        let clothing = "";
+        if (hot && precipitation){
+          clothing = "shorts and bring an umbrella";
+        } else if (hot){
+          clothing ="shorts";
+        } else if (mild && windy){
+          clothing = "a wind breaker";
+        } else if(snow || cold){
+          clothing = "a winter jacket"
+        } else if (precipitation){
+          clothing = "rain jacket"
+        } else {
+          clothing = "anything you want"
+        }
+
+        let clothingRecommendation = "I would recommend wearing " + clothing;
+        let recommendations = overView + weatherEvents + clothingRecommendation;
+        console.log(recommendations);
+        return;
       }
-      console.log("fail");
       return "FAIL";
     }
   ).catch(error => console.log(error))
