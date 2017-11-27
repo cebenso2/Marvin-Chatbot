@@ -69,7 +69,7 @@ function handleMessage(sender_psid, received_message) {
     if (locationName){
       DatabaseUtils.insertLocation(sender_psid, locationName, coordinates.long, coordinates.lat);
     } else {
-      WeatherDataUtils.getWeatherData(coordinates.lat, coordinates.long).then(
+      /*WeatherDataUtils.getWeatherData(coordinates.lat, coordinates.long).then(
         tempString => {
           if (!tempString || tempString == "FAIL"){
             response = {
@@ -82,7 +82,8 @@ function handleMessage(sender_psid, received_message) {
           }
           sendMessage(sender_psid, response);
         }
-      );
+      );*/
+      WeatherDataUtils.getForecastRecommendations(coordinates.lat, coordinates.long);
     }
   }
   // Sends the response message

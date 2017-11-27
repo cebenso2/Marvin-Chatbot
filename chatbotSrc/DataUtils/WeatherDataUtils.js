@@ -2,7 +2,7 @@ var request = require("request-promise");
 
 //endpoint for the wunderground api that deals with conditions and lat,long parameters
 const WEATHER_ENDPOINT = "http://api.wunderground.com/api/" + process.env.WEATHER_API_KEY + "/conditions/q/"
-
+const FORCAST_ENDPOINT = "http://api.wunderground.com/api/" + process.env.WEATHER_API_KEY + "/forecast/q/"
 //returns the current temperature at the give lat and long
 function getWeatherData(latitude, longitude) {
   return request(WEATHER_ENDPOINT + latitude +","+longitude+".json").then(
@@ -15,5 +15,22 @@ function getWeatherData(latitude, longitude) {
     }
   ).catch(error => console.log(error))
 }
+//returns recommendations for weather info
+function getForecastRecommendations(latitude, longitude) {
+  return request(FORCAST_ENDPOINT+ latitude +","+longitude+".json").then(
+    response => {
+      let data = JSON.parse(response);
+      if (data && data.simpleforecast){
+        let rain = false;
+        let cold = false;
+        let snow = false;
+        console.log(data.simpleforecast);
+        //return data.current_observation.feelslike_string;
+      }
+      console.log("fail");
+      return "FAIL";
+    }
+  ).catch(error => console.log(error))
+}
 
-module.exports = {getWeatherData: getWeatherData}
+module.exports = {getWeatherData: getWeatherData, getForecastRecommendations: getForecastRecommendations}
