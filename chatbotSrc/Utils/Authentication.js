@@ -1,4 +1,4 @@
-import Base64 from './Base64'
+var Base64 = require('./Base64');
 
 //Module for setting up authetication header for post requests
 module.exports = {
