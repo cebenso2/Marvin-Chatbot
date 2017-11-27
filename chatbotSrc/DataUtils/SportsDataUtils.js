@@ -14,7 +14,7 @@ function getTeamSchedule(team) {
     headers: {
       'Authentication': Authentication.getAuthenticationHeader(),
     },
-  ).then(
+  }).then(
     response => {
       let data = JSON.parse(response);
       console.log(data);
