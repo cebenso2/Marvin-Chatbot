@@ -1,7 +1,8 @@
 var request = require("request");
-var WeatherDataUtils = require("./DataUtils/WeatherDataUtils")
-var NewsDataUtils = require("./DataUtils/NewsDataUtils")
-var DatabaseUtils = require("./StorageUtils/DatabaseUtils")
+var WeatherDataUtils = require("./DataUtils/WeatherDataUtils");
+var NewsDataUtils = require("./DataUtils/NewsDataUtils");
+var DatabaseUtils = require("./StorageUtils/DatabaseUtils");
+var SportsDataUtils = require("./DataUtils/SportsDataUtils")
 let locationName = null;
 
 //access token for page - set in heroku for security
@@ -35,6 +36,8 @@ function handleMessage(sender_psid, received_message) {
       sendNewsHeadlines(sender_psid);
     } else if (received_message.text === "@locations") {
       sendLocations(sender_psid);
+    } else if (received_message.text === "@sports") {
+      SportsDataUtils.getTeamSchedule("bos");
     } else if (received_message.text.substring(0,9) === "@location") {
       locationName = received_message.text.substring(10);
       response = {
