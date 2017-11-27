@@ -80,7 +80,7 @@ function createPersistentMenu(res){
           "type":"postback",
           "title":"@news",
           "payload":"NEWS"
-        }
+        },
         {
           "type":"postback",
           "title":"@locations",
