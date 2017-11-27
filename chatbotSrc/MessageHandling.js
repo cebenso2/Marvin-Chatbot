@@ -92,6 +92,7 @@ function handleMessage(sender_psid, received_message) {
 
 //Handle postback - TODO
 function handlePostback(sender_psid, received_message) {
+  console.log(received_message);
 }
 
 function sendNewsHeadlines(sender_psid){

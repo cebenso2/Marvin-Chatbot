@@ -42,11 +42,10 @@ app.get('/setup',function(req,res){
 
 function setupGetStartedButton(res){
   var messageData = {
-    "get_started":[
+    "get_started":
       {
-        "payload":"USER_DEFINED_PAYLOAD"
+        "payload":"Get Started"
       }
-    ]
   };
   request({
     url: 'https://graph.facebook.com/v2.6/me/messenger_profile?access_token='+ process.env.PAGE_ACCESS_TOKEN,
