@@ -5,7 +5,7 @@ const NEWS_SOURCES = "cnn";
 //endpoint for the news api
 const NEWS_ENDPOINT = "https://newsapi.org/v2/top-headlines?apiKey=" + process.env.NEWS_API_KEY+ "&sources=" + NEWS_SOURCES;
 
-//returns the current temperature at the give lat and long
+//returns the top headlines, image urls, and new urls for 10 stories from cnn
 function getNewsHeadlines(latitude, longitude) {
   return request(NEWS_ENDPOINT).then(
     response => {
