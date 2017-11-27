@@ -13,6 +13,7 @@ function getTeamSchedule(team) {
   let options = {
     uri: SPORTS_SCHEDULE_ENDPOINT,
     headers: {
+      'User-Agent': 'Request-Promise',
       'Authentication': 'Basic ' + btoa(process.env.SPORTS_USERNAME +":"+process.env.SPORTS_PASSWORD),
     },
     json: true // Automatically parses the JSON string in the response
