@@ -90,9 +90,27 @@ function handleMessage(sender_psid, received_message) {
   sendMessage(sender_psid, response);
 }
 
-//Handle postback - TODO
+//Handle postback for persistent menu
 function handlePostback(sender_psid, received_message) {
   console.log(received_message);
+  switch (received_message.payload) {
+    case "NEWS":
+      sendNewsHeadlines(sender_psid);
+      break;
+    case "LOCATIONS":
+      sendLocations(sender_psid);
+      break;
+    case "WEATHER":
+      let response = {
+        "text": "Where are you so I can get weather data?",
+        "quick_replies":[
+          {"content_type":"location"}
+        ]
+      };
+      sendMessage(sender_psid, response);
+      break;
+    default:
+  }
 }
 
 function sendNewsHeadlines(sender_psid){

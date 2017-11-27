@@ -21,7 +21,7 @@ function createLocationTable(){
 
 }
 
-//insert a location for a user
+//insert a location for a user - stores a location in the locations table using the users psid
 function insertLocation(user_psid, name, long, lat){
   const client = new Client({
     connectionString: process.env.DATABASE_URL,
