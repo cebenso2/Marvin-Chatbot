@@ -34,18 +34,60 @@ app.get("/webhook", function (req, res) {
   }
 });
 
-//setup start button
+//endpoint to create persistent menu and startupbutton
 app.get('/setup',function(req,res){
   console.log("setup");
-  setupGetStartedButton(res);
+  createGetStartedButton(res);
+  createGetPersistentMenu(res);
 });
 
-function setupGetStartedButton(res){
+//create startup button
+function createGetStartedButton(res){
   var messageData = {
     "get_started":
       {
         "payload":"Get Started"
       }
+  };
+  request({
+    url: 'https://graph.facebook.com/v2.6/me/messenger_profile?access_token='+ process.env.PAGE_ACCESS_TOKEN,
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    form: messageData
+  },
+  function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+      // Print out the response body
+      res.send(body);
+    } else {
+      res.send(body);
+    }
+  });
+}
+
+//create persistent menu
+function createPersistentMenu(res){
+  let messageData = {
+    "persistent_menu":[{
+      "locale":"default",
+      "call_to_actions":[
+        {
+          "type":"postback",
+          "title":"@weather",
+          "payload":"WEATHER"
+        },
+        {
+          "type":"postback",
+          "title":"@news",
+          "payload":"NEWS"
+        }
+        {
+          "type":"postback",
+          "title":"@locations",
+          "payload":"LOCATIONS"
+        }
+      ]
+    }]
   };
   request({
     url: 'https://graph.facebook.com/v2.6/me/messenger_profile?access_token='+ process.env.PAGE_ACCESS_TOKEN,
