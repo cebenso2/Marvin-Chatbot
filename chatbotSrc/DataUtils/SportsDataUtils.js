@@ -1,5 +1,5 @@
 var request = require("request-promise");
-var Authentication = require("../utils/Authentication")
+var Authentication = require("../Utils/Authentication")
 
 //news source - currently only CNN
 const SPORTS_TEAM = "bos";
