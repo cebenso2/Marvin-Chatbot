@@ -20,18 +20,26 @@ function getForecastRecommendations(latitude, longitude) {
   return request(FORCAST_ENDPOINT+ latitude +","+longitude+".json").then(
     response => {
       let data = JSON.parse(response);
-      if (data && data.forecast){
-        let rain = false;
-        let cold = false;
-        let snow = false;
-        let windy = false;
-        console.log("break")
-        console.log(data.forecast);
-        //console.log(data.forecast.txt_forecast);
-        console.log("break")
-        console.log(data.forecast.simpleforecast);
-        console.log("break");
-        console.log(data.forecast.simpleforecast.forecastday);
+      if (data && data.forecast && data.forecast.simpleforecast &&data.forecast.simpleforecast.forecastday){
+        let forcast = data.forecast.simpleforecast.forecastday[0];
+        let lowTemp = forecast.low.fahrenheit;
+        let highTemp = forecast.high.fahrenheit
+        let precipitation = forecast.qpf_allday.in > 0;
+        let cold = lowTemp < 40;
+        let hot = highTemp > 80;
+        let snow = forecast.snow_allday.in > 0;
+        let windy = forecast.avewind.mph > 17;
+        let humid = forecast.avehumid > 100;
+
+        console.log(lowTemp);
+        console.log(highTemp);
+        console.log(cold);
+        console.log(hot);
+        console.log(precipitation);
+        console.log(snow);
+        console.log(windy);
+        console.log(humid);
+
 
 
         //return data.current_observation.feelslike_string;
