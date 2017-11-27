@@ -63,7 +63,7 @@ function createRecommendationText(hot, cold, rain, snow, wind, humid, conditions
     events.push("be humid");
   }
   let eventsText = ""
-  if(len(events)==0){
+  if(events.length==0){
     eventsText = "nice outside"
   }
   else if (events.length<2){
