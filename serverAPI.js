@@ -15,6 +15,7 @@ app.set('view engine', 'ejs');
 
 //token for verification of webhook - set in heroku for security
 const VERIFY_TOKEN = process.env.VERIFY_TOKEN
+var request = require("request");
 
 //Homepage for info about marvin - render on get
 app.get("/", function (req, res) {
@@ -36,7 +37,32 @@ app.get("/webhook", function (req, res) {
 //setup start button
 app.get('/setup',function(req,res){
   console.log("setup");
+  setupGetStartedButton(res);
 });
+
+function setupGetStartedButton(res){
+  var messageData = {
+    "get_started":[
+      {
+        "payload":"USER_DEFINED_PAYLOAD"
+      }
+    ]
+  };
+  request({
+    url: 'https://graph.facebook.com/v2.6/me/messenger_profile?access_token='+ process.env.PAGE_ACCESS_TOKEN,
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    form: messageData
+  },
+  function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+      // Print out the response body
+      res.send(body);
+    } else {
+      res.send(body);
+    }
+  });
+}
 
 // endpoint for receiving messages
 app.post('/webhook', (req, res) => {
