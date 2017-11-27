@@ -38,7 +38,7 @@ app.get("/webhook", function (req, res) {
 app.get('/setup',function(req,res){
   console.log("setup");
   createGetStartedButton(res);
-  createGetPersistentMenu(res);
+  createPersistentMenu(res);
 });
 
 //create startup button
