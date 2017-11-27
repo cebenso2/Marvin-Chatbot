@@ -24,9 +24,15 @@ function getForecastRecommendations(latitude, longitude) {
         let rain = false;
         let cold = false;
         let snow = false;
+        let windy = false;
+        console.log("break")
         console.log(data.forecast);
-        console.log(data.forecast.txt_forecast);
-        console.log(data.forecast.txt_forecast.simpleforecast);
+        //console.log(data.forecast.txt_forecast);
+        console.log("break")
+        console.log(data.forecast.simpleforecast);
+        console.log("break");
+        console.log(data.forecast.simpleforecast.forecastday);
+
 
         //return data.current_observation.feelslike_string;
       }
