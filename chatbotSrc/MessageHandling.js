@@ -83,7 +83,18 @@ function handleMessage(sender_psid, received_message) {
           sendMessage(sender_psid, response);
         }
       );*/
-      WeatherDataUtils.getForecastRecommendations(coordinates.lat, coordinates.long);
+      WeatherDataUtils.getForecastRecommendations(coordinates.lat, coordinates.long).then(info =>{
+        if (!info || info == "FAIL"){
+          response = {
+            "text": "Sorry I could not find any weather data for that location.",
+          }
+        }
+        else {
+          response = {
+            "text": info
+          }
+        }
+      });
     }
   }
   // Sends the response message

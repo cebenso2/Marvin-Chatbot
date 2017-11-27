@@ -30,8 +30,7 @@ function getForecastRecommendations(latitude, longitude) {
         let humid = forecast.avehumid > 100;
         let conditions = forecast.conditions;
         let response = createRecommendationText(hot,cold,precipitation,snow,wind,humid,conditions);
-        console.log(response);
-
+        return recommendations;
       }
       return "FAIL";
     }
@@ -77,7 +76,7 @@ function createRecommendationText(hot, cold, rain, snow, wind, humid, conditions
     eventsText += "and " +events[events.length-1];
   }
 
-  let weatherEvents = "During today, it is probably going to " + eventsText;
+  let weatherEvents = "During today, it is probably going to " + eventsText +".";
 
   let clothing = "";
   if (hot && rain){
@@ -94,7 +93,7 @@ function createRecommendationText(hot, cold, rain, snow, wind, humid, conditions
     clothing = "anything you want"
   }
 
-  let clothingRecommendation = "I would recommend wearing " + clothing;
+  let clothingRecommendation = "I would recommend wearing " + clothing +". ";
   let recommendations = overView + weatherEvents + clothingRecommendation;
   return recommendations;
 }
