@@ -28,6 +28,7 @@ function getForecastRecommendations(latitude, longitude) {
         let snow = forecast.snow_allday.in > 0;
         let wind = forecast.avewind.mph > 17;
         let humid = forecast.avehumid > 100;
+        let conditions = forecast.conditions;
         let response = createRecommendationText(hot,cold,precipitation, snow,wind,humid,conditions);
         console.log(response);
 
@@ -45,7 +46,6 @@ function createRecommendationText(hot, cold, precipitation, snow, wind, humid, c
   if (cold) {
     tempText="cold";
   }
-  let conditions = forecast.conditions;
 
   let overView = "Today is going to be " + tempText +" in terms of temperature and have " + conditions + ' conditions. '
 
