@@ -15,7 +15,7 @@ function getTeamSchedule(team) {
     uri: SPORTS_SCHEDULE_ENDPOINT,
     headers: {
       'User-Agent': 'Request-Promise',
-      'Authentication': 'Basic ' + (process.env.SPORTS_USERNAME +":"+process.env.SPORTS_PASSWORD),
+      'Authentication': 'Basic ' + btoa(process.env.SPORTS_USERNAME +":"+process.env.SPORTS_PASSWORD),
     },
     method: 'GET',
     qs: {},
@@ -23,15 +23,14 @@ function getTeamSchedule(team) {
       // console.log("response = '" + util.inspect(body, {depth: null}) + "'");
       return body;
     },
-    json: true,// Automatically parses the JSON string in the response
+    json: true // Automatically parses the JSON string in the response
   };
   console.log(options);
   return request(options).then(
     response => {
-      console.log(reponse);
       //let data = JSON.parse(response);
       //console.log(data);
-      //return data;
+      console.log(response);
     }
   ).catch(error => console.log(error))*/
 
