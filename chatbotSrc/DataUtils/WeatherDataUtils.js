@@ -66,9 +66,9 @@ function createRecommendationText(hot, cold, rain, snow, wind, humid, conditions
   if(len(events)==0){
     eventsText = "nice outside"
   }
-  else if (len(events)<2){
+  else if (events.length<2){
     eventsText = events[0];
-  } else if (len(events)==2){
+  } else if (events.length ==2){
     eventsText = events[0] + " and " +events[1];
   } else {
     for (let i = 0; i < events.length - 1; i++) {
