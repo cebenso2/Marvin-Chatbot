@@ -21,7 +21,7 @@ function getForecastRecommendations(latitude, longitude) {
     response => {
       let data = JSON.parse(response);
       if (data && data.forecast && data.forecast.simpleforecast &&data.forecast.simpleforecast.forecastday){
-        let forcast = data.forecast.simpleforecast.forecastday[0];
+        let forecast = data.forecast.simpleforecast.forecastday[0];
         let lowTemp = forecast.low.fahrenheit;
         let highTemp = forecast.high.fahrenheit
         let precipitation = forecast.qpf_allday.in > 0;
