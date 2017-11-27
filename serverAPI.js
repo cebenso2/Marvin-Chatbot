@@ -33,6 +33,11 @@ app.get("/webhook", function (req, res) {
   }
 });
 
+//setup start button
+app.get('/setup',function(req,res){
+  console.log("setup");
+});
+
 // endpoint for receiving messages
 app.post('/webhook', (req, res) => {
 
