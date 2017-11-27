@@ -20,11 +20,14 @@ function getForecastRecommendations(latitude, longitude) {
   return request(FORCAST_ENDPOINT+ latitude +","+longitude+".json").then(
     response => {
       let data = JSON.parse(response);
-      if (data && data.simpleforecast){
+      if (data && data.forecast){
         let rain = false;
         let cold = false;
         let snow = false;
-        console.log(data.simpleforecast);
+        console.log(data.forecast);
+        console.log(data.forecast.txt_forecast);
+        console.log(data.forecast.txt_forecast.simpleforecast);
+
         //return data.current_observation.feelslike_string;
       }
       console.log("fail");
