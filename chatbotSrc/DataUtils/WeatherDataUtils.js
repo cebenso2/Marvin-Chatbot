@@ -80,15 +80,15 @@ function createRecommendationText(hot, cold, rain, snow, wind, humid, conditions
   let weatherEvents = "During today, it is probably going to " + eventsText;
 
   let clothing = "";
-  if (hot && precipitation){
+  if (hot && rain){
     clothing = "shorts and bring an umbrella";
   } else if (hot){
     clothing ="shorts";
-  } else if (!cold && !hot && windy){
+  } else if (!cold && !hot && wind){
     clothing = "a wind breaker";
   } else if(snow || cold){
     clothing = "a winter jacket"
-  } else if (precipitation){
+  } else if (rain){
     clothing = "rain jacket"
   } else {
     clothing = "anything you want"
