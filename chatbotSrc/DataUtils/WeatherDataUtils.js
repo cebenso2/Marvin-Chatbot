@@ -32,10 +32,10 @@ function getForecastRecommendations(latitude, longitude) {
         let humid = forecast.avehumid > 100;
 
         let tempText = "mild" ;
-        if hot {
+        if (hot) {
           tempText="hot";
         }
-        if cold {
+        if (cold) {
           tempText="cold";
         }
         let conditions = forecast.conditions;
@@ -95,6 +95,10 @@ function getForecastRecommendations(latitude, longitude) {
       return "FAIL";
     }
   ).catch(error => console.log(error))
+}
+
+function createRecommendationText(hot, cold, precipitation, snow, wind, humid, conditions){
+  
 }
 
 module.exports = {getWeatherData: getWeatherData, getForecastRecommendations: getForecastRecommendations}
