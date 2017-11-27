@@ -1,5 +1,6 @@
 var Authentication = require("../Utils/Authentication")
 var request = require("request-promise");
+var btoa = require('btoa')
 
 //news source - currently only CNN
 const SPORTS_TEAM = "bos";
