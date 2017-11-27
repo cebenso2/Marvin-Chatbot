@@ -84,7 +84,7 @@ function createRecommendationText(hot, cold, rain, snow, wind, humid, conditions
     clothing = "shorts and bring an umbrella";
   } else if (hot){
     clothing ="shorts";
-  } else if (mild && windy){
+  } else if (!cold && !hot && windy){
     clothing = "a wind breaker";
   } else if(snow || cold){
     clothing = "a winter jacket"
