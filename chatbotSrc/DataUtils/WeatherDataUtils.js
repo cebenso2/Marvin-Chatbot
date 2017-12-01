@@ -50,6 +50,12 @@ function createRecommendationText(hot, cold, rain, snow, wind, humid, conditions
   let overView = "Today is going to be " + tempText +" in terms of temperature and have " + conditions.toLowerCase() + ' conditions. '
 
   let events = [];
+  if (cold) {
+    events.push("be cold");
+  }
+  if (hot) {
+    events.push("be hot");
+  }
   if (snow) {
     events.push("snow");
   }
