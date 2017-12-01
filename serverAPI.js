@@ -81,7 +81,8 @@ function createPersistentMenu(res){
           "title":"@news",
           "payload":"NEWS"
         },
-        "title":"Weather Help",
+        {
+          "title":"Weather Help",
           "type":"nested",
           "call_to_actions":[
             {
@@ -95,6 +96,7 @@ function createPersistentMenu(res){
               "payload":"TEMPERATURE"
             }
           ]
+        }
       ]
     }]
   };
