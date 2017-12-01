@@ -26,16 +26,21 @@ function handleMessage(sender_psid, received_message) {
       response = {
         "text": "Hi. I hope you are having a good day!"
       }
-    } else if (received_message.text === "@weather" || received_message.text === "@temperature" ) {
+    } else if (received_message.text === "@weather") {
       response = {
         "text": "Where are you so I can get weather data?",
         "quick_replies":[
           {"content_type":"location"}
         ]
       }
-      if (received_message.text === "@temperature"){
-        sendTemp = true;
+    } else if(received_message.text === "@temperature"){
+      response = {
+        "text": "Where are you so I can get the temperature?",
+        "quick_replies":[
+          {"content_type":"location"}
+        ]
       }
+      sendTemp = true;
     } else if (received_message.text === "@news") {
       sendNewsHeadlines(sender_psid);
     } else if (received_message.text === "@locations") {
@@ -122,6 +127,15 @@ function handlePostback(sender_psid, received_message) {
     case "WEATHER":
       let response = {
         "text": "Where are you so I can get weather data?",
+        "quick_replies":[
+          {"content_type":"location"}
+        ]
+      };
+      sendMessage(sender_psid, response);
+      break;
+    case "TEMPERATURE":
+      let response = {
+        "text": "Where are you so I can get temperature data?",
         "quick_replies":[
           {"content_type":"location"}
         ]
