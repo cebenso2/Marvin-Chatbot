@@ -74,11 +74,11 @@ function createPersistentMenu(res){
         {
           "type":"postback",
           "title":"Locations",
-          "payload":"@locations"
+          "payload":"LOCATIONS"
         },
         {
           "type":"postback",
-          "title":"@news",
+          "title":"News",
           "payload":"NEWS"
         },
         {
@@ -86,7 +86,7 @@ function createPersistentMenu(res){
           "type":"nested",
           "call_to_actions":[
             {
-              "title":"Weather recommendations",
+              "title":"Weather Recommendations",
               "type":"postback",
               "payload":"WEATHER"
             },
