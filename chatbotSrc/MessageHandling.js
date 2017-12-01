@@ -158,7 +158,6 @@ function handlePostback(sender_psid, received_message) {
                 "url":"https://www.google.com",
                 "title":"Google",
                 "webview_height_ratio": "compact",
-                "messenger_extensions": true,
                 "fallback_url": "https://www.google.com"
               }
             ]
