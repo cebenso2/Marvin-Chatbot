@@ -147,18 +147,23 @@ function handlePostback(sender_psid, received_message) {
       break;
     case "GOOGLE":
       response = {
-        "template_type":"button",
-        "title": "Google!",
-        "buttons":[
-          {
-            "type":"web_url",
-            "url":"https://www.google.com",
-            "title":"Google",
-            "webview_height_ratio": "full",
-            "messenger_extensions": true,
-            "fallback_url": "https://www.google.com"
+        "attachment":{
+          "type":"template",
+          "payload":{
+            "template_type":"button",
+            "title": "Google!",
+            "buttons":[
+              {
+                "type":"web_url",
+                "url":"https://www.google.com",
+                "title":"Google",
+                "webview_height_ratio": "full",
+                "messenger_extensions": true,
+                "fallback_url": "https://www.google.com"
+              }
+            ]
           }
-        ]
+        }
       };
       sendMessage(sender_psid, response);
       break;
