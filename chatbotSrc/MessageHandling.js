@@ -117,6 +117,7 @@ function handleMessage(sender_psid, received_message) {
 //Handle postback for persistent menu
 function handlePostback(sender_psid, received_message) {
   console.log(received_message);
+  let reponse = null;
   switch (received_message.payload) {
     case "NEWS":
       sendNewsHeadlines(sender_psid);
@@ -125,7 +126,7 @@ function handlePostback(sender_psid, received_message) {
       sendLocations(sender_psid);
       break;
     case "WEATHER":
-      let response = {
+      response = {
         "text": "Where are you so I can get weather data?",
         "quick_replies":[
           {"content_type":"location"}
@@ -134,7 +135,7 @@ function handlePostback(sender_psid, received_message) {
       sendMessage(sender_psid, response);
       break;
     case "TEMPERATURE":
-      let response = {
+      response = {
         "text": "Where are you so I can get temperature data?",
         "quick_replies":[
           {"content_type":"location"}
