@@ -73,24 +73,28 @@ function createPersistentMenu(res){
       "call_to_actions":[
         {
           "type":"postback",
-          "title":"@weather",
-          "payload":"WEATHER"
+          "title":"Locations",
+          "payload":"@locations"
         },
         {
           "type":"postback",
           "title":"@news",
           "payload":"NEWS"
         },
-        {
-          "type":"postback",
-          "title":"@locations",
-          "payload":"LOCATIONS"
-        },
-        {
-          "type":"postback",
-          "title":"@temperature",
-          "payload":"TEMPERATURE"
-        }
+        "title":"Weather Help",
+          "type":"nested",
+          "call_to_actions":[
+            {
+              "title":"Weather recommendations",
+              "type":"postback",
+              "payload":"WEATHER"
+            },
+            {
+              "title":"Current Temperature",
+              "type":"postback",
+              "payload":"TEMPERATURE"
+            }
+          ]
       ]
     }]
   };
