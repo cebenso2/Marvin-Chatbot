@@ -85,6 +85,11 @@ function createPersistentMenu(res){
           "type":"postback",
           "title":"@locations",
           "payload":"LOCATIONS"
+        },
+        {
+          "type":"postback",
+          "title":"@temperature",
+          "payload":"TEMPERATURE"
         }
       ]
     }]
