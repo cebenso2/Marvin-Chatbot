@@ -99,7 +99,7 @@ function createPersistentMenu(res){
             {
               "title":"Locations",
               "type":"postback",
-              "payload":"Locations"
+              "payload":"LOCATIONS"
             },
             {
               "title":"Google",
