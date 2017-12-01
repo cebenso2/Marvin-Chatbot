@@ -152,7 +152,7 @@ function handlePostback(sender_psid, received_message) {
           "payload":{
             "template_type":"button",
             "text": "Google!",
-            "buttons":[c
+            "buttons":[
               {
                 "type":"web_url",
                 "url":"https://www.google.com",
