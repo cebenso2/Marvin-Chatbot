@@ -145,6 +145,27 @@ function handlePostback(sender_psid, received_message) {
       };
       sendMessage(sender_psid, response);
       break;
+    case "GOOGLE":
+      response = {
+        "buttons":[
+          {
+            "type":"web_url",
+            "url":"https://www.google.com",
+            "title":"Google",
+            "webview_height_ratio": "full",
+            "messenger_extensions": true,
+            "fallback_url": "https://www.google.com"
+          }
+        ]
+      };
+      sendMessage(sender_psid, response);
+      break;
+    case "HELP":
+      response = {
+        "text": "I am a personal assistant chatbot. Learn how I can help you at: http://marvin-assistant.herokuapp.com/"
+      };
+      sendMessage(sender_psid, response);
+      break;
     default:
   }
 }

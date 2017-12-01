@@ -93,9 +93,25 @@ function createPersistentMenu(res){
           ]
         },
         {
-          "type":"postback",
-          "title":"Locations",
-          "payload":"LOCATIONS"
+          "title":"Other Functions",
+          "type":"nested",
+          "call_to_actions":[
+            {
+              "title":"Locations",
+              "type":"postback",
+              "payload":"Locations"
+            },
+            {
+              "title":"Google",
+              "type":"postback",
+              "payload":"GOOGLE"
+            },
+            {
+              "title":"Help",
+              "type":"postback",
+              "payload":"HELP"
+            }
+          ]
         },
       ]
     }]
