@@ -147,6 +147,7 @@ function handlePostback(sender_psid, received_message) {
       break;
     case "GOOGLE":
       response = {
+        title: "Google!",
         "buttons":[
           {
             "type":"web_url",
