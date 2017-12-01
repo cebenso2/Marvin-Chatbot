@@ -4,7 +4,7 @@ var NewsDataUtils = require("./DataUtils/NewsDataUtils");
 var DatabaseUtils = require("./StorageUtils/DatabaseUtils");
 var SportsDataUtils = require("./DataUtils/SportsDataUtils")
 let locationName = null;
-let sendTemp = false;
+let weatherRecommendations = false;
 
 //access token for page - set in heroku for security
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
@@ -33,6 +33,8 @@ function handleMessage(sender_psid, received_message) {
           {"content_type":"location"}
         ]
       }
+      weatherRecommendations = true;
+      return sendMessage(sender_psid,response);
     } else if(received_message.text === "@temperature"){
       response = {
         "text": "Where are you so I can get the temperature?",
@@ -40,7 +42,6 @@ function handleMessage(sender_psid, received_message) {
           {"content_type":"location"}
         ]
       }
-      sendTemp = true;
     } else if (received_message.text === "@news") {
       sendNewsHeadlines(sender_psid);
     } else if (received_message.text === "@locations") {
@@ -77,7 +78,21 @@ function handleMessage(sender_psid, received_message) {
     }
     if (locationName){
       DatabaseUtils.insertLocation(sender_psid, locationName, coordinates.long, coordinates.lat);
-    } else if (sendTemp) {
+    } else if (weatherRecommendations) {
+      WeatherDataUtils.getForecastRecommendations(coordinates.lat, coordinates.long).then(info => {
+        if (!info || info == "FAIL"){
+          response = {
+            "text": "Sorry I could not find any weather data for that location.",
+          }
+        }
+        else {
+          response = {
+            "text": info
+          }
+        }
+        sendMessage(sender_psid, response);
+      });
+    } else {
       WeatherDataUtils.getTemperatureData(coordinates.lat, coordinates.long).then(
         tempString => {
           if (!tempString || tempString == "FAIL"){
@@ -92,25 +107,11 @@ function handleMessage(sender_psid, received_message) {
           sendMessage(sender_psid, response);
         }
       );
-    } else {
-      WeatherDataUtils.getForecastRecommendations(coordinates.lat, coordinates.long).then(info => {
-        if (!info || info == "FAIL"){
-          response = {
-            "text": "Sorry I could not find any weather data for that location.",
-          }
-        }
-        else {
-          response = {
-            "text": info
-          }
-        }
-        sendMessage(sender_psid, response);
-      });
     }
   }
   // Sends the response message
   locationName=null;
-  sendTemp = false;
+  weatherRecommendations = false;
   sendMessage(sender_psid, response);
 }
 
@@ -132,6 +133,7 @@ function handlePostback(sender_psid, received_message) {
           {"content_type":"location"}
         ]
       };
+      weatherRecommendations = true;
       sendMessage(sender_psid, response);
       break;
     case "TEMPERATURE":

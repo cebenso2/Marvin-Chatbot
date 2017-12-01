@@ -73,11 +73,6 @@ function createPersistentMenu(res){
       "call_to_actions":[
         {
           "type":"postback",
-          "title":"Locations",
-          "payload":"LOCATIONS"
-        },
-        {
-          "type":"postback",
           "title":"News",
           "payload":"NEWS"
         },
@@ -96,7 +91,12 @@ function createPersistentMenu(res){
               "payload":"TEMPERATURE"
             }
           ]
-        }
+        },
+        {
+          "type":"postback",
+          "title":"Locations",
+          "payload":"LOCATIONS"
+        },
       ]
     }]
   };
