@@ -89,7 +89,7 @@ function createRecommendationText(hot, cold, rain, snow, wind, humid, conditions
   } else if(snow || cold){
     clothing = "a winter jacket"
   } else if (rain){
-    clothing = "rain jacket"
+    clothing = "a rain jacket"
   } else {
     clothing = "anything you want"
   }
