@@ -47,15 +47,9 @@ function createRecommendationText(hot, cold, rain, snow, wind, humid, conditions
     tempText="cold";
   }
 
-  let overView = "Today is going to be " + tempText +" in terms of temperature and have " + conditions.toLowerCase() + ' conditions. '
+  let overView = "Today is going to be " + tempText +" and have " + conditions.toLowerCase() + ' conditions. '
 
   let events = [];
-  if (cold) {
-    events.push("be cold");
-  }
-  if (hot) {
-    events.push("be hot");
-  }
   if (snow) {
     events.push("snow");
   }
@@ -70,7 +64,7 @@ function createRecommendationText(hot, cold, rain, snow, wind, humid, conditions
   }
   let eventsText = ""
   if(events.length==0){
-    eventsText = " be nice outside"
+    eventsText = "be nice outside"
   }
   else if (events.length<2){
     eventsText = events[0];
@@ -101,7 +95,11 @@ function createRecommendationText(hot, cold, rain, snow, wind, humid, conditions
   }
 
   let clothingRecommendation = "I would recommend wearing " + clothing +". ";
-  let recommendations = overView + weatherEvents + clothingRecommendation;
+  let recommendations = overView;
+  if (events.length >0) {
+    recommendations += weatherEvents;
+  }
+  recommendations += clothingRecommendation;
   return recommendations;
 }
 
