@@ -4,6 +4,7 @@ var NewsDataUtils = require("./DataUtils/NewsDataUtils");
 var DatabaseUtils = require("./StorageUtils/DatabaseUtils");
 var SportsDataUtils = require("./DataUtils/SportsDataUtils")
 let locationName = null;
+let sendTemp = false;
 
 //access token for page - set in heroku for security
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
@@ -25,12 +26,15 @@ function handleMessage(sender_psid, received_message) {
       response = {
         "text": "Hi. I hope you are having a good day!"
       }
-    } else if (received_message.text === "@weather") {
+    } else if (received_message.text === "@weather" || received_message.text === "@temperature" ) {
       response = {
         "text": "Where are you so I can get weather data?",
         "quick_replies":[
           {"content_type":"location"}
         ]
+      }
+      if (received_message.text === "@temperature"){
+        sendTemp = true;
       }
     } else if (received_message.text === "@news") {
       sendNewsHeadlines(sender_psid);
@@ -68,8 +72,8 @@ function handleMessage(sender_psid, received_message) {
     }
     if (locationName){
       DatabaseUtils.insertLocation(sender_psid, locationName, coordinates.long, coordinates.lat);
-    } else {
-      /*WeatherDataUtils.getWeatherData(coordinates.lat, coordinates.long).then(
+    } else if (sendTemp) {
+      WeatherDataUtils.getTemperatureData(coordinates.lat, coordinates.long).then(
         tempString => {
           if (!tempString || tempString == "FAIL"){
             response = {
@@ -82,7 +86,8 @@ function handleMessage(sender_psid, received_message) {
           }
           sendMessage(sender_psid, response);
         }
-      );*/
+      );
+    } else {
       WeatherDataUtils.getForecastRecommendations(coordinates.lat, coordinates.long).then(info => {
         if (!info || info == "FAIL"){
           response = {
@@ -100,6 +105,7 @@ function handleMessage(sender_psid, received_message) {
   }
   // Sends the response message
   locationName=null;
+  sendTemp = false;
   sendMessage(sender_psid, response);
 }
 

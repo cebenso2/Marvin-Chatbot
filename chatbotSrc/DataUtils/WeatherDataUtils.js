@@ -4,7 +4,7 @@ var request = require("request-promise");
 const WEATHER_ENDPOINT = "http://api.wunderground.com/api/" + process.env.WEATHER_API_KEY + "/conditions/q/"
 const FORCAST_ENDPOINT = "http://api.wunderground.com/api/" + process.env.WEATHER_API_KEY + "/forecast/q/"
 //returns the current temperature at the give lat and long
-function getWeatherData(latitude, longitude) {
+function getTemperatureData(latitude, longitude) {
   return request(WEATHER_ENDPOINT + latitude +","+longitude+".json").then(
     response => {
       let data = JSON.parse(response);
@@ -105,4 +105,4 @@ function createRecommendationText(hot, cold, rain, snow, wind, humid, conditions
   return recommendations;
 }
 
-module.exports = {getWeatherData: getWeatherData, getForecastRecommendations: getForecastRecommendations, createRecommendationText: createRecommendationText}
+module.exports = {getTemperatureData: getTemperatureData, getForecastRecommendations: getForecastRecommendations, createRecommendationText: createRecommendationText}
