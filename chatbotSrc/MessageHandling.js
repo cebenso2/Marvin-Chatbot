@@ -5,6 +5,7 @@ var DatabaseUtils = require("./StorageUtils/DatabaseUtils");
 var SportsDataUtils = require("./DataUtils/SportsDataUtils");
 var MapsDataUtils = require("./DataUtils/MapsDataUtils")
 
+//flags for multiple message conversations
 let locationName = null;
 let weatherRecommendations = false;
 let originLat = null;
@@ -154,6 +155,7 @@ function handleMessage(sender_psid, received_message) {
     }
   }
   // Sends the response message
+  //clears flag variables
   locationName=null;
   weatherRecommendations = false;
   estimateTime = false;
@@ -223,6 +225,7 @@ function handlePostback(sender_psid, received_message) {
   }
 }
 
+//sends headlines for the news
 function sendNewsHeadlines(sender_psid){
   NewsDataUtils.getNewsHeadlines().then(headlines => {
     let tiles = headlines.map((headline) => {

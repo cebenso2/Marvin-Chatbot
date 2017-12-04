@@ -5,8 +5,10 @@ var Base64 = require('../Utils//Base64');
 const httpTransport = require('https');
 const responseEncoding = 'utf8';
 
+//function for getting last game result given the league and city
+//sends string output to callback function on completion
 function getLastGame(sport, city, callback) {
-
+  //sets up headers
     const httpOptions = {
         hostname: 'api.mysportsfeeds.com',
         port: '443',
@@ -28,6 +30,7 @@ function getLastGame(sport, city, callback) {
                 responseStr = responseStr + chunk;
             }
         }).on('end', () => {
+            //parses response into easy string result
             responseStr = responseBufs.length > 0 ?
                 Buffer.concat(responseBufs).toString(responseEncoding) : responseStr;
             let teamData = JSON.parse(responseStr);
@@ -43,6 +46,7 @@ function getLastGame(sport, city, callback) {
             let result = "Last Game: "+date +"\n";
             result += team + ": " +pointsFor +"\n";
             result += opponent + ": " +pointsAgainst;
+            //passed to callback
             callback(result);
         });
 
@@ -53,8 +57,6 @@ function getLastGame(sport, city, callback) {
     });
     request.write("")
     request.end();
-
-
 }
 
 module.exports = {getLastGame: getLastGame}

@@ -1,11 +1,10 @@
-var request = require("request-promise");
 var distance = require('google-distance-matrix');
-const endpoint = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=Vancouver+BC|Seattle&destinations=San+Francisco|Victoria+BC&key=AIzaSyAYtdgKqjDivyTKd2CcHbN8h7P2TwWbotk"
 
+//use google maps api and google maps npm wrapper to get time estimate
 function getTimeFromOriginToDest(olat, olong, dlat, dlong, mode, callback) {
   var origins = [olat +","+olong];
   var destinations = [dlat +","+dlong];
-  distance.key('AIzaSyAYtdgKqjDivyTKd2CcHbN8h7P2TwWbotk');
+  distance.key(process.env.MAPS_API_KEY);
   distance.mode(mode);
   distance.matrix(origins, destinations, callback);
 }
