@@ -22,7 +22,7 @@ app.get("/", function (req, res) {
    res.render('pages/index');
 });
 
-//Homepage for info about marvin - render on get
+//page for users to interact with a todo list
 app.get("/todo", function (req, res) {
    res.render('pages/todo');
 });
