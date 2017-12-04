@@ -41,8 +41,8 @@ function getLastGame(sport, city, callback) {
             let pointsFor = lastGame.stats.Pts['#text'];
             let pointsAgainst = lastGame.stats.PtsAgainst['#text'];
             let result = "Last Game: "+date +"\n";
-            result += team: + " " +pointsFor +"\n";
-            result += opponent: + " " +pointsAgainst;
+            result += team + ": " +pointsFor +"\n";
+            result += opponent + ": " +pointsAgainst;
             callback(result);
         });
 
