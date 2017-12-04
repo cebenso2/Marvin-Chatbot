@@ -4,6 +4,7 @@ var NewsDataUtils = require("./DataUtils/NewsDataUtils");
 var DatabaseUtils = require("./StorageUtils/DatabaseUtils");
 var SportsDataUtils = require("./DataUtils/SportsDataUtils");
 var MapsDataUtils = require("./DataUtils/MapsDataUtils")
+var EmailUtils = require("./Email/EmailUtils")
 
 //flags for multiple message conversations
 let locationName = null;
@@ -51,6 +52,8 @@ function handleMessage(sender_psid, received_message) {
       sendNewsHeadlines(sender_psid);
     } else if (received_message.text === "@locations") {
       sendLocations(sender_psid);
+    } else if (received_message.text === "@email") {
+      EmailUtils.sendMail("cebenso2@illinois.edu", "Email Subject", "This is an email sent from Marvin");
     } else if (received_message.text === "@sports") {
       SportsDataUtils.getLastGame("nba", "bos", (message)=> {
         response = {
@@ -67,8 +70,7 @@ function handleMessage(sender_psid, received_message) {
         ]
       };
       return sendMessage(sender_psid, response);
-      MapsDataUtils.getTimeFromOriginToDest(42.4851, 71.4328, 42.3601, 71.0589, 'driving');
-    }else if (received_message.text.substring(0,9) === "@location") {
+    } else if (received_message.text.substring(0,9) === "@location") {
       locationName = received_message.text.substring(10);
       response = {
         "text": `What location would you like to store for "${locationName}" ?`,

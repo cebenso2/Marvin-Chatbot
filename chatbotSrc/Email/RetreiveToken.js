@@ -1,0 +1,45 @@
+'use strict';
+
+var fs = require('fs');
+var googleAuth = require('google-auth-library');
+
+//gets authorization token from google
+function getAuthorizationToken(code, cb) {
+  // Load client secrets
+  fs.readFile('client_secret.json', function(err, data) {
+    if (err) {
+      return cb(err);
+    }
+    var credentials = JSON.parse(data);
+    var clientSecret = credentials.web.client_secret;
+    var clientId = credentials.web.client_id;
+    var redirectUrl = credentials.web.redirect_uris[0];
+    var auth = new googleAuth();
+    var oauth2Client = new auth.OAuth2(clientId, clientSecret, redirectUrl);
+
+    oauth2Client.getToken(code, function(err, token) {
+      if (err) {
+        return cb(err);
+      }
+      var file = 'gmail-credentials.json';
+
+      fs.writeFile(file, JSON.stringify(token));
+      return cb(null, file);
+    });
+  });
+}
+module.exports = {getAuthorizationToken: getAuthorizationToken}
+
+/*if (process.argv.length != 3) {
+  console.log('usage: node get_token token');
+  process.exit(1);
+}
+var token = process.argv[2];
+
+getAuthorizationToken(token, function(err, file) {
+  if (err) {
+    console.log('err:', err);
+  } else {
+    console.log('authorization token is in:\n', file);
+  }
+});*/
