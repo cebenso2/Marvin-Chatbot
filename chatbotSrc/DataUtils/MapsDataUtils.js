@@ -1,19 +1,16 @@
 var request = require("request-promise");
-let endpoint = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=Vancouver+BC|Seattle&destinations=San+Francisco|Victoria+BC&key=AIzaSyAYtdgKqjDivyTKd2CcHbN8h7P2TwWbotk"
+var distance = require('google-distance-matrix');
+const endpoint = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=Vancouver+BC|Seattle&destinations=San+Francisco|Victoria+BC&key=AIzaSyAYtdgKqjDivyTKd2CcHbN8h7P2TwWbotk"
 
 function getTimeFromOriginToDest() {
-  var googleMapsClient = require('@google/maps').createClient({
-    key: 'AIzaSyAYtdgKqjDivyTKd2CcHbN8h7P2TwWbotk',
+  var origins = ['San Francisco CA'];
+  var destinations = ['New York NY', '41.8337329,-87.7321554'];
+  distance.key('AIzaSyAYtdgKqjDivyTKd2CcHbN8h7P2TwWbotk');
+  distance.matrix(origins, destinations, function (err, distances) {
+    if (!err){
+      console.log(distances);
+    }
   });
-  googleMapsClient.distanceMatrix({
-    origins: ['Greenwich, England'],
-    destinations: ['Stockholm, Sweden'],
-    mode: 'bicycling',
-  }, callback);
-
-  function callback(response, status) {
-    console.log(response);
-  }
 }
 
 module.exports = {getTimeFromOriginToDest: getTimeFromOriginToDest}
