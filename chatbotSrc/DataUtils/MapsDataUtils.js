@@ -4,11 +4,13 @@ const endpoint = "https://maps.googleapis.com/maps/api/distancematrix/json?origi
 
 function getTimeFromOriginToDest() {
   var origins = ['San Francisco CA'];
-  var destinations = ['New York NY', '41.8337329,-87.7321554'];
+  var destinations = [, '41.8337329,-87.7321554'];
   distance.key('AIzaSyAYtdgKqjDivyTKd2CcHbN8h7P2TwWbotk');
   distance.matrix(origins, destinations, function (err, distances) {
     if (!err){
       console.log(distances);
+      let data = JSON.parse(distances);
+      console.log(data.rows[0].elements[0].duration.text);
     }
   });
 }
