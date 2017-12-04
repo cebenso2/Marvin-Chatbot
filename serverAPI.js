@@ -22,6 +22,11 @@ app.get("/", function (req, res) {
    res.render('pages/index');
 });
 
+//Homepage for info about marvin - render on get
+app.get("/todo", function (req, res) {
+   res.render('pages/index');
+});
+
 // Facebook Webhook
 // Used for verification
 app.get("/webhook", function (req, res) {

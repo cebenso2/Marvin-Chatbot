@@ -49,6 +49,8 @@ function handleMessage(sender_psid, received_message) {
           {"content_type":"location"}
         ]
       }
+    } else if (received_message.text === "@todo") {
+      sendTodoButton(sender_psid);
     } else if (received_message.text === "@news") {
       sendNewsHeadlines(sender_psid);
     } else if (received_message.text === "@locations") {
@@ -271,12 +273,38 @@ function sendLocations(sender_psid){
   });
 }
 
+//sends an email based on message
+//message should be a 3 tuple of email, subject, Content
+//delimiter = ","
 function sendEmail(sender_psid, message){
   let parts = message.split(",");
   EmailUtils.sendMail(parts[0], parts[1], parts[2]);
   let response = {
     text: "Email sent to " + parts[0],
   }
+  sendMessage(sender_psid, response);
+}
+
+function sendTodoButton(sender_psid){
+  response = {
+    "attachment":{
+      "type":"template",
+      "payload":{
+        "template_type":"button",
+        "text": "Open TODO List",
+        "buttons":[
+          {
+            "type":"web_url",
+            "url":"https://marvin-assistant.herokuapp.com/todo",
+            "title":"TODO",
+            "webview_height_ratio": "tall",
+            "messenger_extensions": true,
+            "fallback_url": "https://www.google.com"
+          }
+        ]
+      }
+    }
+  };
   sendMessage(sender_psid, response);
 }
 
