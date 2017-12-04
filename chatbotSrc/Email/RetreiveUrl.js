@@ -4,6 +4,7 @@ var fs = require('fs');
 var googleAuth = require('google-auth-library');
 var Scopes = require('./Scopes');
 
+//gets callback url to authorize user
 function getAuthorizationUrl(cb) {
   //app client secret is stored on server
   fs.readFile('client_secret.json', function(err, data) {

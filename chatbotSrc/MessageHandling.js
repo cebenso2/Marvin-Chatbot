@@ -52,8 +52,8 @@ function handleMessage(sender_psid, received_message) {
       sendNewsHeadlines(sender_psid);
     } else if (received_message.text === "@locations") {
       sendLocations(sender_psid);
-    } else if (received_message.text === "@email") {
-      EmailUtils.sendMail("cebenso2@illinois.edu", "Email Subject", "This is an email sent from Marvin");
+    } else if (received_message.text.substring(0,5) === "@email") {
+      sendEmail(sender_psid, received_message.text.substring(6));
     } else if (received_message.text === "@sports") {
       SportsDataUtils.getLastGame("nba", "bos", (message)=> {
         response = {
@@ -268,6 +268,15 @@ function sendLocations(sender_psid){
     }
     sendMessage(sender_psid, response)
   });
+}
+
+function sendEmail(sender_psid, message){
+  let parts = message.split(" ");
+  EmailUtils.sendMail(parts[0], parts[1], parts[2]);
+  let response = {
+    text: "Email sent to " + parts[0],
+  }
+  sendMessage(sender_psid, response);
 }
 
 //sends a message back to the sender id over facebook messenger
