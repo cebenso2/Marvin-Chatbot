@@ -7,6 +7,7 @@ const responseEncoding = 'utf8';
 
 //function for getting last game result given the league and city
 //sends string output to callback function on completion
+//based on sample code given on website
 function getLastGame(sport, city, callback) {
   //sets up headers
     const httpOptions = {
@@ -35,7 +36,7 @@ function getLastGame(sport, city, callback) {
                 Buffer.concat(responseBufs).toString(responseEncoding) : responseStr;
             let teamData = JSON.parse(responseStr);
             let games = teamData.teamgamelogs.gamelogs;
-            let lastGame = games[games.length-2];
+            let lastGame = games[games.length-1];
             let date = lastGame.game.date;
             let team = lastGame.team.City + " " + lastGame.team.Name
             let hometeam = lastGame.game.homeTeam.City + " " + lastGame.game.homeTeam.Name

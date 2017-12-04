@@ -3,7 +3,7 @@ const request = require('request');
 const test = require('tape');
 const WeatherDataUtils = require("./chatbotSrc/DataUtils/WeatherDataUtils")
 const NewsDataUtils = require("./chatbotSrc/DataUtils/NewsDataUtils")
-
+const MapsDataUtils = require("./chatbotSrc/DataUtils/MapsDataUtils")
 
 // Start the app
 const env = Object.assign({}, process.env, {PORT: 5000, PAGE_ACCESS_TOKEN: "Test", VERIFY_TOKEN: "test", WEATHER_API_KEY: "test"});

@@ -14,14 +14,17 @@ test('get oath', (t) => {
   });
 });
 
+//get token from url
 test('get token', (t) => {
   t.plan(1);
   let token = "test"
   RetreiveToken.getAuthorizationToken(token, function(err, file) {
+    //should not work
     t.true(err);
   });
 });
 
+//gets url for callback
 test('get url', (t) => {
   t.plan(1);
   RetreiveUrl.getAuthorizationUrl(function(err, url) {
