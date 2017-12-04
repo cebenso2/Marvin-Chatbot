@@ -8,7 +8,7 @@ function getTimeFromOriginToDest() {
   googleMapsClient.distanceMatrix({
     origins: ['Greenwich, England'],
     destinations: ['Stockholm, Sweden'],
-    travelMode: 'DRIVING',
+    mode: 'bicycling',
   }, callback);
 
   function callback(response, status) {
