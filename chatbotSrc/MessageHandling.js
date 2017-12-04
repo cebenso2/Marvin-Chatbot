@@ -108,7 +108,17 @@ function handleMessage(sender_psid, received_message) {
       });
     } else if(estimateTime) {
       if (originLat != null && originLong!=null){
-        MapsDataUtils.getTimeFromOriginToDest(originLat,originLong, coordinates.lat, coordinates.long, 'walking');
+        //helper function for callback in maps api
+        function parseDistance(err, distances) {
+          if (!err){
+            let result = (distances.rows[0].elements[0].duration.text);
+            let response = {
+              text: "The trip will take " + result
+            }
+            sendMessage(sender_psid, response)
+          }
+        };
+        MapsDataUtils.getTimeFromOriginToDest(originLat,originLong, coordinates.lat, coordinates.long, 'walking', parseDistance);
       } else {
         originLat = coordinates.lat
         originLong = coordinates.long
@@ -280,5 +290,7 @@ function sendMessage(sender_psid, response) {
 function firstEntity(nlp, name) {
   return nlp && nlp.entities && nlp.entities && nlp.entities[name] && nlp.entities[name][0];
 }
+
+
 
 module.exports = {handleMessage: handleMessage, handlePostback: handlePostback}
