@@ -55,7 +55,7 @@ function handleMessage(sender_psid, received_message) {
         response = {
           text: message,
         }
-        sendMessage(sender_psid, message);
+        sendMessage(sender_psid, response);
       });
     } else if (received_message.text === "@estimatetime") {
       estimateTime = true
