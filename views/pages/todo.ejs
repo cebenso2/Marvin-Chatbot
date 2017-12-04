@@ -3,48 +3,28 @@
 <html>
   <head>
     <% include ../partials/header.ejs %>
-    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
-    <script src="/bundle.js"></script>
   </head>
   <body>
     <div class="jumbotron text-center">
       <div class="container">
-        <div class="logo">
-          <img src="/messenger-icon.png">
-        </div>
-        <h1>Todo Page</h1>
-        <p> Page that will have a todo list </p>
+        <h1>Todo List</h1>
       </div>
     </div>
-    <div>
+    <div class="container">
+      <a href="#" class="list-group-item"> Do 242</a>
+      <a href="#" class="list-group-item list-group-item-action"> Present 425</a>
+      <a href="#" class="list-group-item list-group-item-action"> Complete 438</a>
+      <a href="#" class="list-group-item list-group-item-action"> Sleep</a>
+      <a href="#" class="list-group-item list-group-item-action"> cs425 hw</a>
+      <a href="#" class="list-group-item list-group-item-action"> te461 project</a>
+
+    </div>
+    <br/>
+    <div class="container">
+      <a href="#" class="list-group-item list-group-item-action">Add Item TODO</a>
+    </div>
       <script>
-        <% if (locals.gift) { %>
-      const gift = JSON.parse('<%- locals.gift  %>');
-        <% } else { %>
-          const gift = null;
-      <% } %>
-      <% if (demo) { %>
-        window.attachApp("demo", gift);
-      <% } else if (typeof terms !== 'undefined' && terms) { %>
-        window.attachTerms();
-        <% } else { %>
-          window.extAsyncInit = function() {
-       // the Messenger Extensions JS SDK is done loading
-       MessengerExtensions.getUserID(function success(uids) {
-         window.attachApp(uids.psid, gift);
-       }, function error(err) {
-         window.attachApp();
-       });
-     };
-     (function(doc, script, domId){
-       var js, fjs = doc.getElementsByTagName(script)[0];
-       if (doc.getElementById(domId)) { return; }
-       js = doc.createElement(script);
-       js.id = domId;
-       js.src = "//connect.facebook.com/en_US/messenger.Extensions.js";
-       fjs.parentNode.insertBefore(js, fjs);
-     }(document, 'script', 'Messenger'));
-          <% } %>
+
       </script>
     </div>
   </body>
