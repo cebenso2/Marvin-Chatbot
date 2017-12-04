@@ -7,7 +7,9 @@ var MapsDataUtils = require("./DataUtils/MapsDataUtils")
 
 let locationName = null;
 let weatherRecommendations = false;
-
+let originLat = null;
+let originLong = null;
+let estimateTime = false;
 //access token for page - set in heroku for security
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 //endpoint to send response messages to
@@ -51,6 +53,14 @@ function handleMessage(sender_psid, received_message) {
     } else if (received_message.text === "@sports") {
       SportsDataUtils.getTeamSchedule("bos");
     } else if (received_message.text === "@estimatetime") {
+      estimateTime = true
+      response = {
+        "text": `Where are you starting ?`,
+        "quick_replies":[
+          {"content_type":"location"}
+        ]
+      };
+      return sendMessage(sender_psid, response);
       MapsDataUtils.getTimeFromOriginToDest(42.4851, 71.4328, 42.3601, 71.0589, 'driving');
     }else if (received_message.text.substring(0,9) === "@location") {
       locationName = received_message.text.substring(10);
@@ -96,8 +106,22 @@ function handleMessage(sender_psid, received_message) {
         }
         sendMessage(sender_psid, response);
       });
-    } else {
-      MapsDataUtils.getTimeFromOriginToDest(41.8337329,-87.7321554, coordinates.lat, coordinates.long, 'driving');
+    } else if(estimateTime) {
+      if (originLat != null && originLong!=null){
+        MapsDataUtils.getTimeFromOriginToDest(originLat,originLong, coordinates.lat, coordinates.long, 'walking');
+      } else {
+        originLat = coordinates.lat
+        originLong = coordinates.long
+        response = {
+          "text": `What location would you like to go to?`,
+          "quick_replies":[
+            {"content_type":"location"}
+          ]
+        };
+        return sendMessage(sender_psid, response);
+      }
+    }
+    else {
       WeatherDataUtils.getTemperatureData(coordinates.lat, coordinates.long).then(
         tempString => {
           if (!tempString || tempString == "FAIL"){
@@ -117,6 +141,9 @@ function handleMessage(sender_psid, received_message) {
   // Sends the response message
   locationName=null;
   weatherRecommendations = false;
+  estimateTime = false;
+  originLat = null;
+  originLong = null;
   sendMessage(sender_psid, response);
 }
 
