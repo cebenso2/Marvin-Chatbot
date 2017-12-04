@@ -97,6 +97,7 @@ function handleMessage(sender_psid, received_message) {
         sendMessage(sender_psid, response);
       });
     } else {
+      MapsDataUtils.getTimeFromOriginToDest(41.8337329,-87.7321554, coordinates.lat, coordinates.long, 'driving');
       WeatherDataUtils.getTemperatureData(coordinates.lat, coordinates.long).then(
         tempString => {
           if (!tempString || tempString == "FAIL"){
