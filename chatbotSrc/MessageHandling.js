@@ -20,6 +20,9 @@ const FACEBOOK_ENDPOINT = "https://graph.facebook.com/v2.6/me/messages"
 //receives a message and a sender id. Deteremines the correct response
 function handleMessage(sender_psid, received_message) {
   let response = null;
+  console.log(received_message.text.substring(0,5));
+  console.log(received_message.text.substring(0,5) === "@email");
+
   // Check if the message contains text
   if (received_message.text) {
     let greeting = firstEntity(received_message.nlp, 'greetings');
