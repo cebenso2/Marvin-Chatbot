@@ -64,4 +64,4 @@ function sendMail(to, subject, content){
   });
 }
 module.exports = {sendMail: sendMail}
-sendMail('cebenso2@illinois.edu', 'Dynamic', 'This is written in new text');
+//sendMail('cebenso2@illinois.edu', 'Dynamic', 'This is written in new text');
