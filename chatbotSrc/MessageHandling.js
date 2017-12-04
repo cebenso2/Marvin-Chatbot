@@ -51,7 +51,7 @@ function handleMessage(sender_psid, received_message) {
     } else if (received_message.text === "@sports") {
       SportsDataUtils.getTeamSchedule("bos");
     } else if (received_message.text === "@estimatetime") {
-      MapsDataUtils.getTimeFromOriginToDest();
+      MapsDataUtils.getTimeFromOriginToDest(42.4851, 71.4328, 42.3601, 71.0589, 'driving');
     }else if (received_message.text.substring(0,9) === "@location") {
       locationName = received_message.text.substring(10);
       response = {
