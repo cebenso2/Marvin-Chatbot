@@ -2,7 +2,9 @@ var request = require("request");
 var WeatherDataUtils = require("./DataUtils/WeatherDataUtils");
 var NewsDataUtils = require("./DataUtils/NewsDataUtils");
 var DatabaseUtils = require("./StorageUtils/DatabaseUtils");
-var SportsDataUtils = require("./DataUtils/SportsDataUtils")
+var SportsDataUtils = require("./DataUtils/SportsDataUtils");
+var MapsDataUtils = require("./DataUtils/MapsDataUtils")
+
 let locationName = null;
 let weatherRecommendations = false;
 
@@ -48,7 +50,9 @@ function handleMessage(sender_psid, received_message) {
       sendLocations(sender_psid);
     } else if (received_message.text === "@sports") {
       SportsDataUtils.getTeamSchedule("bos");
-    } else if (received_message.text.substring(0,9) === "@location") {
+    } else if (received_message.text === "@estimatetime") {
+      MapsDataUtils.getTimeFromOriginToDest();
+    }else if (received_message.text.substring(0,9) === "@location") {
       locationName = received_message.text.substring(10);
       response = {
         "text": `What location would you like to store for "${locationName}" ?`,
