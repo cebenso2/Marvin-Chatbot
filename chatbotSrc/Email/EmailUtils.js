@@ -3,30 +3,20 @@
 var fs = require('fs');
 var googleAuth = require('google-auth-library');
 var google = require('googleapis');
-
+let client_secret = '{"web":{"client_id":"696019611227-5m62hp5vit4ossvpv7pemo92prrlric8.apps.googleusercontent.com","project_id":"marvinassistantc-1512373709006","auth_uri":"https://accounts.google.com/o/oauth2/auth","token_uri":"https://accounts.google.com/o/oauth2/token","auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs","client_secret":"Ce7jPpvZ7x4nUXJqnzr8DJzE","redirect_uris":["http://marvin-assistant.herokuapp.com/"],"javascript_origins":["http://marvin-assistant.herokuapp.com"]}}'
+let token = '{"access_token":"ya29.GlsYBSrqn9MVnUP9PPqXFFLWIhDPYQ8opVqRVva56oJkNEDnVvYIbRn-VV8nmKfHw8c3KE6ehvPVZMwuceOdWNOFzdLlD7MjgjvVb5PGzE-dfO0pp0dNkht8i6ou","refresh_token":"1/d34vYxhHrS7L3E-6w8lgQz_hIi34eH74Gom5fUhZxBg","token_type":"Bearer","expiry_date":1512403893095}'
 //authenticates for sending email using stored file
 function getOAuth2Client(cb) {
   // Load client secrets
-  fs.readFile('client_secret.json', function(err, data) {
-    if (err) {
-      return cb(err);
-    }
-    var credentials = JSON.parse(data);
-    var clientSecret = credentials.web.client_secret;
-    var clientId = credentials.web.client_id;
-    var redirectUrl = credentials.web.redirect_uris[0];
-    var auth = new googleAuth();
-    var oauth2Client = new auth.OAuth2(clientId, clientSecret, redirectUrl);
-    // Load credentials
-    fs.readFile('gmail-credentials.json', function(err, token) {
-      if (err) {
-        return cb(err);
-      } else {
-        oauth2Client.credentials = JSON.parse(token);
-        return cb(null, oauth2Client);
-      }
-    });
-  });
+  var credentials = JSON.parse(client_secret);
+  var clientSecret = credentials.web.client_secret;
+  var clientId = credentials.web.client_id;
+  var redirectUrl = credentials.web.redirect_uris[0];
+  var auth = new googleAuth();
+  var oauth2Client = new auth.OAuth2(clientId, clientSecret, redirectUrl);
+  // Load credentials
+  oauth2Client.credentials = JSON.parse(token);
+  return cb(null, oauth2Client);
 }
 
 //uses authentication and sends the email
@@ -74,4 +64,4 @@ function sendMail(to, subject, content){
   });
 }
 module.exports = {sendMail: sendMail}
-//sendMail('cebenso2@illinois.edu', 'Dynamic', 'This is written in new text');
+sendMail('cebenso2@illinois.edu', 'Dynamic', 'This is written in new text');
