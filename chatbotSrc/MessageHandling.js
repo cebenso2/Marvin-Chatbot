@@ -272,7 +272,7 @@ function sendLocations(sender_psid){
 }
 
 function sendEmail(sender_psid, message){
-  let parts = message.split(" ");
+  let parts = message.split(",");
   EmailUtils.sendMail(parts[0], parts[1], parts[2]);
   let response = {
     text: "Email sent to " + parts[0],
