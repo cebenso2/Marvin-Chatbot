@@ -9,3 +9,5 @@ function getTimeFromOriginToDest() {
     }
   ).catch(error => console.log("News Error"))
 }
+
+module.exports = {getTimeFromOriginToDest: getTimeFromOriginToDest}
