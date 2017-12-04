@@ -285,6 +285,7 @@ function sendEmail(sender_psid, message){
   sendMessage(sender_psid, response);
 }
 
+//sends a todo button link that will open a webapge
 function sendTodoButton(sender_psid){
   response = {
     "attachment":{
