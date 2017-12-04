@@ -65,5 +65,5 @@ function sendMail(to, subject, content){
     }
   });
 }
-module.exports = {sendMail: sendMail}
+module.exports = {sendMail: sendMail, getOAuth2Client: getOAuth2Client}
 //sendMail('cebenso2@illinois.edu', 'Dynamic', 'This is written in new text');

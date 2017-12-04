@@ -8,7 +8,7 @@
   "main": "serverAPI.js",
   "scripts": {
     "start": "node serverAPI.js",
-    "test": "node test.js"
+    "test": "node test.js; node chatbotSrc/Email/EmailTests.js"
   },
   "dependencies": {
     "@google/maps": "^0.4.5",
