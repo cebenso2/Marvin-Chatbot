@@ -291,7 +291,7 @@ function sendTodoButton(sender_psid){
       "type":"template",
       "payload":{
         "template_type":"button",
-        "text": "Open TODO List",
+        "text": "TODO",
         "buttons":[
           {
             "type":"web_url",
