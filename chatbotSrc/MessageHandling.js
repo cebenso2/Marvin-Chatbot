@@ -20,8 +20,6 @@ const FACEBOOK_ENDPOINT = "https://graph.facebook.com/v2.6/me/messages"
 //receives a message and a sender id. Deteremines the correct response
 function handleMessage(sender_psid, received_message) {
   let response = null;
-  console.log(received_message.text.substring(0,5));
-  console.log(received_message.text.substring(0,5) === "@email");
 
   // Check if the message contains text
   if (received_message.text) {
@@ -55,8 +53,8 @@ function handleMessage(sender_psid, received_message) {
       sendNewsHeadlines(sender_psid);
     } else if (received_message.text === "@locations") {
       sendLocations(sender_psid);
-    } else if (received_message.text.substring(0,5) === "@email") {
-      sendEmail(sender_psid, received_message.text.substring(6));
+    } else if (received_message.text.substring(0,6) === "@email") {
+      sendEmail(sender_psid, received_message.text.substring(7));
     } else if (received_message.text === "@sports") {
       SportsDataUtils.getLastGame("nba", "bos", (message)=> {
         response = {
