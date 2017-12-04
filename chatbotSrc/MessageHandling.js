@@ -51,7 +51,12 @@ function handleMessage(sender_psid, received_message) {
     } else if (received_message.text === "@locations") {
       sendLocations(sender_psid);
     } else if (received_message.text === "@sports") {
-      SportsDataUtils.getTeamSchedule("bos");
+      SportsDataUtils.getLastGame("nba", "bos", (message)=> {
+        response = {
+          text: message,
+        }
+        sendMessage(sender_psid, message);
+      }
     } else if (received_message.text === "@estimatetime") {
       estimateTime = true
       response = {
@@ -159,7 +164,6 @@ function handleMessage(sender_psid, received_message) {
 
 //Handle postback for persistent menu
 function handlePostback(sender_psid, received_message) {
-  console.log(received_message);
   let reponse = null;
   switch (received_message.payload) {
     case "NEWS":

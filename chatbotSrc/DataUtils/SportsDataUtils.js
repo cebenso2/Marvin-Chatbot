@@ -1,39 +1,60 @@
-var Authentication = require("../Utils/Authentication")
-var request = require("request-promise");
-var btoa = require('btoa')
-var MySportsFeeds = require("mysportsfeeds-node");
-var msf = new MySportsFeeds("1.0", true);
+// request Request
+var Base64 = require('../Utils//Base64');
+'use strict';
 
-const SPORTS_TEAM = "bos";
-const SPORTS_LEAGUE = "nba"
-//endpoint for the news api
-const SPORTS_SCHEDULE_ENDPOINT = "https://api.mysportsfeeds.com/v1.1/pull/nba/current/full_game_schedule.json";
+const httpTransport = require('https');
+const responseEncoding = 'utf8';
 
-//returns the current temperature at the give lat and long
-function getTeamSchedule(team) {
-  let options = {
-    uri: SPORTS_SCHEDULE_ENDPOINT,
-    headers: {
-      'User-Agent': 'Request-Promise',
-      'Authentication': 'Basic ' + btoa(process.env.SPORTS_USERNAME +":"+process.env.SPORTS_PASSWORD),
-    },
-    method: 'GET',
-    qs: {},
-    transform: function(body) {
-      // console.log("response = '" + util.inspect(body, {depth: null}) + "'");
-      return body;
-    },
-    json: true // Automatically parses the JSON string in the response
-  };
-  console.log(options);
-  return request(options).then(
-    response => {
-      //let data = JSON.parse(response);
-      //console.log(data);
-      console.log(response);
-    }
-  ).catch(error => console.log(error))
+function getLastGame(sport, city, callback) {
+
+    const httpOptions = {
+        hostname: 'api.mysportsfeeds.com',
+        port: '443',
+        path: "/v1.1/pull/"+sport+"/current/team_gamelogs.json?team="+city,
+        method: 'GET',
+        headers: {"Authorization":"Basic " + Base64.btoa("chrisbenson" + ":" + "HelloWorld!")}
+    };
+    httpOptions.headers['User-Agent'] = 'node ' + process.version;
+
+    const request = httpTransport.request(httpOptions, (res) => {
+        let responseBufs = [];
+        let responseStr = '';
+
+        res.on('data', (chunk) => {
+            if (Buffer.isBuffer(chunk)) {
+                responseBufs.push(chunk);
+            }
+            else {
+                responseStr = responseStr + chunk;
+            }
+        }).on('end', () => {
+            responseStr = responseBufs.length > 0 ?
+                Buffer.concat(responseBufs).toString(responseEncoding) : responseStr;
+            let teamData = JSON.parse(responseStr);
+            let games = teamData.teamgamelogs.gamelogs;
+            let lastGame = games[games.length-2];
+            let date = lastGame.game.date;
+            let team = lastGame.team.City + " " + lastGame.team.Name
+            let hometeam = lastGame.game.homeTeam.City + " " + lastGame.game.homeTeam.Name
+            let awayteam = lastGame.game.awayTeam.City + " " + lastGame.game.awayTeam.Name
+            let opponent = hometeam === team ? awayteam : homeTeam;
+            let pointsFor = lastGame.stats.Pts['#text'];
+            let pointsAgainst = lastGame.stats.PtsAgainst['#text'];
+            let result = "Last Game: "+date +"\n";
+            result += team + " " +pointsFor +"\n";
+            result += opponent + " " +pointsAgainst;
+            callback(result);
+        });
+
+    })
+    .setTimeout(0)
+    .on('error', (error) => {
+        callback(error);
+    });
+    request.write("")
+    request.end();
+
 
 }
 
-module.exports = {getTeamSchedule: getTeamSchedule}
+module.exports = {getLastGame: getLastGame}
