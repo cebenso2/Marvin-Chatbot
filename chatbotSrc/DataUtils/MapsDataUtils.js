@@ -8,9 +8,7 @@ function getTimeFromOriginToDest() {
   distance.key('AIzaSyAYtdgKqjDivyTKd2CcHbN8h7P2TwWbotk');
   distance.matrix(origins, destinations, function (err, distances) {
     if (!err){
-      console.log(distances);
-      let data = JSON.parse(distances);
-      console.log(data.rows[0].elements[0].duration.text);
+      console.log(distances.rows[0].elements[0].duration.text);
     }
   });
 }
