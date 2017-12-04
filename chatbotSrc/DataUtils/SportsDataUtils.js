@@ -14,7 +14,7 @@ function getLastGame(sport, city, callback) {
         port: '443',
         path: "/v1.1/pull/"+sport+"/current/team_gamelogs.json?team="+city,
         method: 'GET',
-        headers: {"Authorization":"Basic " + Base64.btoa("chrisbenson" + ":" + "HelloWorld!")}
+        headers: {"Authorization":"Basic " + Base64.btoa(process.env.SPORTS_USERNAME + ":" + process.env.SPORTS_PASSWORD)}
     };
     httpOptions.headers['User-Agent'] = 'node ' + process.version;
 
