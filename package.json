@@ -22,16 +22,20 @@
     "googleapis": "^23.0.0",
     "mysportsfeeds-node": "^0.2.2",
     "pg": "7.4.0",
+    "react": "^16.2.0",
+    "react-redux": "^5.0.6",
+    "redux": "^3.7.2",
     "request": "^2.83.0",
     "request-promise": "^4.2.2"
   },
   "devDependencies": {
-    "express": "^4.16.2",
     "btoa": "^1.1.2",
+    "express": "^4.16.2",
+    "pg": "7.4.0",
+    "redux-devtools": "^3.4.1",
     "request": "^2.83.0",
-    "tape": "^4.8.0",
     "request-promise": "^4.2.2",
-    "pg": "7.4.0"
+    "tape": "^4.8.0"
   },
   "repository": {
     "type": "git",
