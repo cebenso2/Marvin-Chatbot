@@ -97,7 +97,30 @@ function handleMessage(sender_psid, received_message) {
       }
     } else {
       Wit.processWithAI(received_message.text).then(result => {
-        console.log(result);
+        let response = null;
+        switch(result){
+          case Wit.MESSAGE_TYPE_ENUM.WEATHER:
+            response = {
+              "text": "Where are you so I can get weather data?",
+              "quick_replies":[
+                {"content_type":"location"}
+              ]
+            }
+            weatherRecommendations = true;
+          case Wit.MESSAGE_TYPE_ENUM.TEMPERATURE:
+            response = {
+              "text": "Where are you so I can get temperature data?",
+              "quick_replies":[
+                {"content_type":"location"}
+              ]
+            }
+          default:
+            resetValues();
+            response = {
+              text: "Sorry I do not know how to respond."
+            }
+        }
+        sendMessage(sender_psid, response)
       });
       return;
     }
@@ -168,14 +191,16 @@ function handleMessage(sender_psid, received_message) {
   }
   // Sends the response message
   //clears flag variables
+  resetValues();
+  sendMessage(sender_psid, response);
+}
+function resetValues(){
   locationName=null;
   weatherRecommendations = false;
   estimateTime = false;
   originLat = null;
   originLong = null;
-  sendMessage(sender_psid, response);
 }
-
 //Handle postback for persistent menu
 function handlePostback(sender_psid, received_message) {
   let reponse = null;
