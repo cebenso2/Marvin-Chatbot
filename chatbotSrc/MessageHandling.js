@@ -5,6 +5,7 @@ var DatabaseUtils = require("./StorageUtils/DatabaseUtils");
 var SportsDataUtils = require("./DataUtils/SportsDataUtils");
 var MapsDataUtils = require("./DataUtils/MapsDataUtils")
 var EmailUtils = require("./Email/EmailUtils")
+var RetreiveUrl = require("./Email/RetreiveUrl")
 
 //flags for multiple message conversations
 let locationName = null;
@@ -55,6 +56,8 @@ function handleMessage(sender_psid, received_message) {
       sendNewsHeadlines(sender_psid);
     } else if (received_message.text === "@locations") {
       sendLocations(sender_psid);
+    } else if (received_message.text === "@setup") {
+      startOath(sender_psid);
     } else if (received_message.text.substring(0,6) === "@email") {
       sendEmail(sender_psid, received_message.text.substring(7));
     } else if (received_message.text === "@sports") {
@@ -307,6 +310,15 @@ function sendTodoButton(sender_psid){
     }
   };
   sendMessage(sender_psid, response);
+}
+
+function startOath(sender_psid){
+  RetreiveUrl.getAuthorizationUrl((err, url) => {
+    let response = {
+      text: url
+    }
+    sendMessage(sender_psid, response);
+  })
 }
 
 //sends a message back to the sender id over facebook messenger
