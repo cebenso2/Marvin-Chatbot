@@ -94,7 +94,7 @@ function getEmailToken(user_psid){
     for (let row of result.rows) {
       console.log(row);
       console.log(row.token);
-      if(row.token != 'null'){
+      if(row.token != 'null' && row.token != '[object Object]'){
         emailToken = row.token;
         break;
       }
