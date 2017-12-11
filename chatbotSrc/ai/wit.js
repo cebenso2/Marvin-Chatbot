@@ -15,7 +15,10 @@ function processWithAI(message){
       for(let i of data.entities.intent){
         console.log(i);
         if (i.confidence >0.5){
-          return i.value;
+          if(i.value === "tip"){
+            console.log(i);
+            return i.value
+          };
         }
       }
     }
