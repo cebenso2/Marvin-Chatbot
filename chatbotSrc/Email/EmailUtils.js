@@ -98,6 +98,7 @@ function getEmail(token, cb){
           console.log('err:', err);
           cb(null)
         } else {
+          console.log(results);
           cb(results.emailAddress);
         }
       });
