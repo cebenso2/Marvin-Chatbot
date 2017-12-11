@@ -97,6 +97,8 @@ function handleMessage(sender_psid, received_message) {
       }
     } else {
       Wit.runWit(received_message.text).then(data =>{
+        consol.log(data);
+        console.log(data.entities);
         for(let e of data.entities){
           console.log(e);
         }
