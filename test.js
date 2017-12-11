@@ -4,7 +4,7 @@ const test = require('tape');
 const WeatherDataUtils = require("./chatbotSrc/DataUtils/WeatherDataUtils")
 const NewsDataUtils = require("./chatbotSrc/DataUtils/NewsDataUtils")
 const MapsDataUtils = require("./chatbotSrc/DataUtils/MapsDataUtils")
-
+const Tip = require("./chatbotSrc/Utils/tip")
 // Start the app
 const env = Object.assign({}, process.env, {PORT: 5000, PAGE_ACCESS_TOKEN: "Test", VERIFY_TOKEN: "test", WEATHER_API_KEY: "test"});
 const child = spawn('node', ['serverAPI.js'], {env});
@@ -77,4 +77,9 @@ test('get news headlines', (t) => {
     t.false(response);
     t.end();
   });
+});
+
+//test for headlines
+test('get tip', (t) => {
+  t.equal(Tip.createTipString(10), "Here are tip results for $10.\n 10% would be $1.\n 15% would be $1.5.\n 20% would be $2.");
 });
