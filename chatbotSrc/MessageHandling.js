@@ -85,7 +85,7 @@ function handleMessage(sender_psid, received_message) {
       };
       return sendMessage(sender_psid, response);
     } else if (received_message.text === "@create") {
-      DatabaseUtils.createTeamTable();
+      //DatabaseUtils.createTeamTable();
     } else if (received_message.text === "@insert") {
       DatabaseUtils.insertTeam('test', 'nba', 'Celtics', 'bos');
     } else if (received_message.text === "@print") {
@@ -211,7 +211,11 @@ function resetValues(){
 }
 //Handle postback for persistent menu
 function handlePostback(sender_psid, received_message) {
-  let reponse = null;
+  if(received_message.payload.includes(":")){
+    let [action, league, name, city] = received_message.payload.split(":");
+    console.log(action, league, name, city);
+    returnl
+  }
   switch (received_message.payload) {
     case "NEWS":
       sendNewsHeadlines(sender_psid);
