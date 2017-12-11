@@ -26,7 +26,7 @@ var request = require("request");
 app.get("/", function (req, res) {
   if(req.query.code){
     RetreiveToken.getAuthorizationToken(req.query.code, (err, token) => {
-      EmailUtils.getEmail(token, (err,email) =>{
+      EmailUtils.getEmail(token, (email) =>{
         console.log("resulting email address:");
         console.log(email);
         DatabaseUtils.getUserPsid(email, (sender_psid) =>{
