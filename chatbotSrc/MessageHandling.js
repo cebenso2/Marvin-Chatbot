@@ -413,7 +413,7 @@ function addTeam(sender_psid, input){
   if(!name){
     return sendMessage(sender_psid, {text: "@addteam <league> <name>"});
   }
-  SportsDataUtils.getTeams("nba", (teams)=> {
+  SportsDataUtils.getTeams(league, (teams)=> {
     teams = teams.filter(team => {
       return team.name.toLowerCase().includes(name.toLowerCase())
     });

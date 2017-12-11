@@ -1,11 +1,13 @@
 const {Wit, log} = require('node-wit');
 
+//enum for different ai responses
 const MESSAGE_TYPE_ENUM = {
   WEATHER: "weather",
   TEMPERATURE: "temperature",
   TIP: "tip",
 }
 
+//process the given ai with wit ai and uses it to determine response
 function processWithAI(message){
   const client = new Wit({
     accessToken: process.env.WIT_KEY,

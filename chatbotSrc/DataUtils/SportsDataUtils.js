@@ -60,6 +60,7 @@ function getLastGame(sport, city, callback) {
     request.end();
 }
 
+//gets all teams in the laegue
 function getTeams(sport, callback) {
   //sets up headers
     const httpOptions = {
