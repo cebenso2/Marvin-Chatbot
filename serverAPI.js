@@ -19,7 +19,7 @@ var request = require("request");
 
 //Homepage for info about marvin - render on get
 app.get("/", function (req, res) {
-  console.log(req);
+  console.log(req.query.code);
   res.render('pages/index');
 });
 
