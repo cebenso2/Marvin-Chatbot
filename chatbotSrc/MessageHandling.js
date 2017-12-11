@@ -65,9 +65,10 @@ function handleMessage(sender_psid, received_message) {
     } else if (received_message.text.substring(0,6) === "@email") {
       sendEmail(sender_psid, received_message.text.substring(7));
     } else if (received_message.text === "@sports") {
-      SportsDataUtils.getLastGame("nfl", "WAS", (message)=> {
+      SportsDataUtils.getTeams("nba", (message)=> {
+        console.log(message);
         response = {
-          text: message,
+          text: "teams",
         }
         sendMessage(sender_psid, response);
       });
