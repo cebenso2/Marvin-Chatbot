@@ -6,8 +6,8 @@ function runWit(message){
     accessToken: process.env.WIT_KEY,
 
   });
-  client.message(message).then((data) =>{
-    console.log(data);
+  return client.message(message).then((data) =>{
+    return data;
   });
 }
 module.exports = {runWit: runWit}

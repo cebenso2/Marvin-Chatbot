@@ -91,7 +91,7 @@ function handleMessage(sender_psid, received_message) {
       DatabaseUtils.createEmailTable();
     } else if (received_message.text.substring(0,4) === "@wit") {
       Wit.runWit(received_message.text.substring(5));
-    }else if (greeting && greeting.confidence > 0.8) {
+    } else if (greeting && greeting.confidence > 0.8) {
       response = {
         "text": "Hello! My name is Marvin and I am good.",
       }
@@ -165,15 +165,23 @@ function handleMessage(sender_psid, received_message) {
         }
       );
     }
+  } else {
+    Wit.runWit(received_message.text.substring(5)).then(data =>{
+      for(let e of data.entities){
+        console.log(e);
+      }
+      // Sends the response message
+      //clears flag variables
+      locationName=null;
+      weatherRecommendations = false;
+      estimateTime = false;
+      originLat = null;
+      originLong = null;
+      sendMessage(sender_psid, response);
+    });
   }
-  // Sends the response message
-  //clears flag variables
-  locationName=null;
-  weatherRecommendations = false;
-  estimateTime = false;
-  originLat = null;
-  originLong = null;
-  sendMessage(sender_psid, response);
+
+
 }
 
 //Handle postback for persistent menu
