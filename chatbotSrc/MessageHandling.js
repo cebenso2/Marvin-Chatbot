@@ -6,7 +6,7 @@ var SportsDataUtils = require("./DataUtils/SportsDataUtils");
 var MapsDataUtils = require("./DataUtils/MapsDataUtils")
 var EmailUtils = require("./Email/EmailUtils");
 var RetreiveUrl = require("./Email/RetreiveUrl");
-var Wit = require("./ai/start");
+var Wit = require("./ai/wit");
 
 
 //flags for multiple message conversations
@@ -96,12 +96,8 @@ function handleMessage(sender_psid, received_message) {
         "text": "Hello! My name is Marvin and I am good.",
       }
     } else {
-      Wit.runWit(received_message.text).then(data =>{
-        console.log(data);
-        console.log(data.entities);
-        for(let e of data.entities){
-          console.log(e);
-        }
+      processWithAI(sender_psid, received_message.text).then(result => {
+        console.log(result);
       });
       return;
     }
