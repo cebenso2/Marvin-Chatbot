@@ -3,9 +3,11 @@ const {Wit, log} = require('node-wit');
 
 function runWit(message){
   const client = new Wit({
-    accessToken: "SPYAJMGQ5F6QCJBNU52ECV7XDYPJNZVU",
+    accessToken: process.env.WIT_KEY,
 
   });
-  console.log(client.message(message));
+  client.message(message).then((data) =>{
+    console.log(data);
+  });
 }
 module.exports = {runWit: runWit}
