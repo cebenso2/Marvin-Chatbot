@@ -81,7 +81,7 @@ function getLocations(user_psid){
   });
 }
 
-function getEmail(user_psid){
+function getEmailToken(user_psid){
   console.log("getEmail");
   const client = new Client({
     connectionString: process.env.DATABASE_URL,
@@ -90,13 +90,33 @@ function getEmail(user_psid){
 
   client.connect();
   return client.query("SELECT * FROM emails WHERE userpsid='"+user_psid+"';").then((result) => {
-    let emails = [];
+    let emailToken = null
     for (let row of result.rows) {
-      emails.push(row.email +"," + row.token);
+      if(row.token){
+        emailToken = row.token;
+        break;
+      }
     }
     client.end();
-    console.log(emails)
-    return emails;
+    console.log(emailToken);
+    return emailToken;
+  });
+}
+function getUserPsid(email){
+  console.log("getEmail");
+  const client = new Client({
+    connectionString: process.env.DATABASE_URL,
+    ssl: true,
+  });
+
+  client.connect();
+  return client.query("SELECT * FROM emails WHERE email='"+email+"';").then((result) => {
+    client.end();
+    if (len(result.rows) === 0){
+      return null;
+    } else {
+      return result.rows[0].user_psid
+    }
   });
 }
 
@@ -119,4 +139,4 @@ function insertEmail(user_psid, name, token){
 
 }
 
-module.exports = {createLocationTable: createLocationTable, getLocations: getLocations,  insertLocation: insertLocation, createEmailTable: createEmailTable, getEmail: getEmail, insertEmail: insertEmail}
+module.exports = {createLocationTable: createLocationTable, getLocations: getLocations,  insertLocation: insertLocation, createEmailTable: createEmailTable, getEmailToken: getEmailToken, insertEmail: insertEmail, getUserPsid: getUserPsid}

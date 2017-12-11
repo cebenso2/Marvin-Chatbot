@@ -88,9 +88,11 @@ function handleMessage(sender_psid, received_message) {
     } else if (received_message.text === "@create") {
       DatabaseUtils.createEmailTable();
     } else if (received_message.text === "@insert") {
-      DatabaseUtils.insertEmail('test', 'thing@gmail.com', 'token');
-    } else if (received_message.text === "@get") {
-      DatabaseUtils.getEmail('test');
+      DatabaseUtils.insertEmail('test', 'thing@gmail.com', null);
+    } else if (received_message.text === "@gettoken") {
+      DatabaseUtils.getEmailToken('test');
+    } else if (received_message.text === "@getuser") {
+      DatabaseUtils.getUserPsid('thing@gmail.com');
     } else if (greeting && greeting.confidence > 0.8) {
       response = {
         "text": "Hello! My name is Marvin and I am good.",
