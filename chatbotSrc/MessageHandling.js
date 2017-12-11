@@ -217,7 +217,7 @@ function handlePostback(sender_psid, received_message) {
     let [action, league, name, city] = received_message.payload.split(":");
     switch(action){
       case "add":
-      DataUtils.insertTeam(sender_psid,league,name,city);
+      DatabaseUtils.insertTeam(sender_psid,league,name,city);
       break;
       /*case "delete":
       DataUtils.deleteTeam(sender_psid,league,name,city);
