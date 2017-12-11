@@ -3,7 +3,7 @@ const {Wit, log} = require('node-wit');
 const MESSAGE_TYPE_ENUM = {
   WEATHER: "weather",
   TEMPERATURE: "temperature",
-  TEMPERATURE: "tip",
+  TIP: "tip",
 }
 
 function processWithAI(message){
@@ -12,16 +12,13 @@ function processWithAI(message){
 
   });
   return client.message(message).then((data) => {
-    console.log(data);
     if(data && data.entities && data.entities.intent){
       for(let i of data.entities.intent){
-        console.log(i);
         if (i.confidence >0.5){
           if(i.value === "tip"){
-            console.log(i);
             return {
               type: i.value,
-              number: data.entities.number,
+              number: data.entities.number[0].value,
             }
           } else {
             return {
