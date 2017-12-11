@@ -33,7 +33,7 @@ app.get("/", function (req, res) {
           console.log("sender");
           console.log(sender_psid);
           if (sender_psid){
-            DatabaseUtils.insertEmail(sender_psid, email, JSON.stringify(token);
+            DatabaseUtils.insertEmail(sender_psid, email, JSON.stringify(token));
           }
         })
       });
