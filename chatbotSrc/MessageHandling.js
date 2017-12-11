@@ -383,7 +383,7 @@ function addTeam(sender_psid, input){
   console.log(league);
   SportsDataUtils.getTeams("nba", (teams)=> {
     console.log(teams);
-    let teams = teams.filter(team => {team.name.toLowerCase().includes(name.toLowerCase())})
+    teams = teams.filter(team => {team.name.toLowerCase().includes(name.toLowerCase())})
     console.log(teams);
     let tiles = teams.map((team) => {
       return {
