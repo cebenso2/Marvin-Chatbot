@@ -30,9 +30,22 @@
         <button type="button" class="btn btn-primary btn-block">Add</button>
       </div>
     </div>
-      <script>
-      console.log("test");
-      </script>
-    </div>
+    <script>
+    window.extAsyncInit = function() {
+      MessengerExtensions.getUserID(function success(uids) {
+        var psid = uids.psid;
+        console.log(psid);
+      }, function error(err, errorMessage) {
+        console.log(errorMessage);
+      });
+    };
+    (function(d, s, id){
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) {return;}
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.com/en_US/messenger.Extensions.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'Messenger'));
+    </script>
   </body>
 </html>
