@@ -96,7 +96,7 @@ function handleMessage(sender_psid, received_message) {
         "text": "Hello! My name is Marvin and I am good.",
       }
     } else {
-      Wit.processWithAI(sender_psid, received_message.text).then(result => {
+      Wit.processWithAI(received_message.text).then(result => {
         console.log(result);
       });
       return;
