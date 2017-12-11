@@ -1,7 +1,7 @@
 const {Wit, log} = require('node-wit');
 
 
-function process(message){
+function processWithAI(message){
   const client = new Wit({
     accessToken: process.env.WIT_KEY,
 
@@ -16,4 +16,4 @@ function process(message){
     return text;
   });
 }
-module.exports = {runWit: runWit}
+module.exports = {processWithAI: processWithAI}
