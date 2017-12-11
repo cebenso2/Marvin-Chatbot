@@ -154,4 +154,4 @@ function insertEmail(user_psid, name, token){
 
 }
 
-module.exports = {createLocationTable: createLocationTable, getLocations: getLocations,  insertLocation: insertLocation, createEmailTable: createEmailTable, getEmailToken: getEmailToken, insertEmail: insertEmail, getUserPsid: getUserPsid}
+module.exports = {createLocationTable: createLocationTable, getLocations: getLocations,  insertLocation: insertLocation, createEmailTable: createEmailTable, getEmailToken: getEmailToken, insertEmail: insertEmail, getUserPsid: getUserPsid, PrintEmails: PrintEmails}
