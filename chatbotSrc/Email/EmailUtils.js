@@ -72,8 +72,8 @@ function getProfile(auth, cb) {
 }
 
 //Authenticates user and then send the email
-function sendMail(to, subject, content){
-  getOAuth2Client(function(err, oauth2Client) {
+function sendMail(token, to, subject, content){
+  getOAuth2ClientFromToken(token, function(err, oauth2Client) {
     if (err) {
       console.log('err:', err);
     } else {

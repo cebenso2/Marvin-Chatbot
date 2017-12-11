@@ -99,6 +99,9 @@ function getEmailToken(user_psid){
     }
     client.end();
     console.log(emailToken);
+    if(emailToken){
+      emailToken = JSON.parse(emailToken);
+    }
     return emailToken;
   });
 }

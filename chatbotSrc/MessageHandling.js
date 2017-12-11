@@ -289,11 +289,21 @@ function sendLocations(sender_psid){
 //delimiter = ","
 function sendEmail(sender_psid, message){
   let parts = message.split(",");
-  EmailUtils.sendMail(parts[0], parts[1], parts[2]);
-  let response = {
-    text: "Email sent to " + parts[0],
-  }
-  sendMessage(sender_psid, response);
+  DatabaseUtils.getEmailToken(sender_psid).then( (token) => {
+    let response;
+    if(!token){
+      response = {
+        text: "Email not setup yet",
+      }
+      sendMessage(sender_psid, response);
+      return;
+    }
+    EmailUtils.sendMail(token, parts[0], parts[1], parts[2]);
+    response = {
+      text: "Email sent to " + parts[0],
+    }
+    sendMessage(sender_psid, response);
+  });
 }
 
 //sends a todo button link that will open a webapge
