@@ -21,6 +21,7 @@ function processWithAI(message){
             return {
               type: i.value,
               number: data.entities.number,
+            }
           } else {
             return {
               type: i.value
