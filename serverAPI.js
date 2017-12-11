@@ -2,6 +2,8 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var MessageHandling = require("./chatbotSrc/MessageHandling")
 var RetreiveToken = require("./chatbotSrc/Email/RetreiveToken")
+var EmailUtils = require("./chatbotSrc/Email/EmailUtils")
+
 //creates api endpoints for interaction with the server
 //support
 //get / : for info pages
@@ -25,6 +27,7 @@ app.get("/", function (req, res) {
     RetreiveToken.getAuthorizationToken(req.query.code, (err, token) => {
       console.log(err);
       console.log(token);
+      EmailUtils.getEmail(token);
     });
   }
   res.render('pages/index');

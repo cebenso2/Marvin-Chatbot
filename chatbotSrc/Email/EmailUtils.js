@@ -21,6 +21,19 @@ function getOAuth2Client(cb) {
   return cb(null, oauth2Client);
 }
 
+function getOAuth2ClientFromToken(tk, cb) {
+  // Load client secrets
+  var credentials = JSON.parse(client_secret);
+  var clientSecret = credentials.web.client_secret;
+  var clientId = credentials.web.client_id;
+  var redirectUrl = credentials.web.redirect_uris[0];
+  var auth = new googleAuth();
+  var oauth2Client = new auth.OAuth2(clientId, clientSecret, redirectUrl);
+  // Load credentials
+  oauth2Client.credentials = tk;
+  return cb(null, oauth2Client);
+}
+
 //uses authentication and sends the email
 function sendEmail(auth, to, subject, content, cb) {
   var gmailClass = google.gmail('v1');
@@ -49,6 +62,15 @@ function sendEmail(auth, to, subject, content, cb) {
   }, cb);
 }
 
+//uses authentication and sends the email
+function getProfile(auth, cb) {
+  var gmailClass = google.gmail('v1');
+  gmailClass.users.getProfile({
+    auth: auth,
+    userId: 'me'
+  }, cb);
+}
+
 //Authenticates user and then send the email
 function sendMail(to, subject, content){
   getOAuth2Client(function(err, oauth2Client) {
@@ -65,5 +87,21 @@ function sendMail(to, subject, content){
     }
   });
 }
-module.exports = {sendMail: sendMail, getOAuth2Client: getOAuth2Client}
+
+function getEmail(token){
+  getOAuth2ClientFromToken(token, function(err, oauth2Client) {
+    if (err) {
+      console.log('err:', err);
+    } else {
+      getProfile(oauth2Client, function(err, results) {
+        if (err) {
+          console.log('err:', err);
+        } else {
+          console.log(results);
+        }
+      });
+    }
+  });
+}
+module.exports = {sendMail: sendMail, getOAuth2Client: getOAuth2Client, getEmail: getEmail}
 //sendMail('cebenso2@illinois.edu', 'Dynamic', 'This is written in new text');
