@@ -112,7 +112,7 @@ function getUserPsid(email){
   client.connect();
   return client.query("SELECT * FROM emails WHERE email='"+email+"';").then((result) => {
     client.end();
-    if (len(result.rows) === 0){
+    if (result.rows.length === 0){
       return null;
     } else {
       return result.rows[0].user_psid
