@@ -380,6 +380,9 @@ function startOath(sender_psid, email){
 
 function addTeam(sender_psid, input){
   let [league, name] = input.split(" ");
+  if(!name){
+    return sendMessage(sender_psid, {text: "@addteam <league> <name>"});
+  }
   SportsDataUtils.getTeams("nba", (teams)=> {
     teams = teams.filter(team => {
       return team.name.toLowerCase().includes(name.toLowerCase())
