@@ -7,6 +7,8 @@ var MapsDataUtils = require("./DataUtils/MapsDataUtils")
 var EmailUtils = require("./Email/EmailUtils");
 var RetreiveUrl = require("./Email/RetreiveUrl");
 var Wit = require("./ai/wit");
+var Tip = require("./Util/tip");
+
 
 
 //flags for multiple message conversations
@@ -116,6 +118,11 @@ function handleMessage(sender_psid, received_message) {
               "quick_replies":[
                 {"content_type":"location"}
               ]
+            }
+            break;
+          case Wit.MESSAGE_TYPE_ENUM.TIP:
+            response = {
+              "text": Tip.createTipString(result.number);
             }
             break;
           default:

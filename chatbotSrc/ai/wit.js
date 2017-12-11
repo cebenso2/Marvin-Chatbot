@@ -3,6 +3,7 @@ const {Wit, log} = require('node-wit');
 const MESSAGE_TYPE_ENUM = {
   WEATHER: "weather",
   TEMPERATURE: "temperature",
+  TEMPERATURE: "tip",
 }
 
 function processWithAI(message){
