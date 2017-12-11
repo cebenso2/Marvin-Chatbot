@@ -224,7 +224,6 @@ function handlePostback(sender_psid, received_message) {
       break;*/
       case "score":
       sendScore(sender_psid, league, city);
-      send
       break;
     }
     return;
