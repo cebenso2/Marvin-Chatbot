@@ -88,7 +88,7 @@ function sendMail(to, subject, content){
   });
 }
 
-function getEmail(token){
+function getEmail(token, cb){
   getOAuth2ClientFromToken(token, function(err, oauth2Client) {
     if (err) {
       console.log('err:', err);
@@ -96,8 +96,9 @@ function getEmail(token){
       getProfile(oauth2Client, function(err, results) {
         if (err) {
           console.log('err:', err);
+          cb(null)
         } else {
-          console.log(results);
+          cb(results.emailAddress);
         }
       });
     }

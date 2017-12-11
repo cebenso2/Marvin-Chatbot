@@ -56,8 +56,8 @@ function handleMessage(sender_psid, received_message) {
       sendNewsHeadlines(sender_psid);
     } else if (received_message.text === "@locations") {
       sendLocations(sender_psid);
-    } else if (received_message.text === "@setup") {
-      startOath(sender_psid);
+    } else if (received_message.text.substring(0,11) === "@setupemail") {
+      startOath(sender_psid, received_message.text.substring(12));
     } else if (received_message.text.substring(0,6) === "@email") {
       sendEmail(sender_psid, received_message.text.substring(7));
     } else if (received_message.text === "@sports") {
@@ -90,7 +90,7 @@ function handleMessage(sender_psid, received_message) {
     } else if (received_message.text === "@insert") {
       DatabaseUtils.insertEmail('test', 'thing@gmail.com', null);
     } else if (received_message.text === "@gettoken") {
-      DatabaseUtils.getEmailToken('test');
+      DatabaseUtils.getEmailToken(sender_psid);
     } else if (received_message.text === "@getuser") {
       DatabaseUtils.getUserPsid('thing@gmail.com');
     } else if (greeting && greeting.confidence > 0.8) {
@@ -318,11 +318,25 @@ function sendTodoButton(sender_psid){
   sendMessage(sender_psid, response);
 }
 
-function startOath(sender_psid){
+function startOath(sender_psid, email){
+  DatabaseUtils.insertEmail(sender_psid, email, null);
   RetreiveUrl.getAuthorizationUrl((err, url) => {
     let response = {
-      text: url
-    }
+      "attachment":{
+        "type":"template",
+        "payload":{
+          "template_type":"button",
+          "text": "Setup "+email,
+          "buttons":[
+            {
+              "type":"web_url",
+              "url": url,
+              "title":"Authenticate",
+            }
+          ]
+        }
+      }
+    };
     sendMessage(sender_psid, response);
   })
 }
