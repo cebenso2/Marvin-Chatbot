@@ -64,14 +64,8 @@ function handleMessage(sender_psid, received_message) {
       startOath(sender_psid, received_message.text.substring(12));
     } else if (received_message.text.substring(0,6) === "@email") {
       sendEmail(sender_psid, received_message.text.substring(7));
-    } else if (received_message.text === "@sports") {
-      SportsDataUtils.getTeams("nba", (message)=> {
-        console.log(message);
-        response = {
-          text: "teams",
-        }
-        sendMessage(sender_psid, response);
-      });
+    } else if (received_message.text.substring(0,8) === "@addteam") {
+      addTeam(sender_psid, received_message.text.substring(9));
     } else if (received_message.text === "@estimatetime") {
       estimateTime = true
       response = {
@@ -382,6 +376,33 @@ function startOath(sender_psid, email){
     };
     sendMessage(sender_psid, response);
   })
+}
+
+function addTeam(sender_psid, league){
+  SportsDataUtils.getTeams(league, (teams)=> {
+    let tiles = teams.map((team) => {
+      return {
+        "title": team.name,
+        "buttons":[
+          {
+            "type": "postback",
+            "title": "Add",
+            "payload": "add:" + league+":"+team.city
+          }
+        ]
+      }
+    });
+    let response = {
+      "attachment":{
+        "type":"template",
+        "payload":{
+          "template_type":"generic",
+          "elements": tiles,
+        }
+      }
+    };
+    sendMessage(sender_psid, response);
+  });
 }
 
 //sends a message back to the sender id over facebook messenger
