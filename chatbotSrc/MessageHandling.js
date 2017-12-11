@@ -379,7 +379,7 @@ function startOath(sender_psid, email){
 }
 
 function addTeam(sender_psid, league){
-  SportsDataUtils.getTeams(league, (teams)=> {
+  SportsDataUtils.getTeams("nba", (teams)=> {
     let tiles = teams.map((team) => {
       return {
         "title": team.name,
