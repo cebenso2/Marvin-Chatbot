@@ -66,6 +66,8 @@ function handleMessage(sender_psid, received_message) {
       sendEmail(sender_psid, received_message.text.substring(7));
     } else if (received_message.text.substring(0,8) === "@addteam") {
       addTeam(sender_psid, received_message.text.substring(9));
+    } else if (received_message.text === "@scores") {
+      sendTeams(sender_psid);
     } else if (received_message.text === "@estimatetime") {
       estimateTime = true
       response = {
@@ -213,8 +215,19 @@ function resetValues(){
 function handlePostback(sender_psid, received_message) {
   if(received_message.payload.includes(":")){
     let [action, league, name, city] = received_message.payload.split(":");
-    console.log(action, league, name, city);
-    returnl
+    switch(action){
+      case "add":
+      DataUtils.insertTeam(sender_psid,league,name,city);
+      break;
+      /*case "delete":
+      DataUtils.deleteTeam(sender_psid,league,name,city);
+      break;*/
+      case "score":
+      sendScore(sender_psid, league, city);
+      send
+      break;
+    }
+    return;
   }
   switch (received_message.payload) {
     case "NEWS":
@@ -426,6 +439,41 @@ function addTeam(sender_psid, input){
         text: "Too many teams. Enter a more specific name.",
       }
     }
+    sendMessage(sender_psid, response);
+  });
+}
+function sendScore(sender_psid, league, city){
+  SportsDataUtils.getLastGame(league, city, (string)=>{
+    let response = {
+      text: string,
+    };
+    sendMessage(sender_psid, response);
+  })
+}
+
+function sendTeams(sender_psid){
+  DatabaseUtils.getTeams(sender_psid).then(teams =>{
+    let tiles = teams.map((team) => {
+      return {
+        "title": team.name,
+        "buttons":[
+          {
+            "type": "postback",
+            "title": "Score",
+            "payload": "score:" + team.league+":"+team.name+":"+team.city
+          }
+        ]
+      }
+    });
+    let response = {
+      "attachment":{
+        "type":"template",
+        "payload":{
+          "template_type":"generic",
+          "elements": tiles,
+        }
+      }
+    };
     sendMessage(sender_psid, response);
   });
 }
