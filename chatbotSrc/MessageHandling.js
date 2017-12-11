@@ -7,7 +7,7 @@ var MapsDataUtils = require("./DataUtils/MapsDataUtils")
 var EmailUtils = require("./Email/EmailUtils");
 var RetreiveUrl = require("./Email/RetreiveUrl");
 var Wit = require("./ai/wit");
-var Tip = require("./Util/tip");
+var Tip = require("./Utils/tip");
 
 
 
