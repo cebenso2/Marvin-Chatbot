@@ -47,6 +47,10 @@ app.get("/todo", function (req, res) {
    res.render('pages/todo');
 });
 
+app.get("/start", function (req, res) {
+   res.render('pages/start');
+});
+
 // Facebook Webhook
 // Used for verification
 app.get("/webhook", function (req, res) {

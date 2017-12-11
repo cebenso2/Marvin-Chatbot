@@ -4,8 +4,10 @@ var NewsDataUtils = require("./DataUtils/NewsDataUtils");
 var DatabaseUtils = require("./StorageUtils/DatabaseUtils");
 var SportsDataUtils = require("./DataUtils/SportsDataUtils");
 var MapsDataUtils = require("./DataUtils/MapsDataUtils")
-var EmailUtils = require("./Email/EmailUtils")
-var RetreiveUrl = require("./Email/RetreiveUrl")
+var EmailUtils = require("./Email/EmailUtils");
+var RetreiveUrl = require("./Email/RetreiveUrl");
+var Wit = require("./ai/start");
+
 
 //flags for multiple message conversations
 let locationName = null;
@@ -87,14 +89,8 @@ function handleMessage(sender_psid, received_message) {
       return sendMessage(sender_psid, response);
     } else if (received_message.text === "@create") {
       DatabaseUtils.createEmailTable();
-    } else if (received_message.text === "@insert") {
-      DatabaseUtils.insertEmail('test', 'thing@gmail.com', null);
-    } else if (received_message.text === "@gettoken") {
-      DatabaseUtils.getEmailToken(sender_psid);
-    } else if (received_message.text === "@getuser") {
-      DatabaseUtils.getUserPsid('thing@gmail.com');
-    } else if (received_message.text === "@print") {
-      DatabaseUtils.PrintEmails();
+    } else if (received_message.text.substring(0,4) === "@wit") {
+      Wit.runWit(received_message.text.substring(5));
     }else if (greeting && greeting.confidence > 0.8) {
       response = {
         "text": "Hello! My name is Marvin and I am good.",
