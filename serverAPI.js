@@ -1,6 +1,7 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var MessageHandling = require("./chatbotSrc/MessageHandling")
+var RetreiveToken = require("./chatbotSrc/Email/RetreiveToken")
 //creates api endpoints for interaction with the server
 //support
 //get / : for info pages
@@ -20,6 +21,12 @@ var request = require("request");
 //Homepage for info about marvin - render on get
 app.get("/", function (req, res) {
   console.log(req.query.code);
+  if(req.query.code){
+    RetreiveToken.getAuthorizationToken(req.query.code, (err, token) => {
+      console.log(err);
+      console.log(token);
+    });
+  }
   res.render('pages/index');
 });
 
