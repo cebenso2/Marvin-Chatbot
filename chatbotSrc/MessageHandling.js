@@ -65,7 +65,7 @@ function handleMessage(sender_psid, received_message) {
     } else if (received_message.text.substring(0,6) === "@email") {
       sendEmail(sender_psid, received_message.text.substring(7));
     } else if (received_message.text === "@sports") {
-      SportsDataUtils.getLastGame("nba", "bos", (message)=> {
+      SportsDataUtils.getLastGame("nfl", "bos", (message)=> {
         response = {
           text: message,
         }
@@ -101,7 +101,6 @@ function handleMessage(sender_psid, received_message) {
       Wit.processWithAI(received_message.text).then(result => {
         resetValues();
         let response = null;
-        console.log(result);
         switch(result.type){
           case Wit.MESSAGE_TYPE_ENUM.WEATHER:
             response = {
