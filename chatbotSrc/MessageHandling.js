@@ -87,6 +87,10 @@ function handleMessage(sender_psid, received_message) {
       return sendMessage(sender_psid, response);
     } else if (received_message.text === "@create") {
       DatabaseUtils.createEmailTable();
+    } else if (received_message.text === "@insert") {
+      DatabaseUtils.insertEmail('test', 'thing@gmail.com', 'token');
+    } else if (received_message.text === "@get") {
+      DatabaseUtils.getEmail('test');
     } else if (greeting && greeting.confidence > 0.8) {
       response = {
         "text": "Hello! My name is Marvin and I am good.",
