@@ -97,6 +97,7 @@ function handleMessage(sender_psid, received_message) {
       }
     } else {
       Wit.processWithAI(received_message.text).then(result => {
+        resetValues();
         let response = null;
         console.log(result);
         switch(result){
@@ -118,7 +119,6 @@ function handleMessage(sender_psid, received_message) {
             }
             break;
           default:
-            resetValues();
             response = {
               text: "Sorry I do not know how to respond."
             }
