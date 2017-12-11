@@ -95,7 +95,8 @@ function getEmail(user_psid){
       emails.push(row.email +"," + row.token);
     }
     client.end();
-    return locations;
+    console.log(emails)
+    return emails;
   });
 }
 
