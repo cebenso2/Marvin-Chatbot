@@ -96,7 +96,7 @@ function handleMessage(sender_psid, received_message) {
         "text": "Hello! My name is Marvin and I am good.",
       }
     } else {
-      Wit.runWit(received_message.text.then(data =>{
+      Wit.runWit(received_message.text).then(data =>{
         for(let e of data.entities){
           console.log(e);
         }
