@@ -226,7 +226,7 @@ function deleteTeam(user_psid, league, name, city){
     ssl: true,
   });
   client.connect();
-  client.query("DELETE FROM team WHERE userpsid='"+user_psid+"';", (err, res) => {
+  client.query("DELETE FROM team WHERE userpsid='"+user_psid+"' AND league='"+league+"' AND name='"+name+"' AND city='"+city+"';", (err, res) => {
     if (err) {
       console.log(err);
     } else {
