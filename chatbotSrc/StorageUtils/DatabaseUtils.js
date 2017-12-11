@@ -237,19 +237,20 @@ function deleteTeam(user_psid, league, name, city){
 }
 
 //insert a location for a user - stores a location in the locations table using the users psid
-function clearEmails(user_psid){
+function clearEmails(user_psid, cb){
   const client = new Client({
     connectionString: process.env.DATABASE_URL,
     ssl: true,
   });
   client.connect();
-  return client.query("DELETE FROM emails WHERE userpsid='"+user_psid+"';", (err, res) => {
+  client.query("DELETE FROM emails WHERE userpsid='"+user_psid+"';", (err, res) => {
     if (err) {
       console.log(err);
     } else {
       console.log("Emails Deleted");
     }
     client.end();
+    cb();
   });
 }
 
