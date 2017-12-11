@@ -68,6 +68,8 @@ function handleMessage(sender_psid, received_message) {
       addTeam(sender_psid, received_message.text.substring(9));
     } else if (received_message.text === "@scores") {
       sendTeams(sender_psid);
+    } else if (received_message.text === "@myteams") {
+      sendMyTeams(sender_psid);
     } else if (received_message.text === "@estimatetime") {
       estimateTime = true
       response = {
@@ -219,9 +221,9 @@ function handlePostback(sender_psid, received_message) {
       case "add":
       DatabaseUtils.insertTeam(sender_psid,league,name,city);
       break;
-      /*case "delete":
-      DataUtils.deleteTeam(sender_psid,league,name,city);
-      break;*/
+      case "delete":
+      DatabaseUtils.deleteTeam(sender_psid,league,name,city);
+      break;
       case "score":
       sendScore(sender_psid, league, city);
       break;
@@ -460,6 +462,33 @@ function sendTeams(sender_psid){
             "type": "postback",
             "title": "Score",
             "payload": "score:" + team.league+":"+team.name+":"+team.city
+          }
+        ]
+      }
+    });
+    let response = {
+      "attachment":{
+        "type":"template",
+        "payload":{
+          "template_type":"generic",
+          "elements": tiles,
+        }
+      }
+    };
+    sendMessage(sender_psid, response);
+  });
+}
+
+function sendMyTeams(sender_psid){
+  DatabaseUtils.getTeams(sender_psid).then(teams =>{
+    let tiles = teams.map((team) => {
+      return {
+        "title": team.name,
+        "buttons":[
+          {
+            "type": "postback",
+            "title": "Remove",
+            "payload": "delete:" + team.league+":"+team.name+":"+team.city
           }
         ]
       }

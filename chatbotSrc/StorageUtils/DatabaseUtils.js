@@ -219,4 +219,21 @@ function insertTeam(user_psid, league, name, city){
   });
 }
 
-module.exports = {createTeamTable: createTeamTable, createLocationTable: createLocationTable, getLocations: getLocations,  insertLocation: insertLocation, createEmailTable: createEmailTable, getEmailToken: getEmailToken, insertEmail: insertEmail, getUserPsid: getUserPsid, PrintTeams: PrintTeams, getTeams: getTeams, insertTeam: insertTeam}
+//insert a location for a user - stores a location in the locations table using the users psid
+function deleteTeam(user_psid, league, name, city){
+  const client = new Client({
+    connectionString: process.env.DATABASE_URL,
+    ssl: true,
+  });
+  client.connect();
+  client.query("DELETE FROM team WHERE userpsid='"+user_psid+"';", (err, res) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("Team Deleted");
+    }
+    client.end();
+  });
+}
+
+module.exports = {deleteTeam: deleteTeam, createTeamTable: createTeamTable, createLocationTable: createLocationTable, getLocations: getLocations,  insertLocation: insertLocation, createEmailTable: createEmailTable, getEmailToken: getEmailToken, insertEmail: insertEmail, getUserPsid: getUserPsid, PrintTeams: PrintTeams, getTeams: getTeams, insertTeam: insertTeam}
