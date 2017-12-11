@@ -92,6 +92,8 @@ function getEmailToken(user_psid){
   return client.query("SELECT * FROM emails WHERE userpsid='"+user_psid+"';").then((result) => {
     let emailToken = null
     for (let row of result.rows) {
+      console.log(row);
+      console.log(row.token);
       if(row.token){
         emailToken = row.token;
         break;
