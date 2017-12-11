@@ -378,8 +378,13 @@ function startOath(sender_psid, email){
   })
 }
 
-function addTeam(sender_psid, league){
+function addTeam(sender_psid, input){
+  let [league, name] = input.split(" ");
+  console.log(league);
   SportsDataUtils.getTeams("nba", (teams)=> {
+    console.log(teams);
+    let teams = teams.filter(team => {team.name.toLowerCase().includes(name.toLowerCase())})
+    console.log(teams);
     let tiles = teams.map((team) => {
       return {
         "title": team.name,
