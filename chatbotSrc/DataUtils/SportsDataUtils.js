@@ -90,20 +90,12 @@ function getTeams(sport, callback) {
             let teamData = JSON.parse(responseStr);
             let teams = teamData.overallteamstandings.teamstandingsentry;
             //console.log(teams)
-            let result = teams.map(team => team.team.name + ","+team.team.Abbreviation);
-            /*let lastGame = games[games.length-1];
-            let date = lastGame.game.date;
-            let team = lastGame.team.City + " " + lastGame.team.Name
-            let hometeam = lastGame.game.homeTeam.City + " " + lastGame.game.homeTeam.Name
-            let awayteam = lastGame.game.awayTeam.City + " " + lastGame.game.awayTeam.Name
-            let opponent = hometeam === team ? awayteam : hometeam;
-            console.log(lastGame.stats);
-            let pointsFor = lastGame.stats.Pts['#text'];
-            let pointsAgainst = lastGame.stats.PtsAgainst['#text'];
-            let result = "Last Game: "+date +"\n";
-            result += team + ": " +pointsFor +"\n";
-            result += opponent + ": " +pointsAgainst;*/
-            //passed to callback
+            let result = teams.map(team => {
+              return {
+                name: team.team.Name,
+                city: team.team.Abbreviation,
+              }
+            });
             callback(result);
         });
 
