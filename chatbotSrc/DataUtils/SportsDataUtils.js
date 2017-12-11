@@ -35,6 +35,7 @@ function getLastGame(sport, city, callback) {
             responseStr = responseBufs.length > 0 ?
                 Buffer.concat(responseBufs).toString(responseEncoding) : responseStr;
             let teamData = JSON.parse(responseStr);
+            console.log(teamData);
             let games = teamData.teamgamelogs.gamelogs;
             let lastGame = games[games.length-1];
             let date = lastGame.game.date;
