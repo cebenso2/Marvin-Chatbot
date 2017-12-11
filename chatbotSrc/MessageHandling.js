@@ -96,10 +96,12 @@ function handleMessage(sender_psid, received_message) {
         "text": "Hello! My name is Marvin and I am good.",
       }
     } else {
-      // default
-      response = {
-        "text": `You sent the message: "${received_message.text}". I do not know how to respond. Try sending "@help".`
-      }
+      Wit.runWit(received_message.text.then(data =>{
+        for(let e of data.entities){
+          console.log(e);
+        }
+      });
+      return;
     }
   } else if (received_message.attachments) {
 
@@ -165,23 +167,15 @@ function handleMessage(sender_psid, received_message) {
         }
       );
     }
-  } else {
-    Wit.runWit(received_message.text.substring(5)).then(data =>{
-      for(let e of data.entities){
-        console.log(e);
-      }
-      // Sends the response message
-      //clears flag variables
-      locationName=null;
-      weatherRecommendations = false;
-      estimateTime = false;
-      originLat = null;
-      originLong = null;
-      sendMessage(sender_psid, response);
-    });
   }
-
-
+  // Sends the response message
+  //clears flag variables
+  locationName=null;
+  weatherRecommendations = false;
+  estimateTime = false;
+  originLat = null;
+  originLong = null;
+  sendMessage(sender_psid, response);
 }
 
 //Handle postback for persistent menu
