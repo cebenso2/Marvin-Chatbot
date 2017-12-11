@@ -121,6 +121,20 @@ function getUserPsid(email){
   });
 }
 
+function PrintEmails(){
+  console.log("printEmails");
+  const client = new Client({
+    connectionString: process.env.DATABASE_URL,
+    ssl: true,
+  });
+
+  client.connect();
+  return client.query("SELECT * FROM emails;").then((result) => {
+    client.end();
+    console.log(result);
+  });
+}
+
     //insert a location for a user - stores a location in the locations table using the users psid
 function insertEmail(user_psid, name, token){
   const client = new Client({

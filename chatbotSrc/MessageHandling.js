@@ -93,7 +93,9 @@ function handleMessage(sender_psid, received_message) {
       DatabaseUtils.getEmailToken(sender_psid);
     } else if (received_message.text === "@getuser") {
       DatabaseUtils.getUserPsid('thing@gmail.com');
-    } else if (greeting && greeting.confidence > 0.8) {
+    } else if (received_message.text === "@getuser") {
+      DatabaseUtils.PrintEmails();
+    }else if (greeting && greeting.confidence > 0.8) {
       response = {
         "text": "Hello! My name is Marvin and I am good.",
       }
