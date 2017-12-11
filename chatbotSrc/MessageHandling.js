@@ -108,6 +108,7 @@ function handleMessage(sender_psid, received_message) {
               ]
             }
             weatherRecommendations = true;
+            break;
           case Wit.MESSAGE_TYPE_ENUM.TEMPERATURE:
             response = {
               "text": "Where are you so I can get temperature data?",
@@ -115,6 +116,7 @@ function handleMessage(sender_psid, received_message) {
                 {"content_type":"location"}
               ]
             }
+            break;
           default:
             resetValues();
             response = {
