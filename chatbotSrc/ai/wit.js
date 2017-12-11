@@ -5,6 +5,7 @@ const MESSAGE_TYPE_ENUM = {
   WEATHER: "weather",
   TEMPERATURE: "temperature",
   TIP: "tip",
+  NEWS: "news",
 }
 
 //process the given ai with wit ai and uses it to determine response

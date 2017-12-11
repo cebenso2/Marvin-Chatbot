@@ -131,6 +131,8 @@ function handleMessage(sender_psid, received_message) {
               "text": Tip.createTipString(result.number),
             }
             break;
+          case Wit.MESSAGE_TYPE_ENUM.NEWS:
+            return sendNewsHeadlines(sender_psid);
           default:
             response = {
               text: "Sorry I do not know how to respond."
