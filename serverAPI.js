@@ -19,7 +19,8 @@ var request = require("request");
 
 //Homepage for info about marvin - render on get
 app.get("/", function (req, res) {
-   res.render('pages/index');
+  console.log(req);
+  res.render('pages/index');
 });
 
 //page for users to interact with a todo list
