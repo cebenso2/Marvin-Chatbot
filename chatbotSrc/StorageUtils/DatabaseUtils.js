@@ -21,7 +21,7 @@ function createLocationTable(){
 
 }
 
-//create the location database
+//create the email table
 function createEmailTable(){
   const client = new Client({
     connectionString: process.env.DATABASE_URL,
@@ -35,6 +35,27 @@ function createEmailTable(){
       console.log(err);
     } else {
       console.log("Created locations table");
+      console.log(res);
+    }
+    client.end();
+  });
+
+}
+
+//create the
+function createTeamTable(){
+  const client = new Client({
+    connectionString: process.env.DATABASE_URL,
+    ssl: true,
+  });
+
+  client.connect();
+  client.query('CREATE TABLE teams (userpsid VARCHAR, league VARCHAR, name VARCHAR);', (err, res) => {
+    if (err) {
+      console.log("Error while creating locations table");
+      console.log(err);
+    } else {
+      console.log("Created teams table");
       console.log(res);
     }
     client.end();
@@ -159,4 +180,4 @@ function insertEmail(user_psid, name, token){
 
 }
 
-module.exports = {createLocationTable: createLocationTable, getLocations: getLocations,  insertLocation: insertLocation, createEmailTable: createEmailTable, getEmailToken: getEmailToken, insertEmail: insertEmail, getUserPsid: getUserPsid, PrintEmails: PrintEmails}
+module.exports = {createTeamTable: createTeamTable, createLocationTable: createLocationTable, getLocations: getLocations,  insertLocation: insertLocation, createEmailTable: createEmailTable, getEmailToken: getEmailToken, insertEmail: insertEmail, getUserPsid: getUserPsid, PrintEmails: PrintEmails}
