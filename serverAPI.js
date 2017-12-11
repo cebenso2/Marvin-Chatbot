@@ -29,7 +29,7 @@ app.get("/", function (req, res) {
       EmailUtils.getEmail(token, (email) =>{
         console.log("resulting email address:");
         console.log(email);
-        DatabaseUtils.getUserPsid(email, (sender_psid) =>{
+        DatabaseUtils.getUserPsid(email).then((sender_psid) =>{
           console.log("sender");
           console.log(sender_psid);
           if (sender_psid){

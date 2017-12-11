@@ -99,6 +99,7 @@ function getEmail(token, cb){
           cb(null)
         } else {
           console.log(results);
+          console.log(results.emailAddress)
           cb(results.emailAddress);
         }
       });
