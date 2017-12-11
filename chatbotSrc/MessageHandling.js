@@ -98,6 +98,7 @@ function handleMessage(sender_psid, received_message) {
     } else {
       Wit.processWithAI(received_message.text).then(result => {
         let response = null;
+        console.log(result);
         switch(result){
           case Wit.MESSAGE_TYPE_ENUM.WEATHER:
             response = {

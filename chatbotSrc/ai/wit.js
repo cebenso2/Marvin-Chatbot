@@ -11,9 +11,9 @@ function processWithAI(message){
 
   });
   return client.message(message).then((data) => {
-    let text = "Sorry but I do not know what that means."
     if(data && data.entities && data.entities.intent){
       for(let i of data.entities.intent){
+        console.log(i);
         if (i.confidence >0.5){
           return i.value;
         }
