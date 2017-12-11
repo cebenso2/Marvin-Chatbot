@@ -5,6 +5,5 @@ function createTipString(number){
       string+= tip +"% would be "+number*tip/100+". ";
     }
     return string;
-  });
 }
 module.exports = {createTipString: createTipString}
