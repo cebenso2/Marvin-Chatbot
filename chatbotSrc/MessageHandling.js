@@ -380,18 +380,10 @@ function startOath(sender_psid, email){
 
 function addTeam(sender_psid, input){
   let [league, name] = input.split(" ");
-  console.log(league);
-  console.log(name);
-
   SportsDataUtils.getTeams("nba", (teams)=> {
-    console.log(teams);
     teams = teams.filter(team => {
-      console.log(team.name.toLowerCase());
-      console.log(name.toLowerCase());
-      console.log(team.name.toLowerCase().includes(name.toLowerCase()));
       return team.name.toLowerCase().includes(name.toLowerCase())
     });
-    console.log(teams);
     let tiles = teams.map((team) => {
       return {
         "title": team.name,
@@ -413,6 +405,16 @@ function addTeam(sender_psid, input){
         }
       }
     };
+    if (tiles.length === 0){
+      response = {
+        text: "No teams match the name you entered",
+      }
+    }
+    if (tiles.length > 10){
+      response = {
+        text: "Too many teams. Enter a more specific name.",
+      }
+    }
     sendMessage(sender_psid, response);
   });
 }
