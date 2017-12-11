@@ -122,7 +122,7 @@ function handleMessage(sender_psid, received_message) {
             break;
           case Wit.MESSAGE_TYPE_ENUM.TIP:
             response = {
-              "text": Tip.createTipString(result.number);
+              "text": Tip.createTipString(result.number),
             }
             break;
           default:
