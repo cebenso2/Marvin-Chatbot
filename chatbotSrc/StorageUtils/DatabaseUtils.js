@@ -115,6 +115,7 @@ function getUserPsid(email){
     if (result.rows.length === 0){
       return null;
     } else {
+      console.log(results.rows[0].user_psid);
       return result.rows[0].user_psid
     }
   });
