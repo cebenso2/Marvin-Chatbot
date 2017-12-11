@@ -89,7 +89,7 @@ function getTeams(sport, callback) {
                 Buffer.concat(responseBufs).toString(responseEncoding) : responseStr;
             let teamData = JSON.parse(responseStr);
             let teams = teamData.overallteamstandings.teamstandingsentry;
-            console.log(teams)
+            //console.log(teams)
             let result = team.map(team => team.team.name + ","+team.team.Abbreviation);
             /*let lastGame = games[games.length-1];
             let date = lastGame.game.date;
