@@ -31,7 +31,7 @@ app.get("/", function (req, res) {
           if (sender_psid){
             DatabaseUtils.clearEmails(sender_psid,() => {
                 DatabaseUtils.insertEmail(sender_psid, email, JSON.stringify(token));
-                MessageHandling.handleMessage(sender_psid, {text:'Email setup'})
+                MessageHandling.handleMessage(sender_psid, {text:'Email Setup'})
               }
             );
           }
