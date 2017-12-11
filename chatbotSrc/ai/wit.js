@@ -11,6 +11,7 @@ function processWithAI(message){
 
   });
   return client.message(message).then((data) => {
+    console.log(data);
     if(data && data.entities && data.entities.intent){
       for(let i of data.entities.intent){
         console.log(i);
