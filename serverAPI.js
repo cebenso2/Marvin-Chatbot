@@ -34,7 +34,6 @@ app.get("/", function (req, res) {
                 DatabaseUtils.insertEmail(sender_psid, email, JSON.stringify(token));
                 MessageHandling.handleMessage(sender_psid, {text:'Email Setup'});
                 res.render('pages/success');
-                return
               }
             );
           }

@@ -210,6 +210,8 @@ function handleMessage(sender_psid, received_message) {
   resetValues();
   sendMessage(sender_psid, response);
 }
+
+//clears state values
 function resetValues(){
   locationName=null;
   weatherRecommendations = false;
@@ -381,6 +383,7 @@ function sendTodoButton(sender_psid){
   sendMessage(sender_psid, response);
 }
 
+//starts email oath process
 function startOath(sender_psid, email){
   DatabaseUtils.insertEmail(sender_psid, email, null);
   RetreiveUrl.getAuthorizationUrl((err, url) => {
@@ -404,6 +407,7 @@ function startOath(sender_psid, email){
   })
 }
 
+//adds team to a users set of teams
 function addTeam(sender_psid, input){
   let [league, name] = input.split(" ");
   if(!name){
@@ -447,6 +451,8 @@ function addTeam(sender_psid, input){
     sendMessage(sender_psid, response);
   });
 }
+
+//send score of the game
 function sendScore(sender_psid, league, city){
   SportsDataUtils.getLastGame(league, city, (string)=>{
     let response = {
@@ -456,6 +462,7 @@ function sendScore(sender_psid, league, city){
   })
 }
 
+//sends the teams a users have with option to get score
 function sendTeams(sender_psid){
   DatabaseUtils.getTeams(sender_psid).then(teams =>{
     let tiles = teams.map((team) => {
@@ -483,6 +490,7 @@ function sendTeams(sender_psid){
   });
 }
 
+//sends the teams a users have with option to remove
 function sendMyTeams(sender_psid){
   DatabaseUtils.getTeams(sender_psid).then(teams =>{
     let tiles = teams.map((team) => {

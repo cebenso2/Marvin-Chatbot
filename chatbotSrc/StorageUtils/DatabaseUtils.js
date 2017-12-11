@@ -102,6 +102,7 @@ function getLocations(user_psid){
   });
 }
 
+//gets the aithentication token for the psid
 function getEmailToken(user_psid){
   console.log("getEmail");
   const client = new Client({
@@ -128,6 +129,8 @@ function getEmailToken(user_psid){
     return emailToken;
   });
 }
+
+//gets the userpsid associated with the given email
 function getUserPsid(email){
   console.log("getEmail");
   const client = new Client({
@@ -146,7 +149,7 @@ function getUserPsid(email){
     }
   });
 }
-
+//prints teams table- used for debugging
 function PrintTeams(){
   console.log("printEmails");
   const client = new Client({
@@ -161,7 +164,7 @@ function PrintTeams(){
   });
 }
 
-    //insert a location for a user - stores a location in the locations table using the users psid
+//insert a email for a user
 function insertEmail(user_psid, name, token){
   const client = new Client({
     connectionString: process.env.DATABASE_URL,
@@ -202,7 +205,7 @@ function getTeams(user_psid){
     return teams;
   });
 }
-//insert a location for a user - stores a location in the locations table using the users psid
+//insert a team for a user
 function insertTeam(user_psid, league, name, city){
   const client = new Client({
     connectionString: process.env.DATABASE_URL,
@@ -219,7 +222,7 @@ function insertTeam(user_psid, league, name, city){
   });
 }
 
-//insert a location for a user - stores a location in the locations table using the users psid
+//delete a team from a users set of teams
 function deleteTeam(user_psid, league, name, city){
   const client = new Client({
     connectionString: process.env.DATABASE_URL,
@@ -236,7 +239,7 @@ function deleteTeam(user_psid, league, name, city){
   });
 }
 
-//insert a location for a user - stores a location in the locations table using the users psid
+//delete emails when a new authentication arrives
 function clearEmails(user_psid, cb){
   const client = new Client({
     connectionString: process.env.DATABASE_URL,

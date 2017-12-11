@@ -29,7 +29,9 @@ function processWithAI(message){
         }
       }
     }
-    return null;
+    return {
+      type:null,
+    }
   });
 }
 module.exports = {processWithAI: processWithAI, MESSAGE_TYPE_ENUM: MESSAGE_TYPE_ENUM}

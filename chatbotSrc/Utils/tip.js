@@ -1,3 +1,4 @@
+//creates the tip for a user given a number
 function createTipString(number){
     let string = "Here are tip results for $"+number+".\n " ;
     let tip = 10;
