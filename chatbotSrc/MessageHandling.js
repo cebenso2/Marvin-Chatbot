@@ -100,7 +100,7 @@ function handleMessage(sender_psid, received_message) {
         resetValues();
         let response = null;
         console.log(result);
-        switch(result){
+        switch(result.type){
           case Wit.MESSAGE_TYPE_ENUM.WEATHER:
             response = {
               "text": "Where are you so I can get weather data?",

@@ -18,8 +18,15 @@ function processWithAI(message){
         if (i.confidence >0.5){
           if(i.value === "tip"){
             console.log(i);
-            return i.value
-          };
+            return {
+              type: i.value,
+              number: data.entities.number,
+          } else {
+            return {
+              type: i.value
+            }
+
+          }
         }
       }
     }
