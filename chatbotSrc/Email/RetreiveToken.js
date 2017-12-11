@@ -8,7 +8,7 @@ let client_secret = '{"web":{"client_id":"696019611227-5m62hp5vit4ossvpv7pemo92p
 //gets authorization token from google
 function getAuthorizationToken(code, cb) {
   // Load client secrets
-  var credentials = JSON.parse(data);
+  var credentials = JSON.parse(client_secret);
   var clientSecret = credentials.web.client_secret;
   var clientId = credentials.web.client_id;
   var redirectUrl = credentials.web.redirect_uris[0];
