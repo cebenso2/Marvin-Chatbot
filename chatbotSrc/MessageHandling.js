@@ -86,6 +86,10 @@ function handleMessage(sender_psid, received_message) {
       return sendMessage(sender_psid, response);
     } else if (received_message.text === "@create") {
       DatabaseUtils.createTeamTable();
+    } else if (received_message.text === "@insert") {
+      DatabaseUtils.insertTeam('test', 'nba', 'Celtics', 'bos');
+    } else if (received_message.text === "@print") {
+      DatabaseUtils.PrintTeams();
     } else if (received_message.text.substring(0,4) === "@wit") {
       Wit.runWit(received_message.text.substring(5));
     } else if (greeting && greeting.confidence > 0.8) {
@@ -394,7 +398,7 @@ function addTeam(sender_psid, input){
           {
             "type": "postback",
             "title": "Add",
-            "payload": "add:" + league+":"+team.city
+            "payload": "add:" + league+":"+team.name+":"+team.city
           }
         ]
       }

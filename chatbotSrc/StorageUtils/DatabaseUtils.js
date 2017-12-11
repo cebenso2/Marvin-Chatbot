@@ -50,7 +50,7 @@ function createTeamTable(){
   });
 
   client.connect();
-  client.query('CREATE TABLE teams (userpsid VARCHAR, league VARCHAR, name VARCHAR);', (err, res) => {
+  client.query('CREATE TABLE team (userpsid VARCHAR, league VARCHAR, name VARCHAR, city VARCHAR);', (err, res) => {
     if (err) {
       console.log("Error while creating locations table");
       console.log(err);
@@ -147,7 +147,7 @@ function getUserPsid(email){
   });
 }
 
-function PrintEmails(){
+function PrintTeams(){
   console.log("printEmails");
   const client = new Client({
     connectionString: process.env.DATABASE_URL,
@@ -155,7 +155,7 @@ function PrintEmails(){
   });
 
   client.connect();
-  return client.query("SELECT * FROM emails;").then((result) => {
+  return client.query("SELECT * FROM team;").then((result) => {
     client.end();
     console.log(result);
   });
@@ -177,7 +177,46 @@ function insertEmail(user_psid, name, token){
     }
     client.end();
   });
-
 }
 
-module.exports = {createTeamTable: createTeamTable, createLocationTable: createLocationTable, getLocations: getLocations,  insertLocation: insertLocation, createEmailTable: createEmailTable, getEmailToken: getEmailToken, insertEmail: insertEmail, getUserPsid: getUserPsid, PrintEmails: PrintEmails}
+//get teams for a user
+function getTeams(user_psid){
+  console.log("getLocations");
+  const client = new Client({
+    connectionString: process.env.DATABASE_URL,
+    ssl: true,
+  });
+
+  client.connect();
+  return client.query("SELECT * FROM team WHERE userpsid='"+user_psid+"';").then((result) => {
+    let teams = [];
+    for (let row of result.rows) {
+      teams.push({
+        league: row.league,
+        name: row.name,
+        city: row.city,
+      });
+    }
+    client.end();
+    console.log(teams);
+    return teams;
+  });
+}
+//insert a location for a user - stores a location in the locations table using the users psid
+function insertTeam(user_psid, league, name, city){
+  const client = new Client({
+    connectionString: process.env.DATABASE_URL,
+    ssl: true,
+  });
+  client.connect();
+  client.query("INSERT INTO team VALUES ( '" +user_psid +"','" + league + "','" + name + "','" + city+"');", (err, res) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("Team added");
+    }
+    client.end();
+  });
+}
+
+module.exports = {createTeamTable: createTeamTable, createLocationTable: createLocationTable, getLocations: getLocations,  insertLocation: insertLocation, createEmailTable: createEmailTable, getEmailToken: getEmailToken, insertEmail: insertEmail, getUserPsid: getUserPsid, PrintTeams: PrintTeams, getTeams: getTeams, insertTeam: insertTeam}
