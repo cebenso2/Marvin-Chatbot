@@ -27,14 +27,11 @@ app.get("/", function (req, res) {
   if(req.query.code){
     RetreiveToken.getAuthorizationToken(req.query.code, (err, token) => {
       EmailUtils.getEmail(token, (email) =>{
-        console.log("resulting email address:");
-        console.log(email);
         DatabaseUtils.getUserPsid(email).then((sender_psid) =>{
-          console.log("sender");
-          console.log(sender_psid);
           if (sender_psid){
             DatabaseUtils.clearEmails(sender_psid,() => {
                 DatabaseUtils.insertEmail(sender_psid, email, JSON.stringify(token));
+                MessageHandling.handleMessage(sender_psid, {text:'Email setup'})
               }
             );
           }

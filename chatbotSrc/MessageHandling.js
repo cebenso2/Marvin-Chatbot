@@ -38,6 +38,10 @@ function handleMessage(sender_psid, received_message) {
       response = {
         "text": "Hi. I hope you are having a good day!"
       }
+    } else if (received_message.text === "Email Setup") {
+      response = {
+        "text": received_message.text,
+      }
     } else if (received_message.text === "@weather") {
       response = {
         "text": "Where are you so I can get weather data?",
