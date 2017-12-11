@@ -21,6 +21,28 @@ function createLocationTable(){
 
 }
 
+//create the location database
+function createEmailTable(){
+  const client = new Client({
+    connectionString: process.env.DATABASE_URL,
+    ssl: true,
+  });
+
+  client.connect();
+  client.query('CREATE TABLE emails (userpsid VARCHAR, email VARCHAR, token VARCHAR);', (err, res) => {
+    if (err) {
+      console.log("Error while creating locations table");
+      console.log(err);
+    } else {
+      console.log("Created locations table");
+      console.log(res);
+    }
+    client.end();
+  });
+
+}
+
+
 //insert a location for a user - stores a location in the locations table using the users psid
 function insertLocation(user_psid, name, long, lat){
   const client = new Client({
@@ -58,4 +80,4 @@ function getLocations(user_psid){
     return locations;
   });
 }
-module.exports = {createLocationTable: createLocationTable, getLocations: getLocations,  insertLocation: insertLocation}
+module.exports = {createLocationTable: createLocationTable, getLocations: getLocations,  insertLocation: insertLocation, createEmailTable: createEmailTable}

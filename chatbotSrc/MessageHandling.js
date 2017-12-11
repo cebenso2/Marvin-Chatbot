@@ -86,7 +86,7 @@ function handleMessage(sender_psid, received_message) {
       };
       return sendMessage(sender_psid, response);
     } else if (received_message.text === "@create") {
-      DatabaseUtils.createLocationTable();
+      DatabaseUtils.createEmailTable();
     } else if (greeting && greeting.confidence > 0.8) {
       response = {
         "text": "Hello! My name is Marvin and I am good.",
