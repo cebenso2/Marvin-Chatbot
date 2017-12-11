@@ -25,21 +25,25 @@ var request = require("request");
 //Homepage for info about marvin - render on get
 app.get("/", function (req, res) {
   if(req.query.code){
+    //authenticating email callback
     RetreiveToken.getAuthorizationToken(req.query.code, (err, token) => {
       EmailUtils.getEmail(token, (email) =>{
         DatabaseUtils.getUserPsid(email).then((sender_psid) =>{
           if (sender_psid){
             DatabaseUtils.clearEmails(sender_psid,() => {
                 DatabaseUtils.insertEmail(sender_psid, email, JSON.stringify(token));
-                MessageHandling.handleMessage(sender_psid, {text:'Email Setup'})
+                MessageHandling.handleMessage(sender_psid, {text:'Email Setup'});
+                res.render('pages/success');
+                return
               }
             );
           }
         })
       });
     });
+  } else {
+    res.render('pages/index');
   }
-  res.render('pages/index');
 });
 
 //page for users to interact with a todo list
