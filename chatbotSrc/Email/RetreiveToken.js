@@ -2,7 +2,7 @@
 
 var fs = require('fs');
 var googleAuth = require('google-auth-library');
-let client_secret = '{"web":{"client_id":"696019611227-5m62hp5vit4ossvpv7pemo92prrlric8.apps.googleusercontent.com","project_id":"marvinassistantc-1512373709006","auth_uri":"https://accounts.google.com/o/oauth2/auth","token_uri":"https://accounts.google.com/o/oauth2/token","auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs","client_secret":"Ce7jPpvZ7x4nUXJqnzr8DJzE","redirect_uris":["http://marvin-assistant.herokuapp.com/"],"javascript_origins":["http://marvin-assistant.herokuapp.com"]}}'
+let client_secret = '{"web":{"client_id":"696019611227-5m62hp5vit4ossvpv7pemo92prrlric8.apps.googleusercontent.com","project_id":"marvinassistantc-1512373709006","auth_uri":"https://accounts.google.com/o/oauth2/auth","token_uri":"https://accounts.google.com/o/oauth2/token","auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs","client_secret":"Ce7jPpvZ7x4nUXJqnzr8DJzE","redirect_uris":["http://marvin-assistant.herokuapp.com/?email=bob"],"javascript_origins":["http://marvin-assistant.herokuapp.com"]}}'
 
 
 //gets authorization token from google
