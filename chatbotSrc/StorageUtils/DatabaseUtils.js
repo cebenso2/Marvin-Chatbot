@@ -79,41 +79,43 @@ function getLocations(user_psid){
     client.end();
     return locations;
   });
+}
 
-  function getEmail(user_psid){
-    console.log("getEmail");
-    const client = new Client({
-      connectionString: process.env.DATABASE_URL,
-      ssl: true,
-    });
+function getEmail(user_psid){
+  console.log("getEmail");
+  const client = new Client({
+    connectionString: process.env.DATABASE_URL,
+    ssl: true,
+  });
 
-    client.connect();
-    return client.query("SELECT * FROM emails WHERE userpsid='"+user_psid+"';").then((result) => {
-      let emails = [];
-      for (let row of result.rows) {
-        emails.push(row.email +"," + row.token);
-      }
-      client.end();
-      return locations;
-    });
+  client.connect();
+  return client.query("SELECT * FROM emails WHERE userpsid='"+user_psid+"';").then((result) => {
+    let emails = [];
+    for (let row of result.rows) {
+      emails.push(row.email +"," + row.token);
+    }
+    client.end();
+    return locations;
+  });
+}
 
     //insert a location for a user - stores a location in the locations table using the users psid
-    function insertEmail(user_psid, name, token){
-      const client = new Client({
-        connectionString: process.env.DATABASE_URL,
-        ssl: true,
-      });
+function insertEmail(user_psid, name, token){
+  const client = new Client({
+    connectionString: process.env.DATABASE_URL,
+    ssl: true,
+  });
 
-      client.connect();
-      client.query("INSERT INTO emails VALUES ( '" +user_psid +"','" + name + "','" + token +"');", (err, res) => {
-        if (err) {
-          console.log(err);
-        } else {
-          console.log("Email added");
-        }
-        client.end();
-      });
-
+  client.connect();
+  client.query("INSERT INTO emails VALUES ( '" +user_psid +"','" + name + "','" + token +"');", (err, res) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("Email added");
     }
+    client.end();
+  });
+
 }
+
 module.exports = {createLocationTable: createLocationTable, getLocations: getLocations,  insertLocation: insertLocation, createEmailTable: createEmailTable, getEmail: getEmail, insertEmail: insertEmail}
