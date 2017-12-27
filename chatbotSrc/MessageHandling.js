@@ -532,7 +532,7 @@ function sendMyTeams(sender_psid){
         ]
       }
     });
-    tiles.concat([
+    tiles = tiles.concat([
       {
         "title": "Add Team",
         "buttons":[
