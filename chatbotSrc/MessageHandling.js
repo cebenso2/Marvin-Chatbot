@@ -111,7 +111,7 @@ function handleMessage(sender_psid, received_message) {
         switch(result.type){
           case Wit.MESSAGE_TYPE_ENUM.WEATHER:
             response = {
-              "text": "Where are you so I can get weather data?",
+              "text": "Where are you so I can get weather recommendations?",
               "quick_replies":[
                 {"content_type":"location"}
               ]
@@ -120,7 +120,7 @@ function handleMessage(sender_psid, received_message) {
             break;
           case Wit.MESSAGE_TYPE_ENUM.TEMPERATURE:
             response = {
-              "text": "Where are you so I can get temperature data?",
+              "text": "Where are you so I can get the current temperature?",
               "quick_replies":[
                 {"content_type":"location"}
               ]
@@ -135,7 +135,7 @@ function handleMessage(sender_psid, received_message) {
             return sendNewsHeadlines(sender_psid);
           default:
             response = {
-              text: "Sorry I do not know how to respond."
+              text: "Sorry I do not know how to respond. "
             }
         }
         sendMessage(sender_psid, response)
@@ -221,6 +221,7 @@ function resetValues(){
   originLat = null;
   originLong = null;
 }
+
 //Handle postback for persistent menu
 function handlePostback(sender_psid, received_message) {
   if(received_message.payload.includes(":")){
@@ -247,7 +248,7 @@ function handlePostback(sender_psid, received_message) {
       break;
     case "WEATHER":
       response = {
-        "text": "Where are you so I can get weather data?",
+        "text": "Where are you so I can get weather recommendations?",
         "quick_replies":[
           {"content_type":"location"}
         ]
@@ -257,7 +258,7 @@ function handlePostback(sender_psid, received_message) {
       break;
     case "TEMPERATURE":
       response = {
-        "text": "Where are you so I can get temperature data?",
+        "text": "Where are you so I can get the current temperature?",
         "quick_replies":[
           {"content_type":"location"}
         ]
