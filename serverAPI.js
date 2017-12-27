@@ -111,6 +111,16 @@ function createPersistentMenu(res){
               "title":"News",
               "type":"postback",
               "payload":"NEWS"
+            },
+            {
+              "title":"Sports Teams",
+              "type":"postback",
+              "payload":"WEATHER"
+            },
+            {
+              "title":"Sports Scores",
+              "type":"postback",
+              "payload":"WEATHER"
             }
           ]
         },
@@ -136,14 +146,9 @@ function createPersistentMenu(res){
           ]
         },
         {
-          "title":"Other Functions",
+          "title":"Utilities and Help",
           "type":"nested",
           "call_to_actions":[
-            {
-              "title":"Locations",
-              "type":"postback",
-              "payload":"LOCATIONS"
-            },
             {
               "title":"Google",
               "type":"postback",
