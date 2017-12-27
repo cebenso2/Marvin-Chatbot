@@ -115,12 +115,12 @@ function createPersistentMenu(res){
             {
               "title":"Sports Teams",
               "type":"postback",
-              "payload":"WEATHER"
+              "payload":"TEAMS"
             },
             {
               "title":"Sports Scores",
               "type":"postback",
-              "payload":"WEATHER"
+              "payload":"SCORES"
             }
           ]
         },

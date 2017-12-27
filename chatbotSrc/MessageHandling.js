@@ -292,6 +292,22 @@ function handlePostback(sender_psid, received_message) {
       };
       sendMessage(sender_psid, response);
       break;
+    case "TRAVEL":
+      estimateTime = true
+      response = {
+        "text": `Where are you starting ?`,
+        "quick_replies":[
+          {"content_type":"location"}
+        ]
+      };
+      sendMessage(sender_psid, response);
+      break;
+    case "TEAMS":
+      sendMyTeams(sender_psid);
+      break;
+    case "SCORES":
+      sendTeams(sender_psid);
+      break;
     default:
   }
 }
