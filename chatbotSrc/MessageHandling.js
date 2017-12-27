@@ -534,7 +534,7 @@ function sendMyTeams(sender_psid){
     });
     tiles.concat([
       {
-        "title": Add Team,
+        "title": "Add Team",
         "buttons":[
           {
             "type": "postback",
