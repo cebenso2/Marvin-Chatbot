@@ -296,7 +296,7 @@ function handlePostback(sender_psid, received_message) {
     case "TRAVEL":
       estimateTime = true
       response = {
-        "text": `Where are you starting ?`,
+        "text": `Where are you starting?`,
         "quick_replies":[
           {"content_type":"location"}
         ]
@@ -304,6 +304,7 @@ function handlePostback(sender_psid, received_message) {
       sendMessage(sender_psid, response);
       break;
     case "TEAMS":
+      console.log('teams');
       sendMyTeams(sender_psid);
       break;
     case "SCORES":
