@@ -229,9 +229,11 @@ function handlePostback(sender_psid, received_message) {
     switch(action){
       case "add":
       DatabaseUtils.insertTeam(sender_psid,league,name,city);
+      sendMessage(sender_psid, {text: name + " added"});
       break;
       case "delete":
       DatabaseUtils.deleteTeam(sender_psid,league,name,city);
+      sendMessage(sender_psid, {text: name + " removed"});
       break;
       case "score":
       sendScore(sender_psid, league, city);
@@ -530,6 +532,18 @@ function sendMyTeams(sender_psid){
         ]
       }
     });
+    tiles.concat([
+      {
+        "title": Add Team,
+        "buttons":[
+          {
+            "type": "postback",
+            "title": "Add New Team",
+            "payload": "ADD TEAM"
+          }
+        ]
+      }
+    ]);
     let response = {
       "attachment":{
         "type":"template",
