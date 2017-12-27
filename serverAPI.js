@@ -104,12 +104,18 @@ function createPersistentMenu(res){
       "locale":"default",
       "call_to_actions":[
         {
-          "type":"postback",
-          "title":"News",
-          "payload":"NEWS"
+          "title":"News and Sports",
+          "type":"nested",
+          "call_to_actions":[
+            {
+              "title":"News",
+              "type":"postback",
+              "payload":"NEWS"
+            }
+          ]
         },
         {
-          "title":"Weather Help",
+          "title":"Weather and Travel",
           "type":"nested",
           "call_to_actions":[
             {
@@ -121,6 +127,11 @@ function createPersistentMenu(res){
               "title":"Current Temperature",
               "type":"postback",
               "payload":"TEMPERATURE"
+            },
+            {
+              "title":"Estimate Travel Time",
+              "type":"postback",
+              "payload":"TRAVEL"
             }
           ]
         },
