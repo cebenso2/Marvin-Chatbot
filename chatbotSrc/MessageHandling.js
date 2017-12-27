@@ -310,7 +310,12 @@ function handlePostback(sender_psid, received_message) {
     case "SCORES":
       sendTeams(sender_psid);
       break;
+    case "Get Started":
+      sendMessage(sender_psid, {
+        text: "Hello, my name is Marvin and I am a personal assistant chatbot. Check out the menu of options or visit http://marvin-assistant.herokuapp.com/ to see all of the ways I can help you"
+      })
     default:
+      break;
   }
 }
 
