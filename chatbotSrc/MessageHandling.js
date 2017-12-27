@@ -534,11 +534,11 @@ function sendMyTeams(sender_psid){
     });
     tiles = tiles.concat([
       {
-        "title": "Add Team",
+        "title": "New Team",
         "buttons":[
           {
             "type": "postback",
-            "title": "Add New Team",
+            "title": "Add",
             "payload": "ADD TEAM"
           }
         ]
